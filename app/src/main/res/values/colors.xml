@@ -9,4 +9,9 @@
     <color name="pink">#D113C6</color>
     <color name="blue">#2317D3</color>
 
+
+    <!-- Colores Feedo -->
+    <color name="ToolbarDeFeedo">#FFDD9A</color>
+    <color name="tittle_color">#FFAC00</color>
+
 </resources>

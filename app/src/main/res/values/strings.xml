@@ -8,4 +8,12 @@
     <string name="historial_BottomBar">Historial</string>
     <string name="favoritos_BottomBar">Favoritos</string>
 
+    <!-- Menu Pricipal -->
+    <string name="Tittle">Feedo</string>
+    <string name="hintBuscadorPrincipal">¿Qué se te antoja hoy?</string>
+    <string name="textView_catalogo">Elije tu comida</string>
+    <string name="textView_rapidas">Recetas rapidas</string>
+    <string name="textView_riquisimas">Riquisimas!</string>
+    <string name="textView_criollas">Criollas</string>
+
 </resources>

@@ -1,10 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/red"
-    tools:context=".UI.feedoMenu.MenuFragment">
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".UI.feedoMenu.MenuFragment">
+
+        <View
+            android:id="@+id/viewTittle"
+            android:layout_width="0dp"
+            android:layout_height="175dp"
+            android:background="@color/ToolbarDeFeedo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/balo_thambi"
+            android:text="@string/Tittle"
+            android:textColor="@color/tittle_color"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/etSearchFeed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etSearchFeed"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="27dp"
+            android:background="@drawable/edittext_corner"
+            android:drawableStart="@drawable/ic_search_edittext"
+            android:hint="@string/hintBuscadorPrincipal"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="19sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Titulo" />
+
+        <TextView
+            android:id="@+id/catalogoTittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewTittle"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="27dp"
+            android:text="@string/textView_catalogo"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintStart_toEndOf="@+id/catalogoTittle"
+            app:layout_constraintTop_toBottomOf="@+id/viewTittle">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_piquito_feedo" />
+
+            </FrameLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCatolgo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/catalogoTittle"/>
 
 
-</FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
