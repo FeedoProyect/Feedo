@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ProyectoFeedo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Bottom Bar -->
+    <string name="home_BottomBar">Inicio</string>
+    <string name="historial_BottomBar">Historial</string>
+    <string name="favoritos_BottomBar">Favoritos</string>
+
+</resources>
