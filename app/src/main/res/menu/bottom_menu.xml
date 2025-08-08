@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuFragment"
+        android:title="@string/home_BottomBar"
+        android:icon="@drawable/ic_inicio"/>
+
+    <item
+        android:id="@+id/favoritosFragment"
+        android:title="@string/historial_BottomBar"
+        android:icon="@drawable/ic_historial"/>
+
+    <item
+        android:id="@+id/historialFragment"
+        android:title="@string/favoritos_BottomBar"
+        android:icon="@drawable/ic_favs"/>
+
+</menu>
