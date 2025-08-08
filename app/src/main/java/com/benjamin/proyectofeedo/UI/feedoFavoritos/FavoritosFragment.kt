@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.benjamin.proyectofeedo.R
 import com.benjamin.proyectofeedo.databinding.FragmentFavoritosBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoritosFragment : Fragment() {
 
     private var _binding: FragmentFavoritosBinding? = null

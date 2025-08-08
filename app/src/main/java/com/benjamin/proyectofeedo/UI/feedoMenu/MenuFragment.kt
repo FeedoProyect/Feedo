@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.benjamin.proyectofeedo.R
 import com.benjamin.proyectofeedo.databinding.FragmentMenuBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MenuFragment : Fragment() {
 
     private var _binding: FragmentMenuBinding? = null

@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt)
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -42,6 +44,13 @@ android {
 }
 
 dependencies {
+
+    //version de Dagger Hilt
+    val versionDaggerHilt = "2.48"
+
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:$versionDaggerHilt")
+    kapt("com.google.dagger:hilt-compiler:$versionDaggerHilt")
 
     //version de la libreria de navegacion de componentes
     val versionDeNavegacion = "2.9.0"
