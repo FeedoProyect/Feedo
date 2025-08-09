@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:id="@+id/idCatalogo">
+
+
+    <ImageView
+        android:id="@+id/imCatalogo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:foreground="@drawable/style_image_foreground"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/nameCatalogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Desayunos"
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
+
+</LinearLayout>
