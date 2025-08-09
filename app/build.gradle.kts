@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
     id("org.jetbrains.kotlin.kapt")
-    kotlin("plugin.serialization") version "2.0.0"
 }
 
 android {
@@ -58,21 +57,6 @@ dependencies {
     //Navegacion de componentes
     implementation("androidx.navigation:navigation-fragment-ktx:$versionDeNavegacion")
     implementation("androidx.navigation:navigation-ui-ktx:$versionDeNavegacion")
-
-
-    //version de librerias supabase
-    val versionSupabase = "3.2.2"
-
-    // Librerias de Supabase
-    implementation(platform("io.github.jan-tennert.supabase:bom:$versionSupabase"))
-    implementation("io.github.jan-tennert.supabase:postgrest-kt")
-    implementation("io.ktor:ktor-client-android:$versionSupabase")
-
-    //version de serialization
-    val versionDeSerialization = "1.6.3"
-
-    // Libreria de serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$versionDeSerialization")
 
     // Version de libreria Picaso
     val versionDePicasso = "2.8"

@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.R
-import com.benjamin.proyectofeedo.data.response.CatalogoResponse
+import com.benjamin.proyectofeedo.data.response.CatalogosName
 
-class listaCatalogosAdapter(private val catalogosList: List<CatalogoResponse>) :
+class listaCatalogosAdapter(private val catalogosList: MutableList<CatalogosName>) :
     RecyclerView.Adapter<listaCatalogosViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
