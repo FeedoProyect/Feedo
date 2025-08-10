@@ -8,12 +8,11 @@ import com.benjamin.proyectofeedo.data.response.CatalogosName
 import com.benjamin.proyectofeedo.databinding.ItemListaCatalogoBinding
 import com.squareup.picasso.Picasso
 
-class listaCatalogosViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class listaCatalogosViewHolder(private val binding: ItemListaCatalogoBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
-    private val binding = ItemListaCatalogoBinding.bind(view)
-
-    fun render(catalogosName: CatalogosName){
-        binding.nameCatalogo.text = catalogosName.name
-        Picasso.get().load(catalogosName.imageURL).into(binding.imCatalogo)
+    fun render(catalogosResponse: CatalogoResponse) {
+        binding.nameCatalogo.text = catalogosResponse.titulo
+        Picasso.get().load(catalogosResponse.imagen).into(binding.imCatalogo)
     }
 }

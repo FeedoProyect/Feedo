@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
     id("org.jetbrains.kotlin.kapt")
+    kotlin("plugin.serialization") version "2.2.0"
 }
 
 android {
@@ -45,7 +46,7 @@ android {
 dependencies {
 
     //version de Dagger Hilt
-    val versionDaggerHilt = "2.48"
+    val versionDaggerHilt = "2.56"
 
     // Dagger Hilt
     implementation("com.google.dagger:hilt-android:$versionDaggerHilt")
@@ -63,6 +64,21 @@ dependencies {
 
     // Libreria de Picaso
     implementation("com.squareup.picasso:picasso:$versionDePicasso")
+
+    // version de Serialization
+    val versionDeSerialization = "1.6.3"
+
+    // Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$versionDeSerialization")
+
+
+    // version de librerias de Supabase
+    val versionDeLibreriaSupabase = "3.2.2"
+
+    // Librerias para Supabase
+    implementation(platform("io.github.jan-tennert.supabase:bom:$versionDeLibreriaSupabase"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.ktor:ktor-client-android:$versionDeLibreriaSupabase")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
