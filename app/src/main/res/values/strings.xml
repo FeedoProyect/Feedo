@@ -16,4 +16,20 @@
     <string name="textView_riquisimas">Riquisimas!</string>
     <string name="textView_criollas">Criollas</string>
 
+    <!-- Titulo de Catalogo -->
+    <string name="Desayunos">Desayunos</string>
+    <string name="Almuerzos">Almuerzos</string>
+    <string name="Meriendas">Meriendas</string>
+    <string name="Cena">Cena</string>
+    <string name="Aperitivos">Aperitivos</string>
+    <string name="Elaboradas">Elaboradas</string>
+    <string name="Sencillas">Sencillas</string>
+    <string name="Ensaladas">Ensaladas</string>
+    <string name="Postres">Postres</string>
+    <string name="Rapidas">Rapidas</string>
+    <string name="Sin_lactosa">Sin lactosa</string>
+    <string name="Sopas_y_guisos">Sopas y Guisos</string>
+    <string name="Veganas">Veganas</string>
+    <string name="Vegetarianas">Vegetarianas</string>
+
 </resources>

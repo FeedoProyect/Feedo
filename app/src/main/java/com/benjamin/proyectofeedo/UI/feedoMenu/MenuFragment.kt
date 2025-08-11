@@ -1,15 +1,17 @@
 package com.benjamin.proyectofeedo.UI.feedoMenu
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.benjamin.proyectofeedo.UI.feedoMenu.listaDeCatalogos.listaCatalogosAdapter
-import com.benjamin.proyectofeedo.data.response.CatalogoResponse
+import com.benjamin.proyectofeedo.UI.feedoMenu.listaDeCatalogos.ListaCatalogosAdapter
 import com.benjamin.proyectofeedo.databinding.FragmentMenuBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.jan.supabase.SupabaseClient
@@ -21,11 +23,12 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MenuFragment : Fragment() {
 
+    private val feedoMenuViewModel by viewModels<FeedoMenuViewModel>()
 
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: listaCatalogosAdapter
+    private lateinit var listaCatalogosAdapter: ListaCatalogosAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,33 +37,55 @@ class MenuFragment : Fragment() {
     }
 
     private fun initUI() {
+        initUIState()
         initList()
     }
 
     private fun initList() {
+        listaCatalogosAdapter = ListaCatalogosAdapter(onItemSelected = {
+            Toast.makeText(context, getString(it.titulo), Toast.LENGTH_LONG).show()
+        })
+        binding.rvCatolgo.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = listaCatalogosAdapter
+        }
+    }
+
+    private fun initUIState() {
         lifecycleScope.launch {
-            val client = getClient()
-            val supabaseResponse = client.postgrest["recetas"].select()
-            val data = supabaseResponse.decodeList<CatalogoResponse>()
-            Log.e("supabase", data.toString())
-
-            val adapter = listaCatalogosAdapter(data)
-            binding.rvCatolgo.layoutManager = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.HORIZONTAL, false
-            )
-            binding.rvCatolgo.adapter = adapter
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                feedoMenuViewModel.catalogos.collect {
+                    //Hubo cambios
+                    listaCatalogosAdapter.updateList(it)
+                }
+            }
         }
     }
 
-    private fun getClient(): SupabaseClient {
-        return createSupabaseClient(
-            supabaseUrl = "https://vdtfvlfmdurwsdcvircw.supabase.co",
-            supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZkdGZ2bGZtZHVyd3NkY3ZpcmN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyODk3MzEsImV4cCI6MjA2ODg2NTczMX0.tHJ0zc7ZVsC_sxXGISisq7y_wxT-PWYH4UHSjS6iuos",
-        ) {
-            install(Postgrest)
-        }
-    }
+//    private fun initList() {
+//        lifecycleScope.launch {
+//            val client = getClient()
+//            val supabaseResponse = client.postgrest["recetas"].select()
+//            val data = supabaseResponse.decodeList<CatalogoResponse>()
+//            Log.e("supabase", data.toString())
+//
+//            val adapter = ListaCatalogosAdapter(data)
+//            binding.rvCatolgo.layoutManager = LinearLayoutManager(
+//                requireContext(),
+//                LinearLayoutManager.HORIZONTAL, false
+//            )
+//            binding.rvCatolgo.adapter = adapter
+//        }
+//    }
+
+//    private fun getClient(): SupabaseClient {
+//        return createSupabaseClient(
+//            supabaseUrl = "https://vdtfvlfmdurwsdcvircw.supabase.co",
+//            supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZkdGZ2bGZtZHVyd3NkY3ZpcmN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyODk3MzEsImV4cCI6MjA2ODg2NTczMX0.tHJ0zc7ZVsC_sxXGISisq7y_wxT-PWYH4UHSjS6iuos",
+//        ) {
+//            install(Postgrest)
+//        }
+//    }
 
 
     override fun onCreateView(
