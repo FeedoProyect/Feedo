@@ -5,22 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.benjamin.proyectofeedo.UI.feedoMenu.listaDeCatalogos.ListaCatalogosAdapter
+import com.benjamin.proyectofeedo.UI.feedoMenu.listaDeCatalogosAdapter.ListaCatalogosAdapter
 import com.benjamin.proyectofeedo.databinding.FragmentMenuBinding
 import com.benjamin.proyectofeedo.domain.model.CatalogoInfo
 import com.benjamin.proyectofeedo.domain.model.CatalogosModel
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.jan.supabase.SupabaseClient
-import io.github.jan.supabase.createSupabaseClient
-import io.github.jan.supabase.postgrest.Postgrest
-import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

@@ -26,7 +26,7 @@
         tools:layout="@layout/fragment_historial" />
     <fragment
         android:id="@+id/catalogosListFragment"
-        android:name="com.benjamin.proyectofeedo.UI.ListaCatalogos.CatalogosListFragment"
+        android:name="com.benjamin.proyectofeedo.UI.ListaCatalogos.CatalogosListComidasFragment"
         android:label="fragment_catalogos_list"
         tools:layout="@layout/fragment_catalogos_list" >
         <argument

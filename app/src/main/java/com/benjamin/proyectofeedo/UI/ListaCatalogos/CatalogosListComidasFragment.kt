@@ -11,25 +11,37 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
-import com.benjamin.proyectofeedo.R
+import androidx.recyclerview.widget.GridLayoutManager
+import com.benjamin.proyectofeedo.UI.ListaCatalogos.listaDeComidasCatalogosAdapter.CatalogosListComidasAdapter
 import com.benjamin.proyectofeedo.databinding.FragmentCatalogosListBinding
 import com.benjamin.proyectofeedo.domain.model.CatalogosModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CatalogosListFragment : Fragment() {
+class CatalogosListComidasFragment : Fragment() {
 
     private var _binding: FragmentCatalogosListBinding? = null
     private val binding get() = _binding!!
 
-    private val catalogosListViewModel by viewModels<CatalogosListViewModel>()
+    private val catalogosListViewModel by viewModels<CatalogosListComidasViewModel>()
 
-    private val args: CatalogosListFragmentArgs by navArgs()
+    lateinit var elAdapter: CatalogosListComidasAdapter
+
+    private val args: CatalogosListComidasFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Inicializamos el adapter vacío
+        elAdapter = CatalogosListComidasAdapter()
+        binding.rvComidasCatalogo.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = elAdapter
+        }
+
         initUI()
+        catalogosListViewModel.getComidass(args.type.name)
     }
 
     private fun initUI() {
@@ -42,9 +54,9 @@ class CatalogosListFragment : Fragment() {
             repeatOnLifecycle (Lifecycle.State.STARTED){
                 catalogosListViewModel.state.collect {
                     when(it){
-                        is CatalogosListState.Error -> erroState()
-                        CatalogosListState.Loading -> loadingState()
-                        is CatalogosListState.Succes -> succesState()
+                        is CatalogosListComidasState.Error -> erroState()
+                        CatalogosListComidasState.Loading -> loadingState()
+                        is CatalogosListComidasState.Success -> succesState(it)
                     }
                 }
             }
@@ -52,14 +64,18 @@ class CatalogosListFragment : Fragment() {
     }
 
     private fun loadingState(){
-
+        binding.progresBar.isVisible = true
     }
 
     private fun erroState(){
-
+        binding.progresBar.isVisible = false
     }
 
-    private fun succesState(){
+    private fun succesState(success: CatalogosListComidasState.Success) {
+        binding.progresBar.isVisible = false
+
+        // Actualizamos la lista del adapter, sin recrearlo
+        elAdapter.updateList(success.comidas)
 
     }
 
@@ -75,5 +91,4 @@ class CatalogosListFragment : Fragment() {
         _binding = FragmentCatalogosListBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
-
 }

@@ -1,10 +1,8 @@
-package com.benjamin.proyectofeedo.UI.feedoMenu.listaDeCatalogos
+package com.benjamin.proyectofeedo.UI.feedoMenu.listaDeCatalogosAdapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.benjamin.proyectofeedo.data.response.CatalogoResponse
 import com.benjamin.proyectofeedo.databinding.ItemListaCatalogoBinding
 import com.benjamin.proyectofeedo.domain.model.CatalogoInfo
-import com.squareup.picasso.Picasso
 
 class ListaCatalogosViewHolder(private val binding: ItemListaCatalogoBinding) :
     RecyclerView.ViewHolder(binding.root) {
