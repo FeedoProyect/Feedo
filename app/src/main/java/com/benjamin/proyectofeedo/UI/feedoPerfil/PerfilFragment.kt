@@ -1,17 +1,15 @@
-package com.benjamin.proyectofeedo.UI.feedoHistorial
+package com.benjamin.proyectofeedo.UI.feedoPerfil
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.benjamin.proyectofeedo.R
 import com.benjamin.proyectofeedo.databinding.FragmentHistorialBinding
-import com.benjamin.proyectofeedo.databinding.FragmentMenuBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HistorialFragment : Fragment() {
+class PerfilFragment : Fragment() {
 
     private var _binding: FragmentHistorialBinding? = null
     private val binding get() = _binding!!

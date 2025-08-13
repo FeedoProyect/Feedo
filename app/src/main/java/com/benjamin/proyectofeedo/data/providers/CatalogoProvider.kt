@@ -17,7 +17,7 @@ class CatalogoProvider @Inject constructor() {
              Ensaladas,
              Postres,
              Rapidas,
-             SinLactosa,
+             Diabeticos,
              SopasGuisos,
              Veganas,
              Vegetarianas

@@ -8,12 +8,12 @@
 
     <item
         android:id="@+id/favoritosFragment"
-        android:title="@string/historial_BottomBar"
-        android:icon="@drawable/ic_historial"/>
+        android:title="@string/favoritos_BottomBar"
+        android:icon="@drawable/ic_favs"/>
 
     <item
         android:id="@+id/historialFragment"
-        android:title="@string/favoritos_BottomBar"
-        android:icon="@drawable/ic_favs"/>
+        android:title="@string/perfil_BottomBar"
+        android:icon="@drawable/ic_perfil"/>
 
 </menu>

@@ -10,9 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.benjamin.proyectofeedo.UI.feedoMenu.listaDeCatalogos.ListaCatalogosAdapter
 import com.benjamin.proyectofeedo.databinding.FragmentMenuBinding
+import com.benjamin.proyectofeedo.domain.model.CatalogoInfo
+import com.benjamin.proyectofeedo.domain.model.CatalogosModel
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.createSupabaseClient
@@ -43,8 +46,28 @@ class MenuFragment : Fragment() {
 
     private fun initList() {
         listaCatalogosAdapter = ListaCatalogosAdapter(onItemSelected = {
-            Toast.makeText(context, getString(it.titulo), Toast.LENGTH_LONG).show()
+
+            val type = when(it){
+                CatalogoInfo.Almuerzos -> CatalogosModel.Almuerzos
+                CatalogoInfo.Aperitivos -> CatalogosModel.Aperitivos
+                CatalogoInfo.Cena -> CatalogosModel.Cena
+                CatalogoInfo.Desayunos -> CatalogosModel.Desayunos
+                CatalogoInfo.Elaboradas -> CatalogosModel.Elaboradas
+                CatalogoInfo.Ensaladas -> CatalogosModel.Ensaladas
+                CatalogoInfo.Meriendas -> CatalogosModel.Meriendas
+                CatalogoInfo.Postres -> CatalogosModel.Postres
+                CatalogoInfo.Rapidas -> CatalogosModel.Rapidas
+                CatalogoInfo.Diabeticos -> CatalogosModel.Diabeticos
+                CatalogoInfo.SopasGuisos -> CatalogosModel.Sopas_y_Guisos
+                CatalogoInfo.Veganas -> CatalogosModel.Veganas
+                CatalogoInfo.Vegetarianas -> CatalogosModel.Vegetarianas
+            }
+
+            findNavController().navigate(
+                MenuFragmentDirections.actionMenuFragmentToCatalogosListFragment(type)
+            )
         })
+
         binding.rvCatolgo.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = listaCatalogosAdapter

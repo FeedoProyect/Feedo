@@ -9,7 +9,11 @@
         android:id="@+id/menuFragment"
         android:name="com.benjamin.proyectofeedo.UI.feedoMenu.MenuFragment"
         android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" />
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_catalogosListFragment"
+            app:destination="@id/catalogosListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
         android:name="com.benjamin.proyectofeedo.UI.feedoFavoritos.FavoritosFragment"
@@ -17,7 +21,16 @@
         tools:layout="@layout/fragment_favoritos" />
     <fragment
         android:id="@+id/historialFragment"
-        android:name="com.benjamin.proyectofeedo.UI.feedoHistorial.HistorialFragment"
+        android:name="com.benjamin.proyectofeedo.UI.feedoPerfil.PerfilFragment"
         android:label="fragment_historial"
         tools:layout="@layout/fragment_historial" />
+    <fragment
+        android:id="@+id/catalogosListFragment"
+        android:name="com.benjamin.proyectofeedo.UI.ListaCatalogos.CatalogosListFragment"
+        android:label="fragment_catalogos_list"
+        tools:layout="@layout/fragment_catalogos_list" >
+        <argument
+            android:name="type"
+            app:argType="com.benjamin.proyectofeedo.domain.model.CatalogosModel" />
+    </fragment>
 </navigation>
