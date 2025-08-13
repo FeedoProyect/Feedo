@@ -1,5 +1,6 @@
 package com.benjamin.proyectofeedo.UI.ListaCatalogos
 
+import androidx.core.widget.addTextChangedListener
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.benjamin.proyectofeedo.UI.ListaCatalogos.listaDeComidasCatalogosAdapter.CatalogosListComidasAdapter
 import com.benjamin.proyectofeedo.databinding.FragmentCatalogosListBinding
 import com.benjamin.proyectofeedo.domain.model.CatalogosModel
+import com.benjamin.proyectofeedo.domain.model.ComidasModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -27,6 +29,8 @@ class CatalogosListComidasFragment : Fragment() {
     private val catalogosListViewModel by viewModels<CatalogosListComidasViewModel>()
 
     lateinit var elAdapter: CatalogosListComidasAdapter
+
+    private var comidasOriginales: List<ComidasModel> = emptyList()
 
     private val args: CatalogosListComidasFragmentArgs by navArgs()
 
@@ -47,7 +51,23 @@ class CatalogosListComidasFragment : Fragment() {
     private fun initUI() {
         initUIState()
         tituloDeCatalogo(args.type)
+        Buscador()
     }
+
+    private fun Buscador() {
+        binding.etSearchFeedCatalogo.addTextChangedListener { texto ->
+            val textoFiltrado = texto.toString().trim()
+
+            val comidasFiltradas = if (textoFiltrado.isEmpty()) {
+                comidasOriginales // si no hay texto, mostramos todo
+            } else {
+                comidasOriginales.filter { it.titulo.contains(textoFiltrado, ignoreCase = true) }
+            }
+
+            elAdapter.updateList(comidasFiltradas)
+        }
+    }
+
 
     private fun initUIState() {
         lifecycleScope.launch {
@@ -74,11 +94,13 @@ class CatalogosListComidasFragment : Fragment() {
     private fun succesState(success: CatalogosListComidasState.Success) {
         binding.progresBar.isVisible = false
 
+        // Guardamos la lista original
+        comidasOriginales = success.comidas
+
         // Actualizamos la lista del adapter, sin recrearlo
         elAdapter.updateList(success.comidas)
 
     }
-
 
     private fun tituloDeCatalogo(catalogosModel: CatalogosModel){
         binding.TituloCatalogo.text = catalogosModel.name
