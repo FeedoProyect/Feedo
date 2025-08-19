@@ -1,6 +1,5 @@
 package com.benjamin.proyectofeedo.UI.ListaCatalogos
 
-import androidx.core.widget.addTextChangedListener
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -26,11 +25,9 @@ class CatalogosListComidasFragment : Fragment() {
     private var _binding: FragmentCatalogosListBinding? = null
     private val binding get() = _binding!!
 
-    private val catalogosListViewModel by viewModels<CatalogosListComidasViewModel>()
+    private val catalogosListComidasViewModel by viewModels<CatalogosListComidasViewModel>()
 
     lateinit var elAdapter: CatalogosListComidasAdapter
-
-    private var comidasOriginales: List<ComidasModel> = emptyList()
 
     private val args: CatalogosListComidasFragmentArgs by navArgs()
 
@@ -45,34 +42,19 @@ class CatalogosListComidasFragment : Fragment() {
         }
 
         initUI()
-        catalogosListViewModel.getComidass(args.type.name)
+        catalogosListComidasViewModel.getComidass(args.type.id)
     }
 
     private fun initUI() {
         initUIState()
         tituloDeCatalogo(args.type)
-        Buscador()
-    }
-
-    private fun Buscador() {
-        binding.etSearchFeedCatalogo.addTextChangedListener { texto ->
-            val textoFiltrado = texto.toString().trim()
-
-            val comidasFiltradas = if (textoFiltrado.isEmpty()) {
-                comidasOriginales // si no hay texto, mostramos todo
-            } else {
-                comidasOriginales.filter { it.titulo.contains(textoFiltrado, ignoreCase = true) }
-            }
-
-            elAdapter.updateList(comidasFiltradas)
-        }
     }
 
 
     private fun initUIState() {
         lifecycleScope.launch {
             repeatOnLifecycle (Lifecycle.State.STARTED){
-                catalogosListViewModel.state.collect {
+                catalogosListComidasViewModel.state.collect {
                     when(it){
                         is CatalogosListComidasState.Error -> erroState()
                         CatalogosListComidasState.Loading -> loadingState()
@@ -93,9 +75,6 @@ class CatalogosListComidasFragment : Fragment() {
 
     private fun succesState(success: CatalogosListComidasState.Success) {
         binding.progresBar.isVisible = false
-
-        // Guardamos la lista original
-        comidasOriginales = success.comidas
 
         // Actualizamos la lista del adapter, sin recrearlo
         elAdapter.updateList(success.comidas)

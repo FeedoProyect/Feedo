@@ -6,8 +6,8 @@ import retrofit2.http.Query
 
 interface ComidasApiService {
 
-    @GET("recetas")
+    @GET("recetas?select=*, receta_catalogo!inner(catalogo_id)")
     suspend fun getRecetas(
-        @Query("select") select: String = "*" //por defecto trae todos los campos
+        @Query("receta_catalogo.catalogo_id") catalogoId: String
     ): List<ComidasResponse>
 }

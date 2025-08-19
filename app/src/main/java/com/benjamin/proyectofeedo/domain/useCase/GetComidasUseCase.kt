@@ -5,6 +5,6 @@ import javax.inject.Inject
 
 class GetComidasUseCase @Inject constructor(private val repository: Repository) {
 
-    suspend operator fun invoke(comida:String) = repository.getComidas(comida)
+    suspend operator fun invoke(comida: Int) = repository.getComidas(comida)
 
 }

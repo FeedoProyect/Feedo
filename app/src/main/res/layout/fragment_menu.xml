@@ -19,6 +19,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/etSearchFeed"
+            app:layout_constraintEnd_toStartOf="@+id/Titulo"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/fedo"/>
+
         <TextView
             android:id="@+id/Titulo"
             android:layout_width="wrap_content"

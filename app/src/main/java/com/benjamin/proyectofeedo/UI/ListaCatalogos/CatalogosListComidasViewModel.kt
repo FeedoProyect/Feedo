@@ -17,7 +17,7 @@ class CatalogosListComidasViewModel @Inject constructor(private val getComidasUs
     private var _state = MutableStateFlow<CatalogosListComidasState>(CatalogosListComidasState.Loading)
     val state: StateFlow<CatalogosListComidasState> = _state
 
-    fun getComidass(comida: String){
+    fun getComidass(comida: Int){
         viewModelScope.launch {
             _state.value = CatalogosListComidasState.Loading
             val result = withContext(Dispatchers.IO){ getComidasUseCase(comida) } //hilo secundario

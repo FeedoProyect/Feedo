@@ -80,32 +80,6 @@ class MenuFragment : Fragment() {
         }
     }
 
-//    private fun initList() {
-//        lifecycleScope.launch {
-//            val client = getClient()
-//            val supabaseResponse = client.postgrest["recetas"].select()
-//            val data = supabaseResponse.decodeList<CatalogoResponse>()
-//            Log.e("supabase", data.toString())
-//
-//            val adapter = ListaCatalogosAdapter(data)
-//            binding.rvCatolgo.layoutManager = LinearLayoutManager(
-//                requireContext(),
-//                LinearLayoutManager.HORIZONTAL, false
-//            )
-//            binding.rvCatolgo.adapter = adapter
-//        }
-//    }
-
-//    private fun getClient(): SupabaseClient {
-//        return createSupabaseClient(
-//            supabaseUrl = "https://vdtfvlfmdurwsdcvircw.supabase.co",
-//            supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZkdGZ2bGZtZHVyd3NkY3ZpcmN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyODk3MzEsImV4cCI6MjA2ODg2NTczMX0.tHJ0zc7ZVsC_sxXGISisq7y_wxT-PWYH4UHSjS6iuos",
-//        ) {
-//            install(Postgrest)
-//        }
-//    }
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
