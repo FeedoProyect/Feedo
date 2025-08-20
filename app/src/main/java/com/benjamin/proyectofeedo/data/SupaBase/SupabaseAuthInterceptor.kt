@@ -3,6 +3,9 @@ package com.benjamin.proyectofeedo.data.SupaBase
 import okhttp3.Interceptor
 import okhttp3.Response
 
+/* El interceptor basicamente es el cliente, donde antes de que retrofit le mande la peticion
+  al server le manda la key y autorizacion para que nos deje acceder a la database*/
+
 class SupabaseAuthInterceptor: Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()

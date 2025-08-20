@@ -1,8 +1,11 @@
 package com.benjamin.proyectofeedo.data.Network
 
+import com.benjamin.proyectofeedo.data.Network.response.ComidaDestacadaCatalogoResponse
 import com.benjamin.proyectofeedo.data.Network.response.ComidasResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
+
+/* Esta clase es la apiservice la que dice de que tabla y que items va a dar*/
 
 interface ComidasApiService {
 
@@ -10,4 +13,9 @@ interface ComidasApiService {
     suspend fun getRecetas(
         @Query("receta_catalogo.catalogo_id") catalogoId: String
     ): List<ComidasResponse>
+
+    @GET("recetas?select=*, receta_catalogo2!inner(catalogo_id)")
+    suspend fun getComidaCatalogoDestacada(
+        @Query("receta_catalogo2.catalogo_id") comidaCatalogoDestacada: String
+    ): List<ComidaDestacadaCatalogoResponse>
 }

@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".UI.ListaCatalogos.CatalogosListComidasFragment">
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".UI.ListaCatalogos.CatalogosListComidasFragment">
 
     <View
         android:id="@+id/viewTittleCatalogo"
@@ -19,11 +23,11 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
+        android:src="@drawable/fedo"
         app:layout_constraintBottom_toTopOf="@+id/etSearchFeedCatalogo"
         app:layout_constraintEnd_toStartOf="@+id/TituloCatalogo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/fedo"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/TituloCatalogo"
@@ -54,22 +58,62 @@
         android:padding="10dp"
         android:singleLine="true"
         android:textSize="19sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/CDfilter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TituloCatalogo" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CDfilter"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/tittle_color"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etSearchFeedCatalogo"
+        app:layout_constraintTop_toBottomOf="@+id/TituloCatalogo">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tituloDestacadoCatalogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/tittle_color"
+        android:fontFamily="@font/balo_thambi"
+        android:textSize="30sp"
+        android:text="@string/catalogo_Destacados"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewTittleCatalogo"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvComidaDestacadaCatalogo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloDestacadoCatalogo"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComidasCatalogo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="4dp"
-        android:paddingBottom="80dp"
+        android:layout_marginTop="15dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@+id/viewTittleCatalogo"
+        android:paddingBottom="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/rvComidaDestacadaCatalogo" />
 
 
     <ProgressBar
@@ -82,5 +126,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

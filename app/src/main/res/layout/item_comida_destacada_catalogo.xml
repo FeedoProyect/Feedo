@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cdimagenComidaDestacada"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:cardCornerRadius="200dp"
+        app:layout_constraintBottom_toTopOf="@+id/parentInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgComidaDestacadaCatalogo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:src="@drawable/desayunos" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationY="-60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cdimagenComidaDestacada">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cdInformationComidaDestacadaCatalogo"
+            android:layout_width="200dp"
+            android:layout_height="260dp"
+            android:backgroundTint="@color/item_comida_destacada_catalogo"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/tvTituloComidaDestacadaCatalogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/balo_thambi"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                tools:text="Hamburguesa" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|bottom"
+                android:layout_marginStart="13dp"
+                android:layout_marginBottom="50dp"
+                android:text="@string/tiempo_comida_destacada_catalogo"
+                android:textColor="@color/tiempo_item_comida_destacada_catalogo"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvTiempoComidaDestacadaCatalogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|bottom"
+                android:layout_marginHorizontal="13dp"
+                android:layout_marginBottom="15dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="15 minutos" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="18dp"
+                app:cardCornerRadius="16dp"
+                android:layout_gravity="end|bottom"
+                android:backgroundTint="@color/ToolbarDeFeedo">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_favs"
+                    app:tint="@color/tittle_color" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

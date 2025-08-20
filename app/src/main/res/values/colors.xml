@@ -14,6 +14,8 @@
     <!-- Colores Feedo -->
     <color name="ToolbarDeFeedo">#FFDD9A</color>
     <color name="tittle_color">#FFAC00</color>
+    <color name="item_comida_destacada_catalogo">#E2E2E2</color>
+    <color name="tiempo_item_comida_destacada_catalogo">#817E7E</color>
 
 
     <color name="fondonegro">#6E000000</color>

@@ -6,7 +6,7 @@
     <!-- Bottom Bar -->
     <string name="home_BottomBar">Inicio</string>
     <string name="perfil_BottomBar">Perfil</string>
-    <string name="favoritos_BottomBar">Favoritos</string>
+    <string name="agregar_receta">Agregar</string>
 
     <!-- Menu Pricipal -->
     <string name="Tittle">Feedo</string>
@@ -31,5 +31,9 @@
     <string name="Sopas_y_guisos">Sopas y Guisos</string>
     <string name="Veganas">Veganas</string>
     <string name="Vegetarianas">Vegetarianas</string>
+
+    <string name="catalogo_Destacados">Mas destacados!</string>
+
+    <string name="tiempo_comida_destacada_catalogo">Tiempo</string>
 
 </resources>

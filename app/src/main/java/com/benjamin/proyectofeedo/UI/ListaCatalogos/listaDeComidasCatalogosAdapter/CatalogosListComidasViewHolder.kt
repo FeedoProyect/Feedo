@@ -1,8 +1,6 @@
 package com.benjamin.proyectofeedo.UI.ListaCatalogos.listaDeComidasCatalogosAdapter
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.benjamin.proyectofeedo.databinding.FragmentCatalogosListBinding
 import com.benjamin.proyectofeedo.databinding.ItemComidasCatalogosBinding
 import com.benjamin.proyectofeedo.domain.model.ComidasModel
 import com.squareup.picasso.Picasso

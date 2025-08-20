@@ -20,13 +20,15 @@ class CatalogosListComidasViewModel @Inject constructor(private val getComidasUs
     fun getComidass(comida: Int){
         viewModelScope.launch {
             _state.value = CatalogosListComidasState.Loading
-            val result = withContext(Dispatchers.IO){ getComidasUseCase(comida) } //hilo secundario
-
-            if(result != null){
-                _state.value = CatalogosListComidasState.Success(result)
-            }else{
-                _state.value = CatalogosListComidasState.Error("Ha ocurrido un error, intentelo mas tarde")
+            try {
+                val (comidas, comidasDestacadas) = withContext(Dispatchers.IO) {
+                    getComidasUseCase(comida)
+                }
+                _state.value = CatalogosListComidasState.Success(comidas, comidasDestacadas)
+            } catch (e: Exception) {
+                _state.value = CatalogosListComidasState.Error("Ha ocurrido un error, intentelo más tarde")
             }
         }
     }
+
 }

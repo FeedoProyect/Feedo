@@ -12,10 +12,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.benjamin.proyectofeedo.UI.ListaCatalogos.listaComidaDestacadaCatalogoAdapter.ComidaDestacadaCatalogoAdapter
 import com.benjamin.proyectofeedo.UI.ListaCatalogos.listaDeComidasCatalogosAdapter.CatalogosListComidasAdapter
 import com.benjamin.proyectofeedo.databinding.FragmentCatalogosListBinding
 import com.benjamin.proyectofeedo.domain.model.CatalogosModel
-import com.benjamin.proyectofeedo.domain.model.ComidasModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -28,11 +29,18 @@ class CatalogosListComidasFragment : Fragment() {
     private val catalogosListComidasViewModel by viewModels<CatalogosListComidasViewModel>()
 
     lateinit var elAdapter: CatalogosListComidasAdapter
+    lateinit var adapterComidaDestacadaCatalogo: ComidaDestacadaCatalogoAdapter
 
     private val args: CatalogosListComidasFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        adapterComidaDestacadaCatalogo = ComidaDestacadaCatalogoAdapter()
+        binding.rvComidaDestacadaCatalogo.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = adapterComidaDestacadaCatalogo
+        }
 
         // Inicializamos el adapter vacío
         elAdapter = CatalogosListComidasAdapter()
@@ -49,7 +57,6 @@ class CatalogosListComidasFragment : Fragment() {
         initUIState()
         tituloDeCatalogo(args.type)
     }
-
 
     private fun initUIState() {
         lifecycleScope.launch {
@@ -71,6 +78,7 @@ class CatalogosListComidasFragment : Fragment() {
 
     private fun erroState(){
         binding.progresBar.isVisible = false
+
     }
 
     private fun succesState(success: CatalogosListComidasState.Success) {
@@ -79,10 +87,12 @@ class CatalogosListComidasFragment : Fragment() {
         // Actualizamos la lista del adapter, sin recrearlo
         elAdapter.updateList(success.comidas)
 
+        adapterComidaDestacadaCatalogo.updateListComidaDestacadaCatalogo(success.comidasDestacadas)
+
     }
 
     private fun tituloDeCatalogo(catalogosModel: CatalogosModel){
-        binding.TituloCatalogo.text = catalogosModel.name
+        binding.TituloCatalogo.text = catalogosModel.titulo
     }
 
     override fun onCreateView(
