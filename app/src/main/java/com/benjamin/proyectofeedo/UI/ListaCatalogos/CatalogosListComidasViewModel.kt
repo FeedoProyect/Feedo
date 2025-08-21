@@ -2,7 +2,7 @@ package com.benjamin.proyectofeedo.UI.ListaCatalogos
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.benjamin.proyectofeedo.domain.useCase.GetComidasUseCase
+import com.benjamin.proyectofeedo.domain.useCase.GetComidaCatalogoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class CatalogosListComidasViewModel @Inject constructor(private val getComidasUseCase: GetComidasUseCase): ViewModel() {
+class CatalogosListComidasViewModel @Inject constructor(private val getComidasUseCase: GetComidaCatalogoUseCase): ViewModel() {
 
     private var _state = MutableStateFlow<CatalogosListComidasState>(CatalogosListComidasState.Loading)
     val state: StateFlow<CatalogosListComidasState> = _state
@@ -30,5 +30,4 @@ class CatalogosListComidasViewModel @Inject constructor(private val getComidasUs
             }
         }
     }
-
 }
