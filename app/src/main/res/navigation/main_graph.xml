@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_menuFragment_to_catalogosListFragment"
             app:destination="@id/catalogosListFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_buscadorPrincipalFragment"
+            app:destination="@id/buscadorPrincipalFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
@@ -33,4 +36,9 @@
             android:name="type"
             app:argType="com.benjamin.proyectofeedo.domain.model.CatalogosModel" />
     </fragment>
+    <fragment
+        android:id="@+id/buscadorPrincipalFragment"
+        android:name="com.benjamin.proyectofeedo.UI.feedoBuscador.BuscadorPrincipalFragment"
+        android:label="fragment_buscador_principal"
+        tools:layout="@layout/fragment_buscador_principal" />
 </navigation>

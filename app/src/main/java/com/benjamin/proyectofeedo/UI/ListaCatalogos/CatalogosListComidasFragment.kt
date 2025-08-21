@@ -63,7 +63,7 @@ class CatalogosListComidasFragment : Fragment() {
             repeatOnLifecycle (Lifecycle.State.STARTED){
                 catalogosListComidasViewModel.state.collect {
                     when(it){
-                        is CatalogosListComidasState.Error -> erroState()
+                        is CatalogosListComidasState.Error -> errorState()
                         CatalogosListComidasState.Loading -> loadingState()
                         is CatalogosListComidasState.Success -> succesState(it)
                     }
@@ -76,7 +76,7 @@ class CatalogosListComidasFragment : Fragment() {
         binding.progresBar.isVisible = true
     }
 
-    private fun erroState(){
+    private fun errorState(){
         binding.progresBar.isVisible = false
 
     }

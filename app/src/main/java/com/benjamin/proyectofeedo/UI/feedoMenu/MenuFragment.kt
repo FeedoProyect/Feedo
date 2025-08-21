@@ -35,8 +35,17 @@ class MenuFragment : Fragment() {
     }
 
     private fun initUI() {
+        initBuscador()
         initUIState()
         initList()
+    }
+
+    private fun initBuscador() {
+        binding.etSearchFeed.setOnClickListener {
+            findNavController().navigate(
+                MenuFragmentDirections.actionMenuFragmentToBuscadorPrincipalFragment()
+            )
+        }
     }
 
     private fun initList() {

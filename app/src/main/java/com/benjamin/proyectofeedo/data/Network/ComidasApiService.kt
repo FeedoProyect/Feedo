@@ -18,4 +18,10 @@ interface ComidasApiService {
     suspend fun getComidaCatalogoDestacada(
         @Query("receta_catalogo2.catalogo_id") comidaCatalogoDestacada: String
     ): List<ComidaDestacadaCatalogoResponse>
+
+    @GET("recetas")
+    suspend fun getComidaBuscador(
+        @Query("select") select: String = "*",
+        @Query("titulo") nombre: String? = null
+    ): List<ComidasResponse>
 }
