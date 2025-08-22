@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_graph"
+    app:startDestination="@id/welcomeFeedoFragment">
+
+    <fragment
+        android:id="@+id/loginUserFragment"
+        android:name="com.benjamin.proyectofeedo.usuarioLogin.LoginUI.feedoLoginAccount.LoginUserFragment"
+        android:label="fragment_login_user"
+        tools:layout="@layout/fragment_login_user" />
+    <fragment
+        android:id="@+id/welcomeFeedoFragment"
+        android:name="com.benjamin.proyectofeedo.usuarioLogin.LoginUI.feedoWelcome.WelcomeFeedoFragment"
+        android:label="fragment_welcome_feedo"
+        tools:layout="@layout/fragment_welcome_feedo" >
+        <action
+            android:id="@+id/action_welcomeFeedoFragment_to_loginUserFragment"
+            app:destination="@id/loginUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerUserFragment"
+        android:name="com.benjamin.proyectofeedo.usuarioLogin.LoginUI.feedoRegisterAccount.RegisterUserFragment"
+        android:label="fragment_register_account"
+        tools:layout="@layout/fragment_register_account" />
+</navigation>

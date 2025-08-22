@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/fondo_pantalla_inicio"
+    tools:context=".usuarioLogin.LoginUI.feedoWelcome.WelcomeFeedoFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/description_feedo"
+        android:fontFamily="@font/balo_thambi"
+        android:textSize="23sp"
+        android:layout_marginTop="70dp"
+        android:width="300dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:shadowDx="6"
+        android:shadowDy="6"
+        android:shadowRadius="6"
+        android:shadowColor="@android:color/darker_gray"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/botonGoApp"
+        android:layout_width="260dp"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom|center"
+        android:text="@string/bottom_iniciar_sesion_welcome"
+        android:textColor="@color/tittle_color"
+        android:textSize="17sp"
+        android:fontFamily="@font/balo_thambi"
+        android:layout_marginBottom="80dp"
+        app:backgroundTint="@color/white"
+        app:strokeColor="@android:color/darker_gray"
+        app:strokeWidth="1dp"
+        app:cornerRadius="30dp"/>
+
+
+</FrameLayout>

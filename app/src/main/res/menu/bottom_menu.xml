@@ -7,12 +7,12 @@
         android:icon="@drawable/ic_inicio"/>
 
     <item
-        android:id="@+id/favoritosFragment"
+        android:id="@+id/addRecetasFragment"
         android:title="@string/agregar_receta"
         android:icon="@drawable/ic_add_receta"/>
 
     <item
-        android:id="@+id/historialFragment"
+        android:id="@+id/perfilFragment"
         android:title="@string/perfil_BottomBar"
         android:icon="@drawable/ic_perfil"/>
 

@@ -32,8 +32,29 @@
     <string name="Veganas">Veganas</string>
     <string name="Vegetarianas">Vegetarianas</string>
 
-    <string name="catalogo_Destacados">Mas destacados!</string>
 
+    <!-- Pantalla Catalogos -->
+    <string name="catalogo_Destacados">Mas destacados!</string>
     <string name="tiempo_comida_destacada_catalogo">Tiempo</string>
+
+    <!-- Pantalla de bienvenidos -->
+    <string name="description_feedo">
+        Con Feedo, cocinar es simple, divertido y sabdroso: aprendé nuevas recetas
+        paso a paso y disfrutá de cada plato como nunca antes.
+    </string>
+    <string name="bottom_iniciar_sesion_welcome">Iniciar Sesión</string>
+
+    <!-- Pantalla de Iniciar Sesión -->
+    <string name="login_text_hola">Hola!</string>
+    <string name="login_text_inicia_sesion">Inicia Sesión</string>
+    <string name="login_text_email">Email</string>
+    <string name="login_text_contraseña">Contraseña</string>
+    <string name="login_se_olvido_contraseña">Se olvido la contraseña?</string>
+    <string name="login_bottom_inicio_sesion">Iniciar Sesión</string>
+    <string name="login_alternativos_auth">Alternativos</string>
+    <string name="login_peticion_registrarse">No tienes una cuenta?</string>
+    <string name="login_registrate">Registrate</string>
+    <string name="login_hint_email">Ingresa un email</string>
+    <string name="login_hint_contraseña">Ingresa una contraseña</string>
 
 </resources>

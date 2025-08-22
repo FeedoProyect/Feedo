@@ -1,4 +1,4 @@
-package com.benjamin.proyectofeedo.UI.ListaCatalogos
+package com.benjamin.proyectofeedo.UI.feedoContenidoCatalogos
 
 import com.benjamin.proyectofeedo.domain.model.ComidaDestacadaCatalogoModel
 import com.benjamin.proyectofeedo.domain.model.ComidasModel

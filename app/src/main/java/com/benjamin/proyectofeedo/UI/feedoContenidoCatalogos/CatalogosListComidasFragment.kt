@@ -1,4 +1,4 @@
-package com.benjamin.proyectofeedo.UI.ListaCatalogos
+package com.benjamin.proyectofeedo.UI.feedoContenidoCatalogos
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,8 +13,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.benjamin.proyectofeedo.UI.ListaCatalogos.listaComidaDestacadaCatalogoAdapter.ComidaDestacadaCatalogoAdapter
-import com.benjamin.proyectofeedo.UI.ListaCatalogos.listaDeComidasCatalogosAdapter.CatalogosListComidasAdapter
+import com.benjamin.proyectofeedo.UI.feedoContenidoCatalogos.listaComidaDestacadaCatalogoAdapter.ComidaDestacadaCatalogoAdapter
+import com.benjamin.proyectofeedo.UI.feedoContenidoCatalogos.listaDeComidasCatalogosAdapter.CatalogosListComidasAdapter
 import com.benjamin.proyectofeedo.databinding.FragmentCatalogosListBinding
 import com.benjamin.proyectofeedo.domain.model.CatalogosModel
 import dagger.hilt.android.AndroidEntryPoint

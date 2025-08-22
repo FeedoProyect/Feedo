@@ -1,4 +1,4 @@
-package com.benjamin.proyectofeedo.UI.ListaCatalogos
+package com.benjamin.proyectofeedo.UI.feedoContenidoCatalogos
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

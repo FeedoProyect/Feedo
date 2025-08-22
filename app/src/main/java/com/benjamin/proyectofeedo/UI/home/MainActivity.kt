@@ -5,6 +5,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.benjamin.proyectofeedo.R
 import com.benjamin.proyectofeedo.databinding.ActivityMainBinding
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private fun initNavegation() {
         val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHost.navController
+
         binding.bottomBar.setupWithNavController(navController)
     }
 }

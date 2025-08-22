@@ -1,4 +1,4 @@
-package com.benjamin.proyectofeedo.UI.ListaCatalogos.listaDeComidasCatalogosAdapter
+package com.benjamin.proyectofeedo.UI.feedoContenidoCatalogos.listaDeComidasCatalogosAdapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.databinding.ItemComidasCatalogosBinding

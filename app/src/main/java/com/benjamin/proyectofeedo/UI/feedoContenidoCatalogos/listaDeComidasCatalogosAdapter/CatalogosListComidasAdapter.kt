@@ -1,4 +1,4 @@
-package com.benjamin.proyectofeedo.UI.ListaCatalogos.listaDeComidasCatalogosAdapter
+package com.benjamin.proyectofeedo.UI.feedoContenidoCatalogos.listaDeComidasCatalogosAdapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
