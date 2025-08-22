@@ -53,25 +53,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvIniciaSesion" />
 
-    <EditText
-        android:id="@+id/etGmail"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/gmail"
         android:layout_width="320dp"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/edit_text_login"
-        android:hint="@string/login_hint_email"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:singleLine="true"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etGmail"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/edit_text_login"
+            android:hint="@string/login_hint_email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <TextView
         android:id="@+id/tvContraseña"
@@ -83,27 +90,36 @@
         android:textColor="@color/black"
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etGmail" />
+        app:layout_constraintTop_toBottomOf="@+id/gmail" />
 
-    <EditText
-        android:id="@+id/etContraseña"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/contra"
         android:layout_width="320dp"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/edit_text_login"
-        android:hint="@string/login_hint_contraseña"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:singleLine="true"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
+        app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvContraseña" />
+        app:layout_constraintTop_toBottomOf="@+id/tvContraseña">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etContraseña"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/edit_text_login"
+            android:hint="@string/login_hint_contraseña"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/botonGoApp"
@@ -119,7 +135,34 @@
         app:cornerRadius="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etContraseña"/>
+        app:layout_constraintTop_toBottomOf="@+id/contra"/>
+
+    <TextView
+        android:id="@+id/tvPeticionDeCuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_peticion_registrarse"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="60dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="13dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvRegistrarCuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_registrate"
+        android:layout_marginBottom="60dp"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/tittle_color"
+        android:textStyle="bold"
+        android:textSize="13dp"
+        app:layout_constraintStart_toEndOf="@+id/tvPeticionDeCuenta"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
