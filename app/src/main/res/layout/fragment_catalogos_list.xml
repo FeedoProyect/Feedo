@@ -12,7 +12,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".UI.feedoContenidoCatalogos.CatalogosListComidasFragment">
+            tools:context=".pantallasPrincipales.UI.feedoContenidoCatalogos.CatalogosListComidasFragment">
 
             <View
                 android:id="@+id/viewTittleCatalogo"
@@ -27,7 +27,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="24dp"
-                android:src="@drawable/fedo"
+                android:src="@drawable/feedo_removebg"
                 app:layout_constraintBottom_toTopOf="@+id/etSearchFeedCatalogo"
                 app:layout_constraintEnd_toStartOf="@+id/TituloCatalogo"
                 app:layout_constraintStart_toStartOf="parent"

@@ -14,15 +14,27 @@
             android:id="@+id/tvCreaUnaCuenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="60dp"
             android:text="@string/register_text_creaCuenta"
-            android:textColor="@color/black"
-            android:textSize="27sp"
+            android:textColor="@color/text_de_items"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvUsuario"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgfeedoregister"/>
+
+        <ImageView
+            android:id="@+id/imgfeedoregister"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="40dp"
+            android:src="@drawable/feedo_removebg"
+            app:layout_constraintStart_toEndOf="@+id/tvCreaUnaCuenta"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/tvUsuario"
@@ -31,7 +43,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="30dp"
             android:text="@string/register_text_usuario"
-            android:textColor="@color/black"
+            android:textColor="@color/text_de_items"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCreaUnaCuenta" />
@@ -68,7 +80,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="30dp"
             android:text="@string/register_text_email"
-            android:textColor="@color/black"
+            android:textColor="@color/text_de_items"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/usuario" />
@@ -106,7 +118,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="30dp"
             android:text="@string/register_text_contraseña"
-            android:textColor="@color/black"
+            android:textColor="@color/text_de_items"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registerEmail" />
@@ -124,7 +136,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvRegisterContraseña">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etContraseña"
+                android:id="@+id/etRegisterContraseña"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:background="@drawable/edit_text_login"
@@ -146,7 +158,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="30dp"
             android:text="@string/register_text_confirmarContraseña"
-            android:textColor="@color/black"
+            android:textColor="@color/text_de_items"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/contra" />
@@ -201,7 +213,7 @@
             android:layout_marginEnd="60dp"
             android:layout_marginVertical="70dp"
             android:text="@string/register_yaTengoCuenta"
-            android:textColor="@color/black"
+            android:textColor="@color/text_de_items"
             android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

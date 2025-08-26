@@ -5,17 +5,19 @@
     <color name="transparente">#00000000</color>
 
     <!--Colores de prueba para fragments-->
-    <color name="red">#FF0000</color>
+    <color name="red">#F80202</color>
     <color name="orange">#FF5722</color>
     <color name="pink">#D113C6</color>
     <color name="blue">#2317D3</color>
-
 
     <!-- Colores Feedo -->
     <color name="ToolbarDeFeedo">#FFDD9A</color>
     <color name="tittle_color">#FFAC00</color>
     <color name="item_comida_destacada_catalogo">#E2E2E2</color>
     <color name="tiempo_item_comida_destacada_catalogo">#817E7E</color>
+    <color name="text_de_items">#000000</color>
+    <color name="color_bottom_nav">#FFFFFF</color>
+    <color name="color_item_perfil">#FFFFFF</color>
 
 
     <color name="fondonegro">#6E000000</color>

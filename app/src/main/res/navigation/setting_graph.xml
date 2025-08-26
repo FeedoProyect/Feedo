@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_graph"
+    app:startDestination="@id/settingViewFragment">
+
+    <fragment
+        android:id="@+id/informationOfTeamFragment"
+        android:name="com.benjamin.proyectofeedo.settingsFeedo.UI.InformationOfTeamFragment"
+        android:label="fragment_information_of_team"
+        tools:layout="@layout/fragment_information_of_team" />
+    <fragment
+        android:id="@+id/darkModeFragment"
+        android:name="com.benjamin.proyectofeedo.settingsFeedo.UI.darkMode.DarkModeFragment"
+        android:label="fragment_dark_mode"
+        tools:layout="@layout/fragment_dark_mode" />
+    <fragment
+        android:id="@+id/settingViewFragment"
+        android:name="com.benjamin.proyectofeedo.settingsFeedo.UI.SettingViewFragment"
+        android:label="SettingViewFragment" >
+        <action
+            android:id="@+id/action_settingViewFragment_to_darkModeFragment"
+            app:destination="@id/darkModeFragment" />
+        <action
+            android:id="@+id/action_settingViewFragment_to_informationOfTeamFragment"
+            app:destination="@id/informationOfTeamFragment" />
+    </fragment>
+</navigation>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="40dp"
-    tools:context=".UI.feedoPerfil.PerfilFragment">
+    tools:context=".pantallasPrincipales.UI.feedoPerfil.PerfilFragment">
 
     <TextView
         android:id="@+id/tvPerfil"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="5dp"
-        android:backgroundTint="@android:color/white"
+        android:backgroundTint="@color/color_item_perfil"
         app:cardCornerRadius="12dp"
         app:cardElevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,7 @@
                 android:background="@drawable/oval"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/maxi_fedo" />
+                android:src="@drawable/beboteo_full" />
 
             <!-- Nombre y descripción -->
             <LinearLayout
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Brakko DCA"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_de_items"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 

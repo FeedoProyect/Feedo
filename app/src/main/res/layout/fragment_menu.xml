@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".UI.feedoMenu.MenuFragment">
+        tools:context=".pantallasPrincipales.UI.feedoMenu.MenuFragment">
 
         <View
             android:id="@+id/viewTittle"
@@ -26,7 +26,7 @@
             app:layout_constraintBottom_toTopOf="@+id/etSearchFeed"
             app:layout_constraintEnd_toStartOf="@+id/Titulo"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/fedo"/>
+            android:src="@drawable/feedo_removebg"/>
 
         <TextView
             android:id="@+id/Titulo"
@@ -74,7 +74,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="27dp"
             android:text="@string/textView_catalogo"
-            android:textColor="@color/black"
+            android:textColor="@color/text_de_items"
             android:textSize="17sp"
             android:textStyle="bold"/>
 

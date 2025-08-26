@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.benjamin.proyectofeedo.UI.home.MainActivity
+import com.benjamin.proyectofeedo.pantallasPrincipales.UI.home.MainActivity
 import com.benjamin.proyectofeedo.databinding.FragmentLoginUserBinding
-import com.benjamin.proyectofeedo.usuarioLogin.LoginUI.feedoWelcome.WelcomeFeedoFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

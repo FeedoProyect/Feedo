@@ -4,24 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/fondo_pantalla_inicio"
+    android:background="@drawable/fondo_welcome_verdadero"
     tools:context=".usuarioLogin.LoginUI.feedoWelcome.WelcomeFeedoFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/description_feedo"
-        android:fontFamily="@font/balo_thambi"
-        android:textSize="23sp"
-        android:layout_marginTop="70dp"
-        android:width="300dp"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:shadowDx="6"
-        android:shadowDy="6"
-        android:shadowRadius="6"
-        android:shadowColor="@android:color/darker_gray"/>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/botonGoApp"

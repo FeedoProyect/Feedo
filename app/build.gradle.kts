@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.hilt)
     id("org.jetbrains.kotlin.kapt")
     id("androidx.navigation.safeargs.kotlin")
+    kotlin("plugin.serialization") version "2.2.0"
+
 }
 
 android {
@@ -71,9 +73,26 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
 
-    //contraseña en login
-    implementation("com.google.android.material:material:1.12.0")
+    // Version de libreria material para la pantalla de login
+    val versionDeMaterial = "1.12.0"
 
+    //contraseña en login
+    implementation("com.google.android.material:material:$versionDeMaterial")
+
+
+    //versiones de supabase
+    val supabase_version = "3.2.2"
+    val ktor_version= "3.2.3"
+
+    implementation(platform("io.github.jan-tennert.supabase:bom:$supabase_version"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.ktor:ktor-client-android:$ktor_version")
+
+    //Verision de dataStore
+    val dataStore_Version = "1.1.7"
+
+    // DataStore
+    implementation("androidx.datastore:datastore-preferences:$dataStore_Version")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -84,10 +103,4 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
    }
-}
-dependencies {
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
 }

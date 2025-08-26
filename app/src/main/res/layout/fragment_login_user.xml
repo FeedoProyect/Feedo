@@ -13,7 +13,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginStart="40dp"
         android:text="@string/login_text_hola"
-        android:textColor="@color/black"
+        android:textColor="@color/text_de_items"
         android:textSize="45sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvIniciaSesion"
@@ -27,7 +27,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="40dp"
         android:text="@string/login_text_inicia_sesion"
-        android:textColor="@color/black"
+        android:textColor="@color/text_de_items"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvHola" />
@@ -37,7 +37,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="40dp"
-        android:src="@drawable/ic_feedo_inicio"
+        android:src="@drawable/feedo_removebg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -48,7 +48,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginStart="40dp"
         android:text="@string/login_text_email"
-        android:textColor="@color/black"
+        android:textColor="@color/text_de_items"
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvIniciaSesion" />
@@ -87,7 +87,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginStart="40dp"
         android:text="@string/login_text_contraseña"
-        android:textColor="@color/black"
+        android:textColor="@color/text_de_items"
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gmail" />
@@ -144,7 +144,7 @@
         android:text="@string/login_peticion_registrarse"
         android:layout_marginBottom="60dp"
         android:layout_marginEnd="60dp"
-        android:textColor="@color/black"
+        android:textColor="@color/text_de_items"
         android:textStyle="bold"
         android:textSize="13dp"
         app:layout_constraintStart_toStartOf="parent"

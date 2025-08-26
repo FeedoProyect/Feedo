@@ -7,7 +7,7 @@
 
         <fragment
             android:id="@+id/menuFragment"
-            android:name="com.benjamin.proyectofeedo.UI.feedoMenu.MenuFragment"
+            android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoMenu.MenuFragment"
             android:label="fragment_menu"
             tools:layout="@layout/fragment_menu">
             <action
@@ -19,26 +19,26 @@
         </fragment>
         <fragment
             android:id="@+id/catalogosListFragment"
-            android:name="com.benjamin.proyectofeedo.UI.feedoContenidoCatalogos.CatalogosListComidasFragment"
+            android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoContenidoCatalogos.CatalogosListComidasFragment"
             android:label="fragment_catalogos_list"
             tools:layout="@layout/fragment_catalogos_list">
             <argument
                 android:name="type"
-                app:argType="com.benjamin.proyectofeedo.domain.model.CatalogosModel" />
+                app:argType="com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.CatalogosModel" />
         </fragment>
         <fragment
             android:id="@+id/buscadorPrincipalFragment"
-            android:name="com.benjamin.proyectofeedo.UI.feedoBuscador.BuscadorPrincipalFragment"
+            android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoBuscador.BuscadorPrincipalFragment"
             android:label="fragment_buscador_principal"
             tools:layout="@layout/fragment_buscador_principal" />
         <fragment
             android:id="@+id/perfilFragment"
-            android:name="com.benjamin.proyectofeedo.UI.feedoPerfil.PerfilFragment"
+            android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoPerfil.PerfilFragment"
             android:label="fragment_historial"
             tools:layout="@layout/fragment_perfil" />
         <fragment
             android:id="@+id/addRecetasFragment"
-            android:name="com.benjamin.proyectofeedo.UI.feedoAddRecetas.AddRecetaFragment"
+            android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoAddRecetas.AddRecetaFragment"
             android:label="fragment_favoritos"
             tools:layout="@layout/fragment_add_recetas" />
 </navigation>

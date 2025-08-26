@@ -52,7 +52,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/balo_thambi"
                 android:padding="12dp"
-                android:textColor="@color/black"
+                android:textColor="@color/text_de_items"
                 android:textSize="15sp"
                 tools:text="Hamburguesa" />
 
@@ -73,7 +73,7 @@
                 android:layout_gravity="start|bottom"
                 android:layout_marginHorizontal="13dp"
                 android:layout_marginBottom="15dp"
-                android:textColor="@color/black"
+                android:textColor="@color/text_de_items"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 tools:text="15 minutos" />

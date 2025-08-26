@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colores Feedo -->
+    <color name="ToolbarDeFeedo">#383636</color>
+    <color name="tittle_color">#FFAC00</color>
+    <color name="item_comida_destacada_catalogo">#413F3F</color>
+    <color name="tiempo_item_comida_destacada_catalogo">#E0DDDD</color>
+    <color name="text_de_items">#FFFFFF</color>
+    <color name="color_bottom_nav">#383636</color>
+    <color name="color_item_perfil">#383636</color>
+</resources>
