@@ -53,6 +53,7 @@
             android:background="@drawable/edittext_corner"
             android:drawableStart="@drawable/ic_search_edittext"
             android:hint="@string/hintBuscadorPrincipal"
+            android:textColorHint="@color/color_hint_buscador"
             android:maxLines="1"
             android:padding="10dp"
             android:singleLine="true"
@@ -87,18 +88,12 @@
             app:layout_constraintStart_toEndOf="@+id/catalogoTittle"
             app:layout_constraintTop_toBottomOf="@+id/viewTittle">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center">
-
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_piquito_feedo" />
 
-            </FrameLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -109,6 +104,8 @@
             android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/catalogoTittle"/>
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

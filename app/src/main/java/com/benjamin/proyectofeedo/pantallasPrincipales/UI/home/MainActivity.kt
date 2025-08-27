@@ -1,6 +1,7 @@
 package com.benjamin.proyectofeedo.pantallasPrincipales.UI.home
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -28,6 +29,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUI() {
         initNavegation()
+        configurationNav()
+    }
+
+    private fun configurationNav() {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.menuFragment,
+                R.id.catalogosListFragment,
+                R.id.buscadorPrincipalFragment,
+                R.id.perfilFragment,
+                R.id.addRecetasFragment -> {
+                    binding.bottomBar.visibility = View.VISIBLE
+                }
+                else -> {
+                    // para fragments como settings, darkMode, etc.
+                    binding.bottomBar.visibility = View.GONE
+                }
+            }
+        }
     }
 
     private fun initNavegation() {

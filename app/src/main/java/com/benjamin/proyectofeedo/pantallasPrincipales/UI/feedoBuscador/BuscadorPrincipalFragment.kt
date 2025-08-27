@@ -1,12 +1,10 @@
 package com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoBuscador
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -17,6 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoBuscador.BuscadorPrincipalAdapter.BuscadorPrincipalAdapter
 import com.benjamin.proyectofeedo.databinding.FragmentBuscadorPrincipalBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -77,21 +79,25 @@ class BuscadorPrincipalFragment : Fragment() {
     }
 
     private fun initEditText() {
-        // Focus automático en el EditText
-        binding.etPantallaBuscador.requestFocus()
-        val imm =
-            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(binding.etPantallaBuscador, InputMethodManager.SHOW_IMPLICIT)
-
-        binding.etPantallaBuscador.addTextChangedListener {
-            val response = it.toString()
-            if(response.isNotEmpty()){
-                buscadorPrincipalViewModel.getComidasBuscador(response)
-            } else{
-                adapterBuscador.updateList(emptyList())
+        val editTextFlow = callbackFlow {
+            binding.etPantallaBuscador.doOnTextChanged { text, _, _, _ ->
+                trySend(text.toString())
             }
+            awaitClose {}
         }
 
+        lifecycleScope.launch {
+            editTextFlow
+                .debounce(300) // espera 300ms después de la última letra
+                .distinctUntilChanged()
+                .collect { query ->
+                    if(query.isNotEmpty()){
+                        buscadorPrincipalViewModel.getComidasBuscador(query)
+                    } else{
+                        adapterBuscador.updateList(emptyList())
+                    }
+                }
+        }
     }
 
     private fun buttonBack() {

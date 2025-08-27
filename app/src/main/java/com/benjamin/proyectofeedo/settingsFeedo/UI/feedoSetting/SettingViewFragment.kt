@@ -1,6 +1,5 @@
-package com.benjamin.proyectofeedo.settingsFeedo.UI
+package com.benjamin.proyectofeedo.settingsFeedo.UI.feedoSetting
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.benjamin.proyectofeedo.databinding.FragmentSettingViewBinding
-import com.benjamin.proyectofeedo.pantallasPrincipales.UI.home.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,8 +42,7 @@ class SettingViewFragment : Fragment() {
     }
 
     private fun volverAtras(){
-        val intent = Intent(requireContext(), MainActivity::class.java)
-        startActivity(intent)
+        findNavController().popBackStack()
     }
 
     override fun onCreateView(

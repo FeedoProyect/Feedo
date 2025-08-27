@@ -1,4 +1,4 @@
-package com.benjamin.proyectofeedo.settingsFeedo.UI
+package com.benjamin.proyectofeedo.settingsFeedo.UI.feedoInformation
 
 import android.os.Bundle
 import android.view.LayoutInflater

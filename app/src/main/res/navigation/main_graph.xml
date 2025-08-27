@@ -35,10 +35,36 @@
             android:id="@+id/perfilFragment"
             android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoPerfil.PerfilFragment"
             android:label="fragment_historial"
-            tools:layout="@layout/fragment_perfil" />
+            tools:layout="@layout/fragment_perfil" >
+            <action
+                android:id="@+id/action_perfilFragment_to_settingViewFragment"
+                app:destination="@id/settingViewFragment" />
+        </fragment>
         <fragment
             android:id="@+id/addRecetasFragment"
             android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoAddRecetas.AddRecetaFragment"
             android:label="fragment_favoritos"
             tools:layout="@layout/fragment_add_recetas" />
+    <fragment
+        android:id="@+id/settingViewFragment"
+        android:name="com.benjamin.proyectofeedo.settingsFeedo.UI.feedoSetting.SettingViewFragment"
+        android:label="fragment_setting_view"
+        tools:layout="@layout/fragment_setting_view" >
+        <action
+            android:id="@+id/action_settingViewFragment_to_darkModeFragment"
+            app:destination="@id/darkModeFragment" />
+        <action
+            android:id="@+id/action_settingViewFragment_to_informationOfTeamFragment"
+            app:destination="@id/informationOfTeamFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/darkModeFragment"
+        android:name="com.benjamin.proyectofeedo.settingsFeedo.UI.darkMode.DarkModeFragment"
+        android:label="fragment_dark_mode"
+        tools:layout="@layout/fragment_dark_mode" />
+    <fragment
+        android:id="@+id/informationOfTeamFragment"
+        android:name="com.benjamin.proyectofeedo.settingsFeedo.UI.feedoInformation.InformationOfTeamFragment"
+        android:label="fragment_information_of_team"
+        tools:layout="@layout/fragment_information_of_team" />
 </navigation>

@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFeedo"
-        tools:targetApi="31">
+        tools:targetApi="33">
         <activity
             android:name=".settingsFeedo.UI.home.SettingActivity"
             android:exported="false" />

@@ -4,9 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/fondo_welcome_verdadero"
+    android:background="@drawable/feedo_welcome_fondo"
     tools:context=".usuarioLogin.LoginUI.feedoWelcome.WelcomeFeedoFragment">
 
+    <ImageView
+        android:id="@+id/imgLogoWelcome"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="90dp"
+        android:src="@drawable/logo_feedo_welcome"/>
 
 
     <com.google.android.material.button.MaterialButton

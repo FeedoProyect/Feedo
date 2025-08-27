@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.benjamin.proyectofeedo.databinding.FragmentPerfilBinding
-import com.benjamin.proyectofeedo.settingsFeedo.UI.home.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,14 +42,14 @@ class PerfilFragment : Fragment() {
             .setDuration(500)
             .setInterpolator(LinearInterpolator())
             .rotationBy(360f)
-            .withEndAction { intentSetting() }
+            .withEndAction { startSetting() }
             .start()
     }
 
-
-    fun intentSetting(){
-        val intent = Intent(requireContext(), SettingActivity::class.java)
-        startActivity(intent)
+    private fun startSetting(){
+        findNavController().navigate(
+            PerfilFragmentDirections.actionPerfilFragmentToSettingViewFragment()
+        )
     }
 
     override fun onCreateView(

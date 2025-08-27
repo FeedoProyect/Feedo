@@ -12,9 +12,13 @@
     <string name="Tittle">Feedo</string>
     <string name="hintBuscadorPrincipal">¿Qué se te antoja hoy?</string>
     <string name="textView_catalogo">Catálogos</string>
-    <string name="textView_rapidas">Recetas rapidas</string>
-    <string name="textView_riquisimas">Riquisimas!</string>
-    <string name="textView_criollas">Criollas</string>
+
+    <string name="textView_clasicosArgentino">Clásicos argentinos</string>
+    <string name="textView_idealParaElMate">Ideal para el mate!</string>
+    <string name="textView_modoSaludable">Modo saludable</string>
+    <string name="textView_expres">Exprés</string>
+    <string name="textView_modoAhorro">Modo ahorro</string>
+
 
     <!-- Titulo de Catalogo menu principal-->
     <string name="Desayunos">Desayunos</string>

@@ -30,7 +30,7 @@ class RepositoryImpl @Inject constructor(private val apiService: ComidasApiServi
 
     override suspend fun getComidaBuscadorPrincipal(name: String): List<ComidasModel>?{
         return try {
-            val response = apiService.getComidaBuscador(nombre = "ilike.%${name}%")
+            val response = apiService.getComidaBuscador(nombre = "ilike.${name}%")
             response.map { it.toDomain() }
         } catch (e: Exception){
             e.printStackTrace()
