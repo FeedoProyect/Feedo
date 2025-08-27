@@ -9,7 +9,11 @@
         android:id="@+id/loginUserFragment"
         android:name="com.benjamin.proyectofeedo.usuarioLogin.LoginUI.feedoLoginAccount.LoginUserFragment"
         android:label="fragment_login_user"
-        tools:layout="@layout/fragment_login_user" />
+        tools:layout="@layout/fragment_login_user" >
+        <action
+            android:id="@+id/action_loginUserFragment_to_registerUserFragment"
+            app:destination="@id/registerUserFragment" />
+    </fragment>
     <fragment
         android:id="@+id/welcomeFeedoFragment"
         android:name="com.benjamin.proyectofeedo.usuarioLogin.LoginUI.feedoWelcome.WelcomeFeedoFragment"
@@ -23,5 +27,9 @@
         android:id="@+id/registerUserFragment"
         android:name="com.benjamin.proyectofeedo.usuarioLogin.LoginUI.feedoRegisterAccount.RegisterUserFragment"
         android:label="fragment_register_account"
-        tools:layout="@layout/fragment_register_account" />
+        tools:layout="@layout/fragment_register_account" >
+        <action
+            android:id="@+id/action_registerUserFragment_to_loginUserFragment"
+            app:destination="@id/loginUserFragment" />
+    </fragment>
 </navigation>

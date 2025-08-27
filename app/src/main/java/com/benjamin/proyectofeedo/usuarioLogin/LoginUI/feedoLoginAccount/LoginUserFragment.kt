@@ -6,7 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.benjamin.proyectofeedo.UI.home.MainActivity
+import androidx.navigation.fragment.findNavController
+import com.benjamin.proyectofeedo.pantallasPrincipales.UI.home.MainActivity
 import com.benjamin.proyectofeedo.databinding.FragmentLoginUserBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,8 +29,17 @@ class LoginUserFragment : Fragment() {
 
     private fun initListenerBottom() {
         binding.botonGoApp.setOnClickListener {
-                ingresoMenuFeedo()
+            ingresoMenuFeedo()
         }
+        binding.tvRegistrarCuenta.setOnClickListener {
+            ingresoRegistroCuenta()
+        }
+    }
+
+    private fun ingresoRegistroCuenta(){
+        findNavController().navigate(
+            LoginUserFragmentDirections.actionLoginUserFragmentToRegisterUserFragment()
+        )
     }
 
     private fun ingresoMenuFeedo(){

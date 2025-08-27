@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="40dp"
+    tools:context=".pantallasPrincipales.UI.feedoPerfil.PerfilFragment">
+
+    <TextView
+        android:id="@+id/tvPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/balo_thambi"
+        android:text="@string/perfil_text_perfil"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/cardPerfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Card del perfil -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="5dp"
+        android:backgroundTint="@color/color_item_perfil"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPerfil">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <!-- Foto de perfil -->
+            <ImageView
+                android:id="@+id/ivFotoPerfil"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/oval"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/beboteo_full" />
+
+            <!-- Nombre y descripción -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvNombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Brakko DCA"
+                    android:textColor="@color/text_de_items"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvDescripcion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Músico y compositor de comidas"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvMas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/balo_thambi"
+                    android:text="@string/perfil_biografia_more..."
+                    android:textColor="@color/tittle_color"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Botón circular -->
+            <ImageButton
+                android:id="@+id/btnIrPerfil"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/btn_circle_orange"
+                android:backgroundTint="@color/tittle_color"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_arrow_perfil"
+                app:tint="@android:color/white" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

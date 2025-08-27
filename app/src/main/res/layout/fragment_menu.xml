@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".UI.feedoMenu.MenuFragment">
+        tools:context=".pantallasPrincipales.UI.feedoMenu.MenuFragment">
 
         <View
             android:id="@+id/viewTittle"
@@ -26,7 +26,7 @@
             app:layout_constraintBottom_toTopOf="@+id/etSearchFeed"
             app:layout_constraintEnd_toStartOf="@+id/Titulo"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/fedo"/>
+            android:src="@drawable/feedo_removebg"/>
 
         <TextView
             android:id="@+id/Titulo"
@@ -53,6 +53,7 @@
             android:background="@drawable/edittext_corner"
             android:drawableStart="@drawable/ic_search_edittext"
             android:hint="@string/hintBuscadorPrincipal"
+            android:textColorHint="@color/color_hint_buscador"
             android:maxLines="1"
             android:padding="10dp"
             android:singleLine="true"
@@ -74,7 +75,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="27dp"
             android:text="@string/textView_catalogo"
-            android:textColor="@color/black"
+            android:textColor="@color/text_de_items"
             android:textSize="17sp"
             android:textStyle="bold"/>
 
@@ -87,18 +88,12 @@
             app:layout_constraintStart_toEndOf="@+id/catalogoTittle"
             app:layout_constraintTop_toBottomOf="@+id/viewTittle">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center">
-
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_piquito_feedo" />
 
-            </FrameLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -109,6 +104,210 @@
             android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/catalogoTittle"/>
+
+
+        <TextView
+            android:id="@+id/tvClasicosArgentinos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvCatolgo"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="27dp"
+            android:text="@string/textView_clasicosArgentino"
+            android:textColor="@color/text_de_items"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintStart_toEndOf="@+id/tvClasicosArgentinos"
+            app:layout_constraintTop_toBottomOf="@+id/rvCatolgo">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_piquito_feedo" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvClasicosArgentinos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvClasicosArgentinos"/>
+
+        <TextView
+            android:id="@+id/tvIdealParaElMate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvClasicosArgentinos"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="27dp"
+            android:text="@string/textView_idealParaElMate"
+            android:textColor="@color/text_de_items"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintStart_toEndOf="@+id/tvClasicosArgentinos"
+            app:layout_constraintTop_toBottomOf="@+id/rvClasicosArgentinos">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_piquito_feedo" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvIdealParaElMate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvIdealParaElMate"/>
+
+        <TextView
+            android:id="@+id/tvModoSaludable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvIdealParaElMate"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="27dp"
+            android:text="@string/textView_modoSaludable"
+            android:textColor="@color/text_de_items"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintStart_toEndOf="@+id/tvClasicosArgentinos"
+            app:layout_constraintTop_toBottomOf="@+id/rvIdealParaElMate">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_piquito_feedo" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvModoSaludable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvModoSaludable"/>
+
+        <TextView
+            android:id="@+id/tvExpres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvModoSaludable"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="27dp"
+            android:text="@string/textView_expres"
+            android:textColor="@color/text_de_items"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintStart_toEndOf="@+id/tvClasicosArgentinos"
+            app:layout_constraintTop_toBottomOf="@+id/rvModoSaludable">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_piquito_feedo" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvExpres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvExpres"/>
+
+        <TextView
+            android:id="@+id/tvModoAhorro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvExpres"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="27dp"
+            android:text="@string/textView_modoAhorro"
+            android:textColor="@color/text_de_items"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintStart_toEndOf="@+id/tvClasicosArgentinos"
+            app:layout_constraintTop_toBottomOf="@+id/rvExpres">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_piquito_feedo" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvModoAhorro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvModoAhorro"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvModoAhorro"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

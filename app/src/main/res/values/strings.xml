@@ -12,11 +12,15 @@
     <string name="Tittle">Feedo</string>
     <string name="hintBuscadorPrincipal">¿Qué se te antoja hoy?</string>
     <string name="textView_catalogo">Catálogos</string>
-    <string name="textView_rapidas">Recetas rapidas</string>
-    <string name="textView_riquisimas">Riquisimas!</string>
-    <string name="textView_criollas">Criollas</string>
 
-    <!-- Titulo de Catalogo -->
+    <string name="textView_clasicosArgentino">Clásicos argentinos</string>
+    <string name="textView_idealParaElMate">Ideal para el mate!</string>
+    <string name="textView_modoSaludable">Modo saludable</string>
+    <string name="textView_expres">Exprés</string>
+    <string name="textView_modoAhorro">Modo ahorro</string>
+
+
+    <!-- Titulo de Catalogo menu principal-->
     <string name="Desayunos">Desayunos</string>
     <string name="Almuerzos">Almuerzos</string>
     <string name="Meriendas">Meriendas</string>
@@ -37,6 +41,11 @@
     <string name="catalogo_Destacados">Mas destacados!</string>
     <string name="tiempo_comida_destacada_catalogo">Tiempo</string>
 
+    <!-- Pantalla perfil -->
+    <string name="perfil_text_perfil">Perfil</string>
+    <string name="perfil_biografia_more...">Mas...</string>
+
+
     <!-- Pantalla de bienvenidos -->
     <string name="description_feedo">
         Con Feedo, cocinar es simple, divertido y sabdroso: aprendé nuevas recetas
@@ -56,5 +65,30 @@
     <string name="login_registrate">Registrate</string>
     <string name="login_hint_email">Ingresa un email</string>
     <string name="login_hint_contraseña">Ingresa una contraseña</string>
+
+
+    <!-- Pantalla de registro de cuenta -->
+    <string name="register_text_creaCuenta">Crea una cuenta!</string>
+    <string name="register_text_usuario">Usuario</string>
+    <string name="register_hint_usuario">Ingrese un nombre de usuario</string>
+    <string name="register_text_email">Email</string>
+    <string name="register_hint_email">Ingrese un email</string>
+    <string name="register_text_contraseña">Contraseña</string>
+    <string name="register_hint_contraseña">Ingrese una contraseña</string>
+    <string name="register_text_confirmarContraseña">Confirmar la contraseña</string>
+    <string name="register_hint_confirmarLacontraseña">Ingrese de nuevo la contraseña</string>
+    <string name="register_bottom_registrarse">Registrarse</string>
+    <string name="register_yaTengoCuenta">Ya tienes una cuenta?</string>
+    <string name="register_iniciarSesion">Inicie Sesión</string>
+
+
+    <!-- Pantalla de setting -->
+    <string name="setting_ajustes">Ajustes</string>
+    <string name="setting_modoOscuro">Modo oscuro</string>
+    <string name="setting_sobreNostros">Sobre nosotros</string>
+    <string name="setting_cerrarSesion">Cerrar Sesión</string>
+    <string name="settig_modoOscuroDescription">Activa el modo oscuro para un cambio visual</string>
+
+    <string name="pronto">Toca para volver</string>
 
 </resources>
