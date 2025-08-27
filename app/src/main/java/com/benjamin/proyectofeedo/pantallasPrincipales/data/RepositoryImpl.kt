@@ -4,6 +4,7 @@ import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.ComidasApiSe
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.Repository
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidaDestacadaCatalogoModel
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasModel
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasSeccionMenuModel
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(private val apiService: ComidasApiService) : Repository {
@@ -37,4 +38,15 @@ class RepositoryImpl @Inject constructor(private val apiService: ComidasApiServi
             emptyList()
         }
     }
+
+    override suspend fun getComidaSeccionMenu(seccionId: Int): List<ComidasSeccionMenuModel>? {
+        return try {
+            val response = apiService.getComidaSeccion(seccionId = "eq.$seccionId")
+            response.map { it.toDomain() }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emptyList()
+        }
+    }
+
 }
