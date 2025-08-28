@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.menuFragment,
-                R.id.catalogosListFragment,
+                R.id.catalogosListComidasFragment,
                 R.id.buscadorPrincipalFragment,
                 R.id.perfilFragment,
                 R.id.addRecetasFragment -> {

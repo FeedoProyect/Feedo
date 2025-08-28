@@ -59,7 +59,7 @@
                 android:background="@drawable/oval"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/beboteo_full" />
+                android:src="@drawable/desayunos" />
 
             <!-- Nombre y descripción -->
             <LinearLayout

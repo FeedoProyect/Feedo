@@ -5,51 +5,59 @@
     android:id="@+id/main_graph"
     app:startDestination="@id/menuFragment">
 
-        <fragment
-            android:id="@+id/menuFragment"
-            android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoMenu.MenuFragment"
-            android:label="fragment_menu"
-            tools:layout="@layout/fragment_menu">
-            <action
-                android:id="@+id/action_menuFragment_to_catalogosListFragment"
-                app:destination="@id/catalogosListFragment" />
-            <action
-                android:id="@+id/action_menuFragment_to_buscadorPrincipalFragment"
-                app:destination="@id/buscadorPrincipalFragment" />
-        </fragment>
-        <fragment
-            android:id="@+id/catalogosListFragment"
-            android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoContenidoCatalogos.CatalogosListComidasFragment"
-            android:label="fragment_catalogos_list"
-            tools:layout="@layout/fragment_catalogos_list">
-            <argument
-                android:name="type"
-                app:argType="com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.CatalogosModel" />
-        </fragment>
-        <fragment
-            android:id="@+id/buscadorPrincipalFragment"
-            android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoBuscador.BuscadorPrincipalFragment"
-            android:label="fragment_buscador_principal"
-            tools:layout="@layout/fragment_buscador_principal" />
-        <fragment
-            android:id="@+id/perfilFragment"
-            android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoPerfil.PerfilFragment"
-            android:label="fragment_historial"
-            tools:layout="@layout/fragment_perfil" >
-            <action
-                android:id="@+id/action_perfilFragment_to_settingViewFragment"
-                app:destination="@id/settingViewFragment" />
-        </fragment>
-        <fragment
-            android:id="@+id/addRecetasFragment"
-            android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoAddRecetas.AddRecetaFragment"
-            android:label="fragment_favoritos"
-            tools:layout="@layout/fragment_add_recetas" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoMenu.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu">
+        <action
+            android:id="@+id/action_menuFragment_to_catalogosListComidasFragment"
+            app:destination="@id/catalogosListComidasFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_buscadorPrincipalFragment"
+            app:destination="@id/buscadorPrincipalFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/catalogosListComidasFragment"
+        android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoContenidoCatalogos.CatalogosListComidasFragment"
+        android:label="fragment_catalogos_list"
+        tools:layout="@layout/fragment_catalogos_list">
+        <argument
+            android:name="type"
+            app:argType="com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.CatalogosModel" />
+        <action
+            android:id="@+id/action_catalogosListComidasFragment_to_detalleRecetaFragment"
+            app:destination="@id/detalleRecetaFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/buscadorPrincipalFragment"
+        android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoBuscador.BuscadorPrincipalFragment"
+        android:label="fragment_buscador_principal"
+        tools:layout="@layout/fragment_buscador_principal" />
+
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoPerfil.PerfilFragment"
+        android:label="fragment_historial"
+        tools:layout="@layout/fragment_perfil">
+        <action
+            android:id="@+id/action_perfilFragment_to_settingViewFragment"
+            app:destination="@id/settingViewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addRecetasFragment"
+        android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoAddRecetas.AddRecetaFragment"
+        android:label="fragment_favoritos"
+        tools:layout="@layout/fragment_add_recetas" />
+
     <fragment
         android:id="@+id/settingViewFragment"
         android:name="com.benjamin.proyectofeedo.settingsFeedo.UI.feedoSetting.SettingViewFragment"
         android:label="fragment_setting_view"
-        tools:layout="@layout/fragment_setting_view" >
+        tools:layout="@layout/fragment_setting_view">
         <action
             android:id="@+id/action_settingViewFragment_to_darkModeFragment"
             app:destination="@id/darkModeFragment" />
@@ -57,14 +65,27 @@
             android:id="@+id/action_settingViewFragment_to_informationOfTeamFragment"
             app:destination="@id/informationOfTeamFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/darkModeFragment"
         android:name="com.benjamin.proyectofeedo.settingsFeedo.UI.darkMode.DarkModeFragment"
         android:label="fragment_dark_mode"
         tools:layout="@layout/fragment_dark_mode" />
+
     <fragment
         android:id="@+id/informationOfTeamFragment"
         android:name="com.benjamin.proyectofeedo.settingsFeedo.UI.feedoInformation.InformationOfTeamFragment"
         android:label="fragment_information_of_team"
         tools:layout="@layout/fragment_information_of_team" />
+
+    <fragment
+        android:id="@+id/detalleRecetaFragment"
+        android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.detalleReceta.DetalleRecetaFragment"
+        android:label="Detalle"
+        tools:layout="@layout/fragment_detalle_receta">
+        <argument
+            android:name="recetaId"
+            app:argType="integer" />
+    </fragment>
+
 </navigation>

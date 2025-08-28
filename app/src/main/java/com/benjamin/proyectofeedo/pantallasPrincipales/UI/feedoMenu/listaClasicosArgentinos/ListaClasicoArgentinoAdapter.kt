@@ -31,4 +31,5 @@ class ListaClasicoArgentinoAdapter(private var listClasicoArgentino: List<Comida
     }
 
     override fun getItemCount() = listClasicoArgentino.size
+
 }

@@ -3,6 +3,7 @@ package com.benjamin.proyectofeedo.pantallasPrincipales.data.Network
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.response.ComidaDestacadaCatalogoResponse
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.response.ComidasMenuSeccionResponse
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.response.ComidasResponse
+import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.response.RecetaDetalleResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -29,6 +30,13 @@ interface ComidasApiService {
         @Query("select") select: String = "*,receta_seccion!inner(seccion_id)",
         @Query("receta_seccion.seccion_id") seccionId: String
     ): List<ComidasMenuSeccionResponse>
+    @GET("recetas")
+    suspend fun getRecetaDetalleById(
+        @Query("select") select: String = "id,titulo,imagen,descripcion,tiempo_preparacion,ingredientes,pasos",
+        @Query("id") id: String // debe ir "eq.<id>"
+    ): List<RecetaDetalleResponse>
+
+
 
 
 }

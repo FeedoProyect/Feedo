@@ -148,7 +148,7 @@ class MenuFragment : Fragment() {
             }
 
             findNavController().navigate(
-                MenuFragmentDirections.actionMenuFragmentToCatalogosListFragment(type)
+                MenuFragmentDirections.actionMenuFragmentToCatalogosListComidasFragment(type)
             )
         })
 
