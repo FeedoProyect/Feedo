@@ -9,7 +9,7 @@ class BuscadorPrincipalViewHolder(private val binding: ItemComidaBuscadorBinding
     RecyclerView.ViewHolder(binding.root) {
 
     fun render(comidaBuscadorInfo: ComidasModel){
-        binding.tvNombreComidaBuscador.text = comidaBuscadorInfo.titulo
+        binding.tvComidaBuscador.text = comidaBuscadorInfo.titulo
         Picasso.get().load(comidaBuscadorInfo.imagen).into(binding.imgComidaBuscador)
     }
 }

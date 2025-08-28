@@ -30,5 +30,4 @@ interface ComidasApiService {
         @Query("receta_seccion.seccion_id") seccionId: String
     ): List<ComidasMenuSeccionResponse>
 
-
 }

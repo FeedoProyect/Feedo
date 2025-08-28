@@ -8,6 +8,7 @@
     <color name="text_de_items">#FFFFFF</color>
     <color name="color_bottom_nav">#383636</color>
     <color name="color_item_perfil">#383636</color>
-    <color name="color_hint_buscador">#4F4D4D</color>
+    <color name="color_hint_buscador">#DFDADA</color>
     <color name="icon_piquito_color">#FFFFFF</color>
+    <color name="fondo_buscador_color">#686767</color>
 </resources>
