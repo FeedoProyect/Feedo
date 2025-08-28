@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <!-- Fondo del EditText -->
-    <solid android:color="#FFFFFF"/> <!-- Puedes cambiar el color de fondo -->
+    <solid android:color="@color/fondo_buscador_color"/> <!-- Puedes cambiar el color de fondo -->
 
     <!-- Bordes redondeados -->
     <corners android:radius="8dp"/> <!-- Puedes cambiar el radio -->

@@ -19,6 +19,10 @@
     <string name="textView_expres">Exprés</string>
     <string name="textView_modoAhorro">Modo ahorro</string>
 
+    <!-- Buscador -->
+    <string name="textView_Buscar">Buscar</string>
+    <string name="tools_comida_buscada">Encontramos 23 resultados en relacion a tu busqueda</string>
+
 
     <!-- Titulo de Catalogo menu principal-->
     <string name="Desayunos">Desayunos</string>

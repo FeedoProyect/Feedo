@@ -1,9 +1,11 @@
 package com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoBuscador
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,9 +13,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoBuscador.BuscadorPrincipalAdapter.BuscadorPrincipalAdapter
 import com.benjamin.proyectofeedo.databinding.FragmentBuscadorPrincipalBinding
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
@@ -37,6 +41,7 @@ class BuscadorPrincipalFragment : Fragment() {
         initUI()
     }
 
+
     private fun initUI() {
         initList()
         initStatee()
@@ -44,10 +49,15 @@ class BuscadorPrincipalFragment : Fragment() {
         initEditText()
     }
 
+    private fun actualizarResultados(lista: List<ComidasModel>) {
+        val response = "Encontramos ${lista.size} resultados en relacion a tu busqueda"
+        binding.tvResultadosBusqueda.text = response
+    }
+
     private fun initList() {
         adapterBuscador = BuscadorPrincipalAdapter()
         binding.rvListaComidasBuscador.apply {
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = GridLayoutManager(requireContext(),2)
             adapter = adapterBuscador
         }
     }
@@ -76,9 +86,17 @@ class BuscadorPrincipalFragment : Fragment() {
 
     private fun succesState(success: BuscadorPrincipalState.Success) {
         adapterBuscador.updateList(success.comidasBuscador)
+        actualizarResultados(success.comidasBuscador)
     }
 
     private fun initEditText() {
+
+        binding.etPantallaBuscador.requestFocus()
+
+        // Abrir teclado
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(binding.etPantallaBuscador, InputMethodManager.SHOW_IMPLICIT)
+
         val editTextFlow = callbackFlow {
             binding.etPantallaBuscador.doOnTextChanged { text, _, _, _ ->
                 trySend(text.toString())
@@ -95,6 +113,7 @@ class BuscadorPrincipalFragment : Fragment() {
                         buscadorPrincipalViewModel.getComidasBuscador(query)
                     } else{
                         adapterBuscador.updateList(emptyList())
+                        actualizarResultados(emptyList())
                     }
                 }
         }

@@ -17,9 +17,10 @@
     <color name="tiempo_item_comida_destacada_catalogo">#817E7E</color>
     <color name="text_de_items">#000000</color>
     <color name="color_bottom_nav">#FFFFFF</color>
-    <color name="color_item_perfil">#FFFFFF</color>}
+    <color name="color_item_perfil">#FFFFFF</color>
     <color name="color_hint_buscador">#B5B1B1</color>
     <color name="icon_piquito_color">#000000</color>
+    <color name="fondo_buscador_color">#F2F2F2</color>
 
 
 
