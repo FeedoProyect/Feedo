@@ -105,7 +105,6 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/btn_circle_orange"
-                android:backgroundTint="@color/tittle_color"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_arrow_perfil"
                 app:tint="@android:color/white" />
