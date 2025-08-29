@@ -29,14 +29,6 @@ class DetalleRecetaFragment : Fragment() {
 
     private var mediator: TabLayoutMediator? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDetalleRecetaBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -90,6 +82,15 @@ class DetalleRecetaFragment : Fragment() {
         mediator = null
         _binding = null
         super.onDestroyView()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentDetalleRecetaBinding.inflate(inflater, container, false)
+        return binding.root
     }
 }
 

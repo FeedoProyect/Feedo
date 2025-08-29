@@ -53,12 +53,11 @@ class RepositoryImpl @Inject constructor(private val apiService: ComidasApiServi
     // 👇 NUEVO
     suspend fun getRecetaDetalle(id: Int): RecetaDetalleModel? {
         return try {
-            val list = apiService.getRecetaDetalleById(
-                id = "eq.$id"
-            )
+            val list = apiService.getRecetaDetalleById(id = "eq.$id")
+
             val response = list.firstOrNull()
-            Log.d("RepositoryImpl", "Detalle receta crudo: $response")
             response?.toDomain()
+
         } catch (e: Exception) {
             Log.e("RepositoryImpl", "Error al obtener detalle receta", e)
             null
