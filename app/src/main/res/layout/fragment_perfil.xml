@@ -112,6 +112,32 @@
 
     </androidx.cardview.widget.CardView>
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayoutPerfil"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:tabIndicatorGravity="stretch"
+        app:tabIndicatorAnimationMode="elastic"
+        app:tabTextColor="@color/color_text_tabs_perfil"
+        app:tabSelectedTextColor="@color/white"
+        app:tabIndicatorColor="@null"
+        app:tabIndicator="@drawable/tab_indicator_perfil"
+        style="@style/CustomTabLayout"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardPerfil"/>
+    
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPage2Perfil"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tabLayoutPerfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
