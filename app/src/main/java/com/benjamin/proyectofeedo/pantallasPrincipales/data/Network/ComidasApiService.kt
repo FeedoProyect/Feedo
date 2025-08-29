@@ -3,7 +3,7 @@ package com.benjamin.proyectofeedo.pantallasPrincipales.data.Network
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.response.ComidaDestacadaCatalogoResponse
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.response.ComidasMenuSeccionResponse
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.response.ComidasResponse
-import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.response.RecetaDetalleResponse
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.data.network.response.RecetaDetalleResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

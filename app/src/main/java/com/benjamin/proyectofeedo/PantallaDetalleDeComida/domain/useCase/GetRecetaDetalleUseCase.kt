@@ -1,9 +1,7 @@
+package com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.useCase
 
-package com.benjamin.proyectofeedo.pantallasPrincipales.domain.useCase
-
-import android.util.Log
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.RepositoryImpl
-import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.RecetaDetalleModel
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.model.RecetaDetalleModel
 import javax.inject.Inject
 
 class GetRecetaDetalleUseCase @Inject constructor(
@@ -11,4 +9,3 @@ class GetRecetaDetalleUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(id: Int): RecetaDetalleModel? = repositoryImpl.getRecetaDetalle(id)
 }
-

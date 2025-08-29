@@ -1,4 +1,4 @@
-package com.benjamin.proyectofeedo.pantallasPrincipales.UI.detalleReceta.tabs
+package com.benjamin.proyectofeedo.PantallaDetalleDeComida.ui.tabs
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,7 +1,6 @@
-// com/benjamin/proyectofeedo/pantallasPrincipales/data/Network/response/RecetaDetalleResponse.kt
-package com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.response
+package com.benjamin.proyectofeedo.PantallaDetalleDeComida.data.network.response
 
-import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.RecetaDetalleModel
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.model.RecetaDetalleModel
 import com.google.gson.annotations.SerializedName
 
 data class RecetaDetalleResponse(
@@ -31,4 +30,3 @@ data class RecetaDetalleResponse(
             ?: emptyList()
     )
 }
-

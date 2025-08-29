@@ -1,11 +1,10 @@
-
-package com.benjamin.proyectofeedo.pantallasPrincipales.UI.detalleReceta
+package com.benjamin.proyectofeedo.PantallaDetalleDeComida.ui.detalleReceta
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.RecetaDetalleModel
-import com.benjamin.proyectofeedo.pantallasPrincipales.domain.useCase.GetRecetaDetalleUseCase
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.model.RecetaDetalleModel
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.useCase.GetRecetaDetalleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

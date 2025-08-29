@@ -1,5 +1,4 @@
-// com/benjamin/proyectofeedo/pantallasPrincipales/UI/detalleReceta/DetalleRecetaFragment.kt
-package com.benjamin.proyectofeedo.pantallasPrincipales.UI.detalleReceta
+package com.benjamin.proyectofeedo.PantallaDetalleDeComida.ui.detalleReceta
 
 import android.os.Bundle
 import android.util.Log
@@ -12,8 +11,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.benjamin.proyectofeedo.databinding.FragmentDetalleRecetaBinding
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.ui.detalleReceta.DetalleRecetaViewModel
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -93,5 +93,3 @@ class DetalleRecetaFragment : Fragment() {
         return binding.root
     }
 }
-
-

@@ -6,7 +6,7 @@ import com.benjamin.proyectofeedo.pantallasPrincipales.domain.Repository
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidaDestacadaCatalogoModel
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasModel
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasSeccionMenuModel
-import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.RecetaDetalleModel
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.model.RecetaDetalleModel
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(private val apiService: ComidasApiService) : Repository {

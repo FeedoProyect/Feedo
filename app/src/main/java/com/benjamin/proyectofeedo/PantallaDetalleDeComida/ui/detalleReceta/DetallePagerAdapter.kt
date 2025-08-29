@@ -1,10 +1,9 @@
-
-package com.benjamin.proyectofeedo.pantallasPrincipales.UI.detalleReceta
+package com.benjamin.proyectofeedo.PantallaDetalleDeComida.ui.detalleReceta
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.benjamin.proyectofeedo.pantallasPrincipales.UI.detalleReceta.tabs.InstruccionesFragment
-import com.benjamin.proyectofeedo.pantallasPrincipales.UI.detalleReceta.tabs.IngredientesFragment
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.ui.tabs.IngredientesFragment
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.ui.tabs.InstruccionesFragment
 
 class DetallePagerAdapter(
     fragment: Fragment,
@@ -16,8 +15,8 @@ class DetallePagerAdapter(
 
     override fun createFragment(position: Int): Fragment {
         return if (position == 0)
-            IngredientesFragment.newInstance(ingredientes)
+            IngredientesFragment.Companion.newInstance(ingredientes)
         else
-            InstruccionesFragment.newInstance(pasos)
+            InstruccionesFragment.Companion.newInstance(pasos)
     }
 }

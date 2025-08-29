@@ -1,5 +1,4 @@
-
-package com.benjamin.proyectofeedo.pantallasPrincipales.domain.model
+package com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.model
 
 data class RecetaDetalleModel(
     val id: Int,

@@ -80,7 +80,7 @@
 
     <fragment
         android:id="@+id/detalleRecetaFragment"
-        android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.detalleReceta.DetalleRecetaFragment"
+        android:name="com.benjamin.proyectofeedo.PantallaDetalleDeComida.ui.detalleReceta.DetalleRecetaFragment"
         android:label="Detalle"
         tools:layout="@layout/fragment_detalle_receta">
         <argument

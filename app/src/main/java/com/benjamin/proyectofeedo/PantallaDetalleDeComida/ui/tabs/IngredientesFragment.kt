@@ -1,5 +1,5 @@
-// com/benjamin/proyectofeedo/pantallasPrincipales/UI/detalleReceta/tabs/InstruccionesFragment.kt
-package com.benjamin.proyectofeedo.pantallasPrincipales.UI.detalleReceta.tabs
+// com/benjamin/proyectofeedo/pantallasPrincipales/UI/detalleReceta/tabs/IngredientesFragment.kt
+package com.benjamin.proyectofeedo.PantallaDetalleDeComida.ui.tabs
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,15 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.benjamin.proyectofeedo.databinding.FragmentListaSimpleBinding
 
-class InstruccionesFragment : Fragment() {
+class IngredientesFragment : Fragment() {
 
     private var _binding: FragmentListaSimpleBinding? = null
     private val binding get() = _binding!!
 
     companion object {
-        private const val KEY_PASOS = "key_pasos"
-        fun newInstance(items: ArrayList<String>) = InstruccionesFragment().apply {
-            arguments = Bundle().apply { putStringArrayList(KEY_PASOS, items) }
+        private const val KEY_INGREDIENTES = "key_ingredientes"
+        fun newInstance(items: ArrayList<String>) = IngredientesFragment().apply {
+            arguments = Bundle().apply { putStringArrayList(KEY_INGREDIENTES, items) }
         }
     }
 
@@ -27,7 +27,7 @@ class InstruccionesFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val data = arguments?.getStringArrayList(KEY_PASOS) ?: arrayListOf()
+        val data = arguments?.getStringArrayList(KEY_INGREDIENTES) ?: arrayListOf()
         binding.recycler.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = SimpleTextAdapter(data)
