@@ -2,32 +2,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="150dp"
     android:layout_height="150dp"
-    android:layout_margin="20dp"
-    app:cardCornerRadius="10dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginHorizontal="10dp"
+    app:cardCornerRadius="8dp"
     app:cardElevation="8dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/imgAgregarFavComidaCatalogo"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_margin="8dp"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="10dp"
         android:layout_gravity="end|top"
         android:backgroundTint="@color/ToolbarDeFeedo">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_favs"
-            app:tint="@color/tittle_color" />
+            android:src="@drawable/favoritos_prueba"
+            android:scaleType="center"/>
 
     </androidx.cardview.widget.CardView>
 
     <ImageView
-        android:id="@+id/imgComidaCatalogo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:id="@+id/imgComidaFavoritos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
     <View
@@ -37,7 +36,7 @@
         android:background="@drawable/gradient_overlay" />
 
     <TextView
-        android:id="@+id/tvComidaName"
+        android:id="@+id/tvComidaFavoritos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"

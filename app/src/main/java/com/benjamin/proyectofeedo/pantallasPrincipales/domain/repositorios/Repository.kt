@@ -1,4 +1,4 @@
-package com.benjamin.proyectofeedo.pantallasPrincipales.domain
+package com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios
 
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidaDestacadaCatalogoModel
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasModel
@@ -13,4 +13,5 @@ interface Repository {
 
     suspend fun getComidaSeccionMenu(seccionId: Int): List<ComidasSeccionMenuModel>?
 
+    suspend fun getComidaFavoritos(recetaId: String): List<ComidasModel>?
 }

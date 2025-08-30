@@ -1,6 +1,6 @@
 package com.benjamin.proyectofeedo.pantallasPrincipales.domain.useCase
 
-import com.benjamin.proyectofeedo.pantallasPrincipales.domain.Repository
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.Repository
 import javax.inject.Inject
 
 class GetComidaSeccionMenuUseCase @Inject constructor(private val repository: Repository) {

@@ -3,7 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red"
-    tools:context=".pantallasPrincipales.UI.feedoPerfil.subFragmentTabLayout.FavoritosFragment">
+    tools:context=".pantallasPrincipales.UI.feedoPerfil.subFragmentTabLayout.FavoritosFragment.FavoritosFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSeccionFavoritosPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="100dp"/>
 
 </FrameLayout>

@@ -2,7 +2,7 @@ package com.benjamin.proyectofeedo.pantallasPrincipales.domain.useCase
 
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidaDestacadaCatalogoModel
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasModel
-import com.benjamin.proyectofeedo.pantallasPrincipales.domain.Repository
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.Repository
 import javax.inject.Inject
 
 class GetComidaCatalogoUseCase @Inject constructor(private val repository: Repository) {

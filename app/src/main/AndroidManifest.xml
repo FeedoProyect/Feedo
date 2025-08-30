@@ -16,9 +16,6 @@
         android:theme="@style/Theme.ProyectoFeedo"
         tools:targetApi="33">
         <activity
-            android:name=".settingsFeedo.UI.home.SettingActivity"
-            android:exported="false" />
-        <activity
             android:name=".usuarioLogin.LoginUI.homeLogin.InicioAppActivity"
             android:exported="true">
             <intent-filter>

@@ -1,8 +1,12 @@
-package com.benjamin.proyectofeedo.pantallasPrincipales.data.Network
+package com.benjamin.proyectofeedo.core
 
-import com.benjamin.proyectofeedo.pantallasPrincipales.data.RepositoryImpl
+import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.ComidasApiService
+import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.ComidasFavoritosApiService
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.SupaBase.SupabaseAuthInterceptor
-import com.benjamin.proyectofeedo.pantallasPrincipales.domain.Repository
+import com.benjamin.proyectofeedo.pantallasPrincipales.data.repositoriosImpl.FavoritosRepositoryImpl
+import com.benjamin.proyectofeedo.pantallasPrincipales.data.repositoriosImpl.RepositoryImpl
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.FavoritosRepository
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.Repository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,5 +48,15 @@ object NetworkModul {
     @Provides
     fun provideRepository(apiService: ComidasApiService): Repository {
         return RepositoryImpl(apiService)
+    }
+
+    @Provides
+    fun provideComidasFavoritasApiService(retrofit: Retrofit): ComidasFavoritosApiService {
+        return retrofit.create(ComidasFavoritosApiService::class.java)
+    }
+
+    @Provides
+    fun provideFavoritosRepository(favoritosApiService: ComidasFavoritosApiService): FavoritosRepository {
+        return FavoritosRepositoryImpl(favoritosApiService)
     }
 }

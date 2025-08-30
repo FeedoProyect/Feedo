@@ -19,6 +19,8 @@ import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoContenidoCatalogo
 import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoContenidoCatalogos.listaDeComidasCatalogosAdapter.CatalogosListComidasAdapter
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.CatalogosModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.getValue
 
@@ -46,12 +48,18 @@ class CatalogosListComidasFragment : Fragment() {
         }
 
         // Adapter para la lista de comidas del catálogo
-        elAdapter = CatalogosListComidasAdapter { receta ->
-            // 👇 Navegamos al detalle de la receta
-            val action = CatalogosListComidasFragmentDirections
-                .actionCatalogosListComidasFragmentToDetalleRecetaFragment(receta.id)
-            findNavController().navigate(action)
-        }
+        elAdapter = CatalogosListComidasAdapter(
+            onItemClick = { receta ->
+                // 👇 Navegamos al detalle de la receta
+                val action = CatalogosListComidasFragmentDirections
+                    .actionCatalogosListComidasFragmentToDetalleRecetaFragment(receta.id)
+
+                findNavController().navigate(action)
+
+            }, onItemSelectedFav = { favoritos ->
+                catalogosListComidasViewModel.addComidasFavoritos(favoritos)
+            }
+        )
 
         binding.rvComidasCatalogo.apply {
             layoutManager = GridLayoutManager(context, 2)

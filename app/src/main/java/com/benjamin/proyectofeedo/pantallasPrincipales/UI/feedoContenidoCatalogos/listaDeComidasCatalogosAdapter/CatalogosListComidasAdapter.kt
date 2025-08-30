@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.databinding.ItemComidasCatalogosBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasModel
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosRequestModel
 
 class CatalogosListComidasAdapter(
     private var listComidas: List<ComidasModel> = emptyList(),
-    private val onItemClick: (ComidasModel) -> Unit // 👈 callback
+    private val onItemClick: (ComidasModel) -> Unit,
+    private val onItemSelectedFav: (FavoritosRequestModel) -> Unit
 ) : RecyclerView.Adapter<CatalogosListComidasViewHolder>() {
 
     fun updateList(list: List<ComidasModel>) {
@@ -29,11 +31,12 @@ class CatalogosListComidasAdapter(
     }
 
     override fun onBindViewHolder(holder: CatalogosListComidasViewHolder, position: Int) {
+
         val item = listComidas[position]
-        holder.render(item)
+        holder.render(item, onItemSelectedFav)
 
         holder.itemView.setOnClickListener {
-            onItemClick(item) // 👈 dispara el callback al hacer click
+            onItemClick(item)
         }
     }
 
