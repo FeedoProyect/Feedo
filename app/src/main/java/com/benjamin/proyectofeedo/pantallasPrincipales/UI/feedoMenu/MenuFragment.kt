@@ -74,22 +74,32 @@ class MenuFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 feedoMenuViewModel.state.collect { stateMap ->
-                    stateMap.forEach { (seccionId, state) ->
-                        when (state) {
-                            is FeedoMenuState.Success -> {
-                                when (seccionId) {
-                                    1 -> listaClasicoArgentinoAdapter.updateListClasicoArgentino(state.recetas)
-                                    2 -> listaEspecialMateAdapter.updateListEspecialMate(state.recetas)
-                                    3 -> listaModoSaludableAdapter.updateListModoSaludable(state.recetas)
-                                    4 -> listaExpresAdapter.updateListExpres(state.recetas)
-                                    5 -> listaModoAhorroAdapter.updateListModoAhorro(state.recetas)
+
+                    launch { // 👈 cada emisión se maneja en una corutina ligera
+                        val hasError = stateMap.values.any { it is FeedoMenuState.Error }
+                        val isLoading = stateMap.values.all { it is FeedoMenuState.Loading }
+
+                        when {
+                            hasError -> {
+                                errorState()
+                            }
+                            isLoading -> {
+                                loadingState()
+                            }
+                            else -> {
+                                successState()
+                                // actualizar los adapters de las secciones que vinieron OK
+                                stateMap.forEach { (seccionId, state) ->
+                                    if (state is FeedoMenuState.Success) {
+                                        when (seccionId) {
+                                            1 -> listaClasicoArgentinoAdapter.updateListClasicoArgentino(state.recetas)
+                                            2 -> listaEspecialMateAdapter.updateListEspecialMate(state.recetas)
+                                            3 -> listaModoSaludableAdapter.updateListModoSaludable(state.recetas)
+                                            4 -> listaExpresAdapter.updateListExpres(state.recetas)
+                                            5 -> listaModoAhorroAdapter.updateListModoAhorro(state.recetas)
+                                        }
+                                    }
                                 }
-                            }
-                            is FeedoMenuState.Error -> {
-                                Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
-                            }
-                            FeedoMenuState.Loading -> {
-                                // si querés shimmer por seccion, lo ponés acá
                             }
                         }
                     }
@@ -97,7 +107,7 @@ class MenuFragment : Fragment() {
             }
         }
 
-        binding.rvClasicosArgentinos.apply {
+    binding.rvClasicosArgentinos.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = listaClasicoArgentinoAdapter
         }
@@ -117,7 +127,22 @@ class MenuFragment : Fragment() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = listaModoAhorroAdapter
         }
+    }
 
+    private fun successState() {
+        binding.MenuFeedo.visibility = View.VISIBLE
+        binding.ProgresBarMenu.visibility = View.GONE
+    }
+
+
+    private fun errorState(){
+        binding.MenuFeedo.visibility = View.GONE
+        binding.ProgresBarMenu.visibility = View.GONE
+    }
+
+    private fun loadingState(){
+        binding.MenuFeedo.visibility = View.GONE
+        binding.ProgresBarMenu.visibility = View.VISIBLE
     }
 
     private fun initBuscador() {

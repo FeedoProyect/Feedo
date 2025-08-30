@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosRequestModel
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.useCase.AddFavoritosUseCase
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.useCase.GetComidaBuscadorCatalogoUseCase
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.useCase.GetComidaCatalogoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,14 +18,15 @@ import javax.inject.Inject
 @HiltViewModel
 class CatalogosListComidasViewModel @Inject constructor(
     private val getComidasUseCase: GetComidaCatalogoUseCase,
-    private val addFavoritosUseCase: AddFavoritosUseCase
-): ViewModel() {
+    private val addFavoritosUseCase: AddFavoritosUseCase,
+    private val getComidaBuscadorCatalogoUseCase: GetComidaBuscadorCatalogoUseCase
+) : ViewModel() {
 
     private var _state =
         MutableStateFlow<CatalogosListComidasState>(CatalogosListComidasState.Loading)
     val state: StateFlow<CatalogosListComidasState> = _state
 
-    fun getComidass(comida: Int){
+    fun getComidass(comida: Int) {
         viewModelScope.launch {
             _state.value = CatalogosListComidasState.Loading
             try {
@@ -33,12 +35,13 @@ class CatalogosListComidasViewModel @Inject constructor(
                 }
                 _state.value = CatalogosListComidasState.Success(comidas, comidasDestacadas)
             } catch (e: Exception) {
-                _state.value = CatalogosListComidasState.Error("Ha ocurrido un error, intentelo más tarde")
+                _state.value =
+                    CatalogosListComidasState.Error("Ha ocurrido un error, intentelo más tarde")
             }
         }
     }
 
-    fun addComidasFavoritos(favoritos: FavoritosRequestModel){
+    fun addComidasFavoritos(favoritos: FavoritosRequestModel) {
         viewModelScope.launch {
             val result = addFavoritosUseCase(favoritos)
 
@@ -46,6 +49,28 @@ class CatalogosListComidasViewModel @Inject constructor(
                 Log.d("Favoritos", "Agregado OK")
             } else {
                 Log.e("Favoritos", "Error: ${result.exceptionOrNull()?.message}")
+            }
+        }
+    }
+
+    fun getComidasBuscadorCatalogo(name: String) {
+        viewModelScope.launch {
+            _state.value = CatalogosListComidasState.Loading
+            try {
+                val response = withContext(Dispatchers.IO) {
+                    getComidaBuscadorCatalogoUseCase(name)
+                }
+                if (response == null || response.isEmpty()) {
+                    _state.value = CatalogosListComidasState.Empty // 👈 “no se encontró nada”
+                } else {
+                    _state.value = CatalogosListComidasState.Success(
+                        comidas = response,
+                        comidasDestacadas = emptyList()
+                    )
+                }
+            } catch (e: Exception) {
+                _state.value =
+                    CatalogosListComidasState.Error("Ha ocurrido un error, intentelo más tarde")
             }
         }
     }

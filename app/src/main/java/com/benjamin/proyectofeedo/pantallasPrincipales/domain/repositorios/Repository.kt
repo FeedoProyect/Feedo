@@ -9,6 +9,8 @@ interface Repository {
 
     suspend fun getComidasDestacadasCatalogo(catalogoId: Int): List<ComidaDestacadaCatalogoModel>?
 
+    suspend fun getComidaCatalogoBuscador(name: String): List<ComidasModel>?
+
     suspend fun getComidaBuscadorPrincipal(name: String): List<ComidasModel>?
 
     suspend fun getComidaSeccionMenu(seccionId: Int): List<ComidasSeccionMenuModel>?

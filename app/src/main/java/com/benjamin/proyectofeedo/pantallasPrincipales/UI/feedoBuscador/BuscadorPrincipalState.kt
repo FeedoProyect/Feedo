@@ -6,4 +6,5 @@ sealed class BuscadorPrincipalState {
     data object Loading : BuscadorPrincipalState()
     data class Error(val error: String) : BuscadorPrincipalState()
     data class Success(val comidasBuscador: List<ComidasModel>) : BuscadorPrincipalState()
+    data object Empty : BuscadorPrincipalState()
 }

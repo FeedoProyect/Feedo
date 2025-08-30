@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -70,10 +71,19 @@ class BuscadorPrincipalFragment : Fragment() {
                         is BuscadorPrincipalState.Error -> errorState()
                         BuscadorPrincipalState.Loading -> loadingState()
                         is BuscadorPrincipalState.Success -> succesState(it)
+                        BuscadorPrincipalState.Empty -> emptySate()
                     }
                 }
             }
         }
+    }
+
+    private fun emptySate(){
+        binding.rvListaComidasBuscador.isVisible = false
+        binding.imgSinResultadosBuscador.isVisible = true
+        binding.tvNoSeencontroComida.isVisible = true
+        adapterBuscador.updateList(emptyList())
+        actualizarResultados(emptyList())
     }
 
     private fun errorState() {
@@ -85,6 +95,12 @@ class BuscadorPrincipalFragment : Fragment() {
     }
 
     private fun succesState(success: BuscadorPrincipalState.Success) {
+        binding.rvListaComidasBuscador.isVisible = true
+        binding.imgSinResultadosBuscador.isVisible = false
+        binding.tvNoSeencontroComida.isVisible = false
+
+
+
         adapterBuscador.updateList(success.comidasBuscador)
         actualizarResultados(success.comidasBuscador)
     }
@@ -106,17 +122,18 @@ class BuscadorPrincipalFragment : Fragment() {
 
         lifecycleScope.launch {
             editTextFlow
-                .debounce(300) // espera 300ms después de la última letra
+                .debounce(300)
                 .distinctUntilChanged()
                 .collect { query ->
                     if(query.isNotEmpty()){
                         buscadorPrincipalViewModel.getComidasBuscador(query)
                     } else{
-                        adapterBuscador.updateList(emptyList())
-                        actualizarResultados(emptyList())
+                        // Actualizamos el estado a Empty para que se muestre la UI correspondiente
+                        buscadorPrincipalViewModel.clearSearch()
                     }
                 }
         }
+
     }
 
     private fun buttonBack() {

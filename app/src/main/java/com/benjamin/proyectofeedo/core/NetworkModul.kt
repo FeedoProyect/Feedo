@@ -3,9 +3,9 @@ package com.benjamin.proyectofeedo.core
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.ComidasApiService
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.ComidasFavoritosApiService
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.SupaBase.SupabaseAuthInterceptor
-import com.benjamin.proyectofeedo.pantallasPrincipales.data.repositoriosImpl.FavoritosRepositoryImpl
+import com.benjamin.proyectofeedo.pantallasPrincipales.data.repositoriosImpl.AddComidaRepositoryImpl
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.repositoriosImpl.RepositoryImpl
-import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.FavoritosRepository
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.AddComidaRepository
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.Repository
 import dagger.Module
 import dagger.Provides
@@ -56,7 +56,7 @@ object NetworkModul {
     }
 
     @Provides
-    fun provideFavoritosRepository(favoritosApiService: ComidasFavoritosApiService): FavoritosRepository {
-        return FavoritosRepositoryImpl(favoritosApiService)
+    fun provideFavoritosRepository(favoritosApiService: ComidasFavoritosApiService): AddComidaRepository {
+        return AddComidaRepositoryImpl(favoritosApiService)
     }
 }

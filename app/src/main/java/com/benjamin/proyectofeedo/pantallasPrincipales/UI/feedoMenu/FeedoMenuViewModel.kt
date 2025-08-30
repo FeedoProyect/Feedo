@@ -45,7 +45,7 @@ class FeedoMenuViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 _state.value = _state.value.toMutableMap().apply {
-                    put(seccionId, FeedoMenuState.Error(e.message ?: "Error desconocido"))
+                    put(seccionId, FeedoMenuState.Error(e.message ?: "No tienes conexión a Internet"))
                 }
             }
 

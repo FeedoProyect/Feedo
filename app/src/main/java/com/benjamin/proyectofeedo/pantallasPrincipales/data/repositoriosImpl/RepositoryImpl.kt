@@ -31,13 +31,25 @@ class RepositoryImpl @Inject constructor(private val apiService: ComidasApiServi
         }
     }
 
-    override suspend fun getComidaBuscadorPrincipal(name: String): List<ComidasModel>?{
+    override suspend fun getComidaCatalogoBuscador(name: String): List<ComidasModel>? {
+        return try {
+            val response = apiService.buscarRecetasCatalogo("ilike.${name}%")
+            val mapped = response.map { it.toDomain() }
+            if (mapped.isEmpty()) null else mapped
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    override suspend fun getComidaBuscadorPrincipal(name: String): List<ComidasModel>? {
         return try {
             val response = apiService.getComidaBuscador(nombre = "ilike.${name}%")
-            response.map { it.toDomain() }
-        } catch (e: Exception){
+            val mapped = response.map { it.toDomain() }
+            if (mapped.isEmpty()) null else mapped
+        } catch (e: Exception) {
             e.printStackTrace()
-            emptyList()
+            null
         }
     }
 

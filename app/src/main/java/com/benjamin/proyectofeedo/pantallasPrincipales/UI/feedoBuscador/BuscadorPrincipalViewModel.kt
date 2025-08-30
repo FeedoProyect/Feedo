@@ -2,6 +2,7 @@ package com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoBuscador
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoContenidoCatalogos.CatalogosListComidasState
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.useCase.GetComidaBuscadorPrincipalUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -26,10 +27,18 @@ class BuscadorPrincipalViewModel @Inject constructor(
                 val response = withContext(Dispatchers.IO) {
                     getComidaBuscadorPrincipalUseCase(comida)
                 }
-                _state.value = BuscadorPrincipalState.Success(response)
+                if (response == null || response.isEmpty()) {
+                    _state.value = BuscadorPrincipalState.Empty // 👈 “no se encontró nada”
+                } else {
+                    _state.value = BuscadorPrincipalState.Success(response)
+                }
             } catch (e: Exception) {
                 _state.value = BuscadorPrincipalState.Error("Ha ocurrido un error, intentelo más tarde")
             }
         }
+    }
+
+    fun clearSearch(){
+        _state.value = BuscadorPrincipalState.Empty
     }
 }

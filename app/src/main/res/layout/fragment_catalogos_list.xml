@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <ScrollView
+        android:id="@+id/pantallaCatalogo"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -90,36 +91,63 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tituloDestacadoCatalogo" />
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvComidasCatalogo"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:clipToPadding="false"
-                android:paddingBottom="80dp"
-                android:background="@android:color/transparent"
-                android:cacheColorHint="@android:color/transparent"
-                android:scrollbars="none"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvComidaDestacadaCatalogo"/>
-
-            <View
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LayoutBuscadorErroneo"
                 android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:background="@color/transparente"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvComidasCatalogo"/>
+                app:layout_constraintTop_toBottomOf="@+id/rvComidaDestacadaCatalogo">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvComidasCatalogo"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:clipToPadding="false"
+                    android:paddingBottom="80dp"
+                    android:background="@android:color/transparent"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:scrollbars="none"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/imgSinResultados"
+                    android:layout_width="250dp"
+                    android:layout_height="290dp"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/no_encontro_nada"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tvNoSeencontroComida"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/texteView_NoSeEncontro"
+                    android:textColor="@color/tittle_color"
+                    android:fontFamily="@font/balo_thambi"
+                    android:layout_marginTop="15dp"
+                    android:textSize="20sp"
+                    android:maxLines="2"
+                    android:gravity="center"
+                    app:layout_constraintTop_toBottomOf="@+id/imgSinResultados"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
     <ProgressBar
-        android:id="@+id/progresBar"
+        android:id="@+id/ProgressbarCatalogos"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateTint="@color/tittle_color"

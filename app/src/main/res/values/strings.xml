@@ -19,6 +19,8 @@
     <string name="textView_expres">Exprés</string>
     <string name="textView_modoAhorro">Modo ahorro</string>
 
+    <string name="texteView_NoSeEncontro">No encontramos ninguna receta en relacion a lo que buscas...</string>
+
     <!-- Buscador -->
     <string name="textView_Buscar">Buscar</string>
     <string name="tools_comida_buscada">Encontramos 23 resultados en relacion a tu busqueda</string>
