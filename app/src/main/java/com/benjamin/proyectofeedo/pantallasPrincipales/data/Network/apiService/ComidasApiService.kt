@@ -37,10 +37,10 @@ interface ComidasApiService {
         @Query("receta_seccion.seccion_id") seccionId: String
     ): List<ComidasMenuSeccionResponse>
 
-    @GET("favoritos")
+    @GET("favoritos2")
     suspend fun getComidaFavoritos(
         @Query("select") select: String = "recetas(*)",
-        @Query("usuario_id") usuarioId: String
+        @Query("id_usuario") usuarioId: String
     ): List<ComidasResponseFavoritos>
 
 

@@ -5,6 +5,7 @@ import com.benjamin.proyectofeedo.databinding.ItemComidasCatalogosBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasModel
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosRequestModel
 import com.squareup.picasso.Picasso
+import io.github.jan.supabase.auth.Auth
 import java.util.UUID
 
 class CatalogosListComidasViewHolder(private val binding: ItemComidasCatalogosBinding) :
@@ -12,21 +13,23 @@ class CatalogosListComidasViewHolder(private val binding: ItemComidasCatalogosBi
 
     fun render(
         comidasModel: ComidasModel,
-        onItemSelectedFav: (FavoritosRequestModel) -> Unit
+        onItemSelectedFav: (FavoritosRequestModel) -> Unit,
+        auth: Auth
     ) {
         binding.tvComidaName.text = comidasModel.titulo
         Picasso.get().load(comidasModel.imagen).into(binding.imgComidaCatalogo)
 
         binding.imgAgregarFavComidaCatalogo.setOnClickListener {
-            val favorito =
-                FavoritosRequestModel(
-                    recetaId = comidasModel.id,
-                    usuarioId = "7ede9214-d595-496e-9510-28db794d91b6"
-                )
+            val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener
+            val favorito = FavoritosRequestModel(
+                recetaId = comidasModel.id,
+                usuarioId = userId
+            )
             onItemSelectedFav(favorito)
         }
     }
 }
+
 
 //proyecto a largo plazo lo de abajo
 

@@ -1,6 +1,7 @@
 package com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoPerfil.subFragmentTabLayout.FavoritosFragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,10 @@ import com.benjamin.proyectofeedo.databinding.FragmentFavoritosBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoPerfil.subFragmentTabLayout.FavoritosFragment.FavoritosState
 import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoPerfil.subFragmentTabLayout.FavoritosFragment.listaFavoritosAdapter.ListaFavoritosAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FavoritosFragment : Fragment() {
@@ -23,6 +27,9 @@ class FavoritosFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val favoritoViewModel by viewModels<FavoritosViewModel>()
+
+    @Inject
+    lateinit var supabaseClient: SupabaseClient
 
     private lateinit var adapterFav: ListaFavoritosAdapter
 
@@ -36,10 +43,14 @@ class FavoritosFragment : Fragment() {
         initList()
         iniState()
 
-        // 👇 Acá pasás el UUID del usuario logueado
-        val usuarioId = "7ede9214-d595-496e-9510-28db794d91b6"
-        favoritoViewModel.getComidaFavoritos(usuarioId)
+        val userId = supabaseClient.auth.currentUserOrNull()?.id
+        if (userId != null) {
+            favoritoViewModel.getComidaFavoritos(userId)
+        } else {
+            Log.e("Favoritos", "⚠️ No hay usuario logueado")
+        }
     }
+
 
 
     private fun initList() {

@@ -7,4 +7,5 @@ sealed class AuthState {
     object Loading : AuthState()
     data class Success(val user: UserModel) : AuthState()
     data class Error(val message: String) : AuthState()
+    object LoggedOut : AuthState()
 }

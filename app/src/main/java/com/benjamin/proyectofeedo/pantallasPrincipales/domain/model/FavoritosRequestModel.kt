@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.util.UUID
 
 data class FavoritosRequestModel(
-    @SerializedName("usuario_id")
+    @SerializedName("id_usuario")
     val usuarioId: String,
     @SerializedName("receta_id")
     val recetaId: Int
