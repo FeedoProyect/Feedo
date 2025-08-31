@@ -11,6 +11,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.github.jan.supabase.auth.Auth
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,9 +25,9 @@ object NetworkModul {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(auth: Auth): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(SupabaseAuthInterceptor())
+            .addInterceptor(SupabaseAuthInterceptor(auth))
             .build()
     }
 

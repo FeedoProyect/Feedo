@@ -88,6 +88,7 @@ android {
         implementation("io.github.jan-tennert.supabase:postgrest-kt")
         implementation("io.ktor:ktor-client-android:$ktor_version")
 
+
         //Verision de dataStore
         val dataStore_Version = "1.1.7"
 

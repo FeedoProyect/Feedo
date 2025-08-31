@@ -1,0 +1,83 @@
+package com.benjamin.proyectofeedo.usuarioLogin.LoginUI
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.AuthRepository
+import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.modelUser.UserModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
+
+@HiltViewModel
+class AuthUserViewModel @Inject constructor(
+    private val authRepository: AuthRepository
+) : ViewModel() {
+
+    private val _state = MutableStateFlow<AuthState>(AuthState.Idle)
+    val state: StateFlow<AuthState> = _state
+
+
+    private val _email = MutableStateFlow("")
+    val email: Flow<String> = _email
+    private val _password = MutableStateFlow("")
+    val password = _password
+
+    fun onEmailChange(email: String) {
+        _email.value = email
+    }
+
+    fun onPasswordChange(password: String) {
+        _password.value = password
+    }
+
+    fun register(email: String, password: String) {
+        viewModelScope.launch {
+            _state.value = AuthState.Loading
+            val user = withContext(Dispatchers.IO) {
+                authRepository.register(email, password)
+            }
+            _state.value = if (user != null) {
+                AuthState.Success(user)
+            } else {
+                AuthState.Error("No se pudo registrar")
+            }
+        }
+    }
+
+    fun login(email: String, password: String) {
+        viewModelScope.launch {
+            _state.value = AuthState.Loading
+            try {
+                val user = withContext(Dispatchers.IO) {
+                    authRepository.login(email, password)
+                }
+                _state.value = if (user != null) {
+                    AuthState.Success(user)
+                } else {
+                    AuthState.Error("Credenciales inválidas")
+                }
+            } catch (e: Exception) {
+                _state.value = AuthState.Error(e.message ?: "Error desconocido")
+            }
+        }
+    }
+
+    fun logout() {
+        viewModelScope.launch {
+            _state.value = AuthState.Loading
+            val success = withContext(Dispatchers.IO) {
+                authRepository.logout()
+            }
+            _state.value = if (success) {
+                AuthState.LoggedOut   // 👈 Podés crear un estado específico para logout
+            } else {
+                AuthState.Error("No se pudo cerrar sesión")
+            }
+        }
+    }
+}

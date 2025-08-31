@@ -9,7 +9,7 @@ import retrofit2.http.POST
 interface ComidasFavoritosApiService {
 
     @Headers("Prefer: resolution=merge-duplicates,return=representation")
-    @POST("favoritos")
+    @POST("favoritos2")
     suspend fun addFavorito(@Body favorito: FavoritosRequestModel): List<AddFavoritosResponse>
 
 }

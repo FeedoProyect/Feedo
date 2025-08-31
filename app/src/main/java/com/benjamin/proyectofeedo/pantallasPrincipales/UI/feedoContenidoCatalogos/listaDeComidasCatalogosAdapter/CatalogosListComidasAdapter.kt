@@ -8,7 +8,6 @@ import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasModel
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosRequestModel
 
 class CatalogosListComidasAdapter(
-
     private var listComidas: List<ComidasModel> = emptyList(),
     private val onItemClick: (ComidasModel) -> Unit,
     private val onItemSelectedFav: (FavoritosRequestModel) -> Unit

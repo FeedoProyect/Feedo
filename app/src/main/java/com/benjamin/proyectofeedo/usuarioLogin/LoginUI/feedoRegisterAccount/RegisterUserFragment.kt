@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.benjamin.proyectofeedo.databinding.FragmentRegisterAccountBinding
 import com.benjamin.proyectofeedo.usuarioLogin.LoginUI.AuthState
+import com.benjamin.proyectofeedo.usuarioLogin.LoginUI.AuthUserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -22,7 +23,7 @@ class RegisterUserFragment : Fragment() {
     private var _binding: FragmentRegisterAccountBinding? = null
     private val binding get() = _binding!!
 
-    private val registerUserViewModel by viewModels<RegisterUserViewModel>()
+    private val authUserViewModel by viewModels<AuthUserViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,12 +39,15 @@ class RegisterUserFragment : Fragment() {
     private fun initState(){
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
-                registerUserViewModel.state.collect {
+                authUserViewModel.state.collect {
                     when(it){
                         is AuthState.Error -> errorState(it)
                         AuthState.Idle -> idleState()
                         AuthState.Loading -> loadingState()
                         is AuthState.Success -> succesState(it)
+                        AuthState.LoggedOut -> {
+
+                        }
                     }
                 }
             }
@@ -56,7 +60,6 @@ class RegisterUserFragment : Fragment() {
 
     private fun loadingState() {
         binding.botonRegistrado.isEnabled = false
-        // Podés mostrar un ProgressBar
     }
 
     private fun succesState(success: AuthState.Success) {
@@ -70,8 +73,7 @@ class RegisterUserFragment : Fragment() {
     }
 
     private fun errorState(error: AuthState.Error) {
-        binding.botonRegistrado.isEnabled = true
-        Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
+        //
     }
 
 
@@ -93,7 +95,7 @@ class RegisterUserFragment : Fragment() {
             }
 
             // Llamamos al ViewModel
-            registerUserViewModel.register(email, password)
+            authUserViewModel.register(email, password)
         }
 
         binding.tvInicieSesion.setOnClickListener {

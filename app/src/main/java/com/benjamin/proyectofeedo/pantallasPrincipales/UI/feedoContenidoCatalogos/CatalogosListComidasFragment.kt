@@ -23,10 +23,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.getValue
 import androidx.core.widget.doOnTextChanged
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.supabaseJson
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CatalogosListComidasFragment : Fragment() {
@@ -35,6 +39,9 @@ class CatalogosListComidasFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val catalogosListComidasViewModel by viewModels<CatalogosListComidasViewModel>()
+
+    @Inject
+    lateinit var supabaseClient: SupabaseClient
 
     private lateinit var elAdapter: CatalogosListComidasAdapter
     private lateinit var adapterComidaDestacadaCatalogo: ComidaDestacadaCatalogoAdapter
@@ -107,6 +114,7 @@ class CatalogosListComidasFragment : Fragment() {
 
         // Adapter para la lista de comidas del catálogo
         elAdapter = CatalogosListComidasAdapter(
+            auth = supabaseClient.auth,
             onItemClick = { receta ->
                 val action = CatalogosListComidasFragmentDirections
                     .actionCatalogosListComidasFragmentToDetalleRecetaFragment(receta.id)
@@ -114,7 +122,7 @@ class CatalogosListComidasFragment : Fragment() {
 
             }, onItemSelectedFav = { favoritos ->
                 catalogosListComidasViewModel.addComidasFavoritos(favoritos)
-            }
+            },
         )
     }
 
