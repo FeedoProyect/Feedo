@@ -13,5 +13,6 @@ class ListaCatalogosViewHolder(private val binding: ItemListaCatalogoBinding) :
         binding.nameCatalogo.text = context.getString(catalogoInfo.titulo)
 
         binding.root.setOnClickListener { onItemSelected(catalogoInfo) }
+
     }
 }

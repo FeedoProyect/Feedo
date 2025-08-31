@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.databinding.ItemEspecialMateBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasSeccionMenuModel
 
-class ListaEspecialMateAdapter(private var listaEspecialMate: List<ComidasSeccionMenuModel> = emptyList()) :
-    RecyclerView.Adapter<ListaEspecialMateViewHolder>() {
+class ListaEspecialMateAdapter(
+    private var listaEspecialMate: List<ComidasSeccionMenuModel> = emptyList(),
+    private val onItemClick: (ComidasSeccionMenuModel) -> Unit
+) : RecyclerView.Adapter<ListaEspecialMateViewHolder>() {
 
-    fun updateListEspecialMate(list: List<ComidasSeccionMenuModel>){
+    fun updateListEspecialMate(list: List<ComidasSeccionMenuModel>) {
         listaEspecialMate = list
         notifyDataSetChanged()
     }
@@ -18,16 +20,24 @@ class ListaEspecialMateAdapter(private var listaEspecialMate: List<ComidasSeccio
         parent: ViewGroup,
         viewType: Int
     ): ListaEspecialMateViewHolder {
-        val binding = ItemEspecialMateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemEspecialMateBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return ListaEspecialMateViewHolder(binding)
     }
 
-    override fun onBindViewHolder(
-        holder: ListaEspecialMateViewHolder,
-        position: Int
-    ) {
-        holder.render(listaEspecialMate[position])
+    override fun onBindViewHolder(holder: ListaEspecialMateViewHolder, position: Int) {
+        val item = listaEspecialMate[position]
+        holder.render(item)
+
+        // 👇 click manejado acá
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
     }
 
     override fun getItemCount() = listaEspecialMate.size
 }
+

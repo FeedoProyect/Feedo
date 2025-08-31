@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -12,15 +11,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoMenu.listaDeCatalogosAdapter.ListaCatalogosAdapter
 import com.benjamin.proyectofeedo.databinding.FragmentMenuBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoMenu.ListaEspecialMate.ListaEspecialMateAdapter
 import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoMenu.ListaModoAhorro.ListaModoAhorroAdapter
 import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoMenu.listaClasicosArgentinos.ListaClasicoArgentinoAdapter
-import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoMenu.listaClasicosArgentinos.ListaClasicoArgentinoViewHolder
 import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoMenu.listaComidaExpres.ListaExpresAdapter
 import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoMenu.listaModoSaludable.ListaModoSaludableAdapter
-import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.response.ComidasMenuSeccionResponse
+import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoMenu.listaDeCatalogosAdapter.ListaCatalogosAdapter
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.CatalogoInfo
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.CatalogosModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,7 +41,6 @@ class MenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initUI()
     }
 
@@ -57,11 +53,22 @@ class MenuFragment : Fragment() {
     }
 
     private fun initAdapters() {
-        listaClasicoArgentinoAdapter = ListaClasicoArgentinoAdapter()
-        listaEspecialMateAdapter = ListaEspecialMateAdapter()
-        listaModoSaludableAdapter = ListaModoSaludableAdapter()
-        listaExpresAdapter = ListaExpresAdapter()
-        listaModoAhorroAdapter = ListaModoAhorroAdapter()
+        // 🔥 Paso el onItemClick a cada adapter
+        listaClasicoArgentinoAdapter = ListaClasicoArgentinoAdapter { receta ->
+            navigateToDetalle(receta.id)
+        }
+        listaEspecialMateAdapter = ListaEspecialMateAdapter { receta ->
+            navigateToDetalle(receta.id)
+        }
+        listaModoSaludableAdapter = ListaModoSaludableAdapter { receta ->
+            navigateToDetalle(receta.id)
+        }
+        listaExpresAdapter = ListaExpresAdapter { receta ->
+            navigateToDetalle(receta.id)
+        }
+        listaModoAhorroAdapter = ListaModoAhorroAdapter { receta ->
+            navigateToDetalle(receta.id)
+        }
 
         binding.rvClasicosArgentinos.adapter = listaClasicoArgentinoAdapter
         binding.rvIdealParaElMate.adapter = listaEspecialMateAdapter
@@ -75,20 +82,15 @@ class MenuFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 feedoMenuViewModel.state.collect { stateMap ->
 
-                    launch { // 👈 cada emisión se maneja en una corutina ligera
+                    launch {
                         val hasError = stateMap.values.any { it is FeedoMenuState.Error }
                         val isLoading = stateMap.values.all { it is FeedoMenuState.Loading }
 
                         when {
-                            hasError -> {
-                                errorState()
-                            }
-                            isLoading -> {
-                                loadingState()
-                            }
+                            hasError -> errorState()
+                            isLoading -> loadingState()
                             else -> {
                                 successState()
-                                // actualizar los adapters de las secciones que vinieron OK
                                 stateMap.forEach { (seccionId, state) ->
                                     if (state is FeedoMenuState.Success) {
                                         when (seccionId) {
@@ -107,25 +109,20 @@ class MenuFragment : Fragment() {
             }
         }
 
-    binding.rvClasicosArgentinos.apply {
+        binding.rvClasicosArgentinos.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = listaClasicoArgentinoAdapter
         }
         binding.rvIdealParaElMate.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = listaEspecialMateAdapter
         }
         binding.rvModoSaludable.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = listaModoSaludableAdapter
         }
         binding.rvExpres.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = listaExpresAdapter
         }
         binding.rvModoAhorro.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = listaModoAhorroAdapter
         }
     }
 
@@ -134,13 +131,12 @@ class MenuFragment : Fragment() {
         binding.ProgresBarMenu.visibility = View.GONE
     }
 
-
-    private fun errorState(){
+    private fun errorState() {
         binding.MenuFeedo.visibility = View.GONE
         binding.ProgresBarMenu.visibility = View.GONE
     }
 
-    private fun loadingState(){
+    private fun loadingState() {
         binding.MenuFeedo.visibility = View.GONE
         binding.ProgresBarMenu.visibility = View.VISIBLE
     }
@@ -181,14 +177,12 @@ class MenuFragment : Fragment() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = listaCatalogosAdapter
         }
-
     }
 
     private fun initUIState() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 feedoMenuViewModel.catalogos.collect {
-                    //Hubo cambios
                     listaCatalogosAdapter.updateList(it)
                 }
             }
@@ -201,6 +195,13 @@ class MenuFragment : Fragment() {
     ): View {
         _binding = FragmentMenuBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
 
+    // para navegar al detalle
+    private fun navigateToDetalle(recetaId: Int) {
+        findNavController().navigate(
+            MenuFragmentDirections.actionMenuFragmentToDetalleRecetaFragment(recetaId)
+
+        )
     }
 }

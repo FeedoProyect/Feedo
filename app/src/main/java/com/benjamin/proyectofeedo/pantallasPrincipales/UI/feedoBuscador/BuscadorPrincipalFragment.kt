@@ -56,9 +56,16 @@ class BuscadorPrincipalFragment : Fragment() {
     }
 
     private fun initList() {
-        adapterBuscador = BuscadorPrincipalAdapter()
+        adapterBuscador = BuscadorPrincipalAdapter(
+            onItemClick = { comida -> // 👈 lo nuevo
+                val action = BuscadorPrincipalFragmentDirections
+                    .actionBuscadorPrincipalFragmentToDetalleRecetaFragment(comida.id)
+                findNavController().navigate(action)
+            }
+        )
+
         binding.rvListaComidasBuscador.apply {
-            layoutManager = GridLayoutManager(requireContext(),2)
+            layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = adapterBuscador
         }
     }

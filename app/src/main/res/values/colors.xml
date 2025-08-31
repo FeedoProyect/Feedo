@@ -24,6 +24,9 @@
     <color name="color_text_tabs_perfil">#FFAC00</color>
 
 
+    <color name="light_gray">#E0E0E0</color>  <!-- gris clarito, para bordes -->
+    <color name="dark_gray">#616161</color>   <!-- gris oscuro, para texto secundario -->
+
 
 
 </resources>

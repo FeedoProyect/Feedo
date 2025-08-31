@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.databinding.ItemComidaBuscadorBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasModel
 
-class BuscadorPrincipalAdapter(private var listComidaBuscador: List<ComidasModel> = emptyList()) :
-    RecyclerView.Adapter<BuscadorPrincipalViewHolder>() {
+class BuscadorPrincipalAdapter(
+    private var listComidaBuscador: List<ComidasModel> = emptyList(),
+    private val onItemClick: (ComidasModel) -> Unit // 👈 agregado
+) : RecyclerView.Adapter<BuscadorPrincipalViewHolder>() {
 
-    fun updateList(list: List<ComidasModel>){
+    fun updateList(list: List<ComidasModel>) {
         listComidaBuscador = list
         notifyDataSetChanged()
     }
@@ -18,7 +20,11 @@ class BuscadorPrincipalAdapter(private var listComidaBuscador: List<ComidasModel
         parent: ViewGroup,
         viewType: Int
     ): BuscadorPrincipalViewHolder {
-        val binding = ItemComidaBuscadorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemComidaBuscadorBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return BuscadorPrincipalViewHolder(binding)
     }
 
@@ -26,7 +32,13 @@ class BuscadorPrincipalAdapter(private var listComidaBuscador: List<ComidasModel
         holder: BuscadorPrincipalViewHolder,
         position: Int
     ) {
-        holder.render(listComidaBuscador[position])
+        val item = listComidaBuscador[position]
+        holder.render(item)
+
+        // 👇 agregado
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
     }
 
     override fun getItemCount() = listComidaBuscador.size

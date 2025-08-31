@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.databinding.ItemExpresBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasSeccionMenuModel
 
-class ListaExpresAdapter(private var listaExpres: List<ComidasSeccionMenuModel> = emptyList()):
-    RecyclerView.Adapter<ListaExpresViewHolder>() {
+class ListaExpresAdapter(
+    private var listaExpres: List<ComidasSeccionMenuModel> = emptyList(),
+    private val onItemClick: (ComidasSeccionMenuModel) -> Unit
+) : RecyclerView.Adapter<ListaExpresViewHolder>() {
 
-    fun updateListExpres(list: List<ComidasSeccionMenuModel>){
+    fun updateListExpres(list: List<ComidasSeccionMenuModel>) {
         listaExpres = list
         notifyDataSetChanged()
     }
@@ -22,11 +24,14 @@ class ListaExpresAdapter(private var listaExpres: List<ComidasSeccionMenuModel> 
         return ListaExpresViewHolder(binding)
     }
 
-    override fun onBindViewHolder(
-        holder: ListaExpresViewHolder,
-        position: Int
-    ) {
-        holder.render(listaExpres[position])
+    override fun onBindViewHolder(holder: ListaExpresViewHolder, position: Int) {
+        val item = listaExpres[position]
+        holder.render(item)
+
+        // 👇 Click manejado acá
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
     }
 
     override fun getItemCount() = listaExpres.size

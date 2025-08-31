@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/favoritos_prueba"
+            android:src="@drawable/ic_favs"
             android:scaleType="center"/>
 
     </androidx.cardview.widget.CardView>

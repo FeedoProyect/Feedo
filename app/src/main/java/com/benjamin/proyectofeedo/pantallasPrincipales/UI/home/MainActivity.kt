@@ -55,5 +55,6 @@ class MainActivity : AppCompatActivity() {
         navController = navHost.navController
 
         binding.bottomBar.setupWithNavController(navController)
+
     }
 }

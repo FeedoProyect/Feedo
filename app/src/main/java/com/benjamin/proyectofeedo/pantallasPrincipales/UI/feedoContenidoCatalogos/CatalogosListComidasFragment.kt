@@ -44,7 +44,6 @@ class CatalogosListComidasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         initUI()
         catalogosListComidasViewModel.getComidass(args.type.id)
     }
@@ -68,14 +67,14 @@ class CatalogosListComidasFragment : Fragment() {
 
         lifecycleScope.launch {
             editTextFlow
-                .debounce(300) // espera 300ms después de la última letra
+                .debounce(300)
                 .distinctUntilChanged()
                 .collect { query ->
                     if (query.isNotEmpty()) {
                         catalogosListComidasViewModel.getComidasBuscadorCatalogo(query)
                         binding.tituloDestacadoCatalogo.isVisible = false
                     } else {
-                        catalogosListComidasViewModel.getComidass(args.type.id) // 👈 recargo el catálogo original
+                        catalogosListComidasViewModel.getComidass(args.type.id)
                         binding.tituloDestacadoCatalogo.isVisible = true
                     }
                 }
@@ -97,17 +96,20 @@ class CatalogosListComidasFragment : Fragment() {
     }
 
     private fun initList() {
-        // Adapter para la lista destacada
-        adapterComidaDestacadaCatalogo = ComidaDestacadaCatalogoAdapter()
-
+        // ✅ Adapter para la lista destacada con onItemClick
+        adapterComidaDestacadaCatalogo = ComidaDestacadaCatalogoAdapter(
+            onItemClick = { comidaDestacada ->
+                val action = CatalogosListComidasFragmentDirections
+                    .actionCatalogosListComidasFragmentToDetalleRecetaFragment(comidaDestacada.id)
+                findNavController().navigate(action)
+            }
+        )
 
         // Adapter para la lista de comidas del catálogo
         elAdapter = CatalogosListComidasAdapter(
             onItemClick = { receta ->
-                // 👇 Navegamos al detalle de la receta
                 val action = CatalogosListComidasFragmentDirections
                     .actionCatalogosListComidasFragmentToDetalleRecetaFragment(receta.id)
-
                 findNavController().navigate(action)
 
             }, onItemSelectedFav = { favoritos ->
@@ -161,7 +163,6 @@ class CatalogosListComidasFragment : Fragment() {
         elAdapter.updateList(success.comidas ?: emptyList())
         adapterComidaDestacadaCatalogo.updateListComidaDestacadaCatalogo(success.comidasDestacadas)
     }
-
 
     private fun tituloDeCatalogo(catalogosModel: CatalogosModel) {
         binding.TituloCatalogo.text = catalogosModel.titulo
