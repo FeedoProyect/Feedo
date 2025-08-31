@@ -82,7 +82,7 @@ android {
 
         //versiones de supabase
         val supabase_version = "3.2.2"
-        val ktor_version= "3.2.3"
+        val ktor_version = "3.2.3"
 
         implementation(platform("io.github.jan-tennert.supabase:bom:$supabase_version"))
         implementation("io.github.jan-tennert.supabase:postgrest-kt")
@@ -99,6 +99,10 @@ android {
 
         // DataStore
         implementation("androidx.datastore:datastore-preferences:$dataStore_Version")
+
+
+        //image picker
+        implementation(libs.imagePicker)
 
         implementation(libs.androidx.core.ktx)
         implementation(libs.androidx.appcompat)

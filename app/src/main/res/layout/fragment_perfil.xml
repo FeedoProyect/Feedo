@@ -73,7 +73,7 @@
                     android:id="@+id/tvNombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Brakko DCA"
+                    android:text="Usuario 1"
                     android:textColor="@color/text_de_items"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:text="Músico y compositor de comidas"
-                    android:textColor="@color/cardview_dark_background"
+                    android:textColor="@color/text_de_items"
                     android:textSize="14sp" />
 
                 <TextView

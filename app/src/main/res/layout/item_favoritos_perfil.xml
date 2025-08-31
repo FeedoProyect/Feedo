@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_favs"
-            android:scaleType="center"/>
+            app:tint="@color/tittle_color"
+            android:scaleType="centerCrop"/>
 
     </androidx.cardview.widget.CardView>
 

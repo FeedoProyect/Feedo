@@ -18,13 +18,12 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/botonAddNameComida"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="40dp"
         android:text="@string/textBotom_Añadir"
         android:textColor="@color/white"
-        android:textSize="17sp"
+        android:textSize="22sp"
         android:fontFamily="@font/balo_thambi"
-        android:layout_marginBottom="80dp"
         app:backgroundTint="@color/tittle_color"
         app:cornerRadius="15dp"/>
 

@@ -1,16 +1,19 @@
 package com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoAddRecetas
 
+import android.app.Activity
 import android.app.Dialog
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import com.benjamin.proyectofeedo.R
 import com.benjamin.proyectofeedo.databinding.DialogRecetasBinding
 import com.benjamin.proyectofeedo.databinding.FragmentAddRecetasBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoAddRecetas.subFragmentTabLayout.FragmentPageAddRecetaAdapter
-import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoPerfil.subFragmentTabLayout.FragmentPageAdapter
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,20 +23,48 @@ class AddRecetaFragment : Fragment() {
     private var _binding: FragmentAddRecetasBinding? = null
     private val binding get() = _binding!!
 
+    private var imageUri: Uri? = null
+
     private lateinit var adapter: FragmentPageAddRecetaAdapter
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         initUI()
     }
+
 
     private fun initUI() {
         initTab()
         initListeners()
     }
 
+    private fun initImage() {
+        ImagePicker.with(this)
+            .crop()
+            .compress(1024)
+            .maxResultSize(1080, 1080)
+            .createIntent { intent ->
+                resultadoImage.launch(intent)
+            }
+    }
+
+    private val resultadoImage =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { resultado ->
+            if (resultado.resultCode == Activity.RESULT_OK) {
+                val data = resultado.data
+                imageUri = data!!.data
+                binding.imgAgregarFotoComida.setImageURI(imageUri)
+            } else {
+                Toast.makeText(requireContext(), "Accion cancelada", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     private fun initListeners() {
+        binding.imgAgregarFotoComida.setOnClickListener { initImage() }
+
         binding.tvAgregarTituloReceta.setOnClickListener { initDialog() }
     }
 
