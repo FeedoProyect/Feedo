@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/etAddComida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_addcomida"
+        android:textColorHint="@color/color_hint_buscador"
+        android:textColor="@color/text_de_items"
+        android:backgroundTint="@color/text_de_items"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/botonAddNameComida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/textBotom_Añadir"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:fontFamily="@font/balo_thambi"
+        android:layout_marginBottom="80dp"
+        app:backgroundTint="@color/tittle_color"
+        app:cornerRadius="15dp"/>
+
+
+</LinearLayout>

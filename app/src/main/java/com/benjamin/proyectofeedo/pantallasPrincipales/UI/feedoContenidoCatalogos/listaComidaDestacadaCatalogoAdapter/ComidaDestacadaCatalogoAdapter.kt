@@ -10,7 +10,7 @@ class ComidaDestacadaCatalogoAdapter(
 
     private var listComidaDestacadaCatalogo: List<ComidaDestacadaCatalogoModel> = emptyList(),
 
-    // 👇 AGREGA ESTO: callback para el click
+
     private val onItemClick: ((ComidaDestacadaCatalogoModel) -> Unit)? = null
 ) : RecyclerView.Adapter<ComidaDestacadaCatalogoViewHolder>() {
 

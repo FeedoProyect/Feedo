@@ -97,4 +97,12 @@
 
     <string name="pronto">Toca para volver</string>
 
+    <!-- Pantalla de agregar receta -->
+    <string name="textview_agregarAgregarReceta">Pon una foto de tu plato para que los demás lo vean</string>
+    <string name="textview_tituloAgregarReceta">Agregar titulo: </string>
+    <string name="textView_ingredientes">Ingredientes</string>
+    <string name="hint_addcomida">Añade el nombre de tu comida</string>
+    <string name="textBotom_Añadir">Añadir</string>
+
+
 </resources>
