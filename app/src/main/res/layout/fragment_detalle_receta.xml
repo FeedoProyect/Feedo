@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Imagen principal -->
+
     <ImageView
         android:id="@+id/ivReceta"
         android:layout_width="match_parent"
@@ -14,13 +14,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Card principal -->
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardDetalleReceta"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="240dp"
-        app:cardBackgroundColor="@color/fondodetalle"
+        app:cardBackgroundColor="@color/color_background_cardview"
         app:cardCornerRadius="30dp"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="false"
@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:padding="16dp">
 
-            <!-- Botón volver -->
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnCerrar"
                 android:layout_width="36dp"
@@ -55,7 +55,7 @@
                     android:contentDescription="@string/app_name"/>
             </androidx.cardview.widget.CardView>
 
-            <!-- Botón favoritos -->
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnFavDetalle"
                 android:layout_width="36dp"
@@ -76,7 +76,7 @@
                     android:src="@drawable/ic_favs" />
             </androidx.cardview.widget.CardView>
 
-            <!-- Título -->
+
             <TextView
                 android:id="@+id/tvTituloReceta"
                 android:layout_width="0dp"
@@ -90,7 +90,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Tabs -->
+
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayoutDetalle"
                 android:layout_width="320dp"
@@ -109,7 +109,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <!-- ViewPager -->
+
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPage2Detalle"
                 android:layout_width="0dp"
@@ -122,7 +122,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Loader -->
+
     <ProgressBar
         android:id="@+id/progressBarDetalle"
         android:layout_width="wrap_content"

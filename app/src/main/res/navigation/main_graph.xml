@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_perfilFragment_to_settingViewFragment"
             app:destination="@id/settingViewFragment" />
+        <action
+            android:id="@+id/action_perfilFragment_to_editarPerfilFragment"
+            app:destination="@id/editarPerfilFragment" />
     </fragment>
 
     <fragment
@@ -96,6 +99,17 @@
         <argument
             android:name="recetaId"
             app:argType="integer" />
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/editarPerfilFragment"
+        android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoPerfil.EditarPerfilFragment"
+        android:label="Editar Perfil">
+        <action
+            android:id="@+id/action_editarPerfilFragment_to_perfilFragment"
+            app:destination="@id/perfilFragment" />
     </fragment>
 
 

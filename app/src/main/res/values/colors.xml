@@ -32,4 +32,7 @@
     <color name="detalleBtn">#000000</color>
     <color name="fondodetalle">#F8F5F5</color>
     <color name="itemPersoPerfil">#CFCACA</color>
+
+
+    <color name="editText">#616161</color>
 </resources>
