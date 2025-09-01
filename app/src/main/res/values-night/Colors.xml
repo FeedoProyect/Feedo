@@ -13,4 +13,7 @@
     <color name="fondo_buscador_color">#686767</color>
 
     <color name="color_boton_welcome">#4B4949</color>
+    <color name="dark_gray">#C7BBBB</color>
+    <color name="fondodetalle">#1E1B1F</color>
+    <color name="detalleBtn">#FFAC00</color>
 </resources>

@@ -35,56 +35,62 @@ class DetalleRecetaFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-
         binding.viewPage2Detalle.adapter = DetallePagerAdapter(this, arrayListOf(), arrayListOf())
         mediator = TabLayoutMediator(binding.tabLayoutDetalle, binding.viewPage2Detalle) { tab, pos ->
             tab.text = if (pos == 0) "Ingredientes" else "Preparación"
         }.also { it.attach() }
 
-
         viewModel.load(args.recetaId)
-
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect { state ->
                     when (state) {
-                        is DetalleRecetaState.Loading -> {
-                            binding.progressBarDetalle.isVisible = true
-                        }
-                        is DetalleRecetaState.Error -> {
-                            binding.progressBarDetalle.isVisible = false
-                            binding.tvTituloReceta.text = "Ocurrió un error "
-                            binding.ivReceta.setImageDrawable(null)
-                        }
-                        is DetalleRecetaState.Success -> {
-                            binding.progressBarDetalle.isVisible = false
-
-                            val receta = state.receta
-
-
-                            binding.tvTituloReceta.text = receta.titulo
-                            Glide.with(this@DetalleRecetaFragment)
-                                .load(receta.imagen)
-                                .into(binding.ivReceta)
-
-
-                            binding.viewPage2Detalle.adapter = DetallePagerAdapter(
-                                this@DetalleRecetaFragment,
-                                ArrayList(receta.ingredientes),
-                                ArrayList(receta.pasos)
-                            )
-
-
-                            mediator?.detach()
-                            mediator = TabLayoutMediator(binding.tabLayoutDetalle, binding.viewPage2Detalle) { tab, pos ->
-                                tab.text = if (pos == 0) "Ingredientes" else "Instrucciones"
-                            }.also { it.attach() }
-                        }
+                        is DetalleRecetaState.Loading -> loadingState()
+                        is DetalleRecetaState.Error -> errorState()
+                        is DetalleRecetaState.Success -> successState(state)
                     }
                 }
             }
         }
+    }
+
+    private fun loadingState() {
+        binding.progressBarDetalle.isVisible = true
+        binding.cardDetalleReceta.isVisible = false
+        binding.ivReceta.isVisible = false
+    }
+
+    private fun errorState() {
+        binding.progressBarDetalle.isVisible = false
+        binding.cardDetalleReceta.isVisible = true
+        binding.ivReceta.isVisible = true
+        binding.tvTituloReceta.text = "Ocurrió un error"
+        binding.ivReceta.setImageDrawable(null)
+    }
+
+    private fun successState(state: DetalleRecetaState.Success) {
+        val receta = state.receta
+
+        binding.progressBarDetalle.isVisible = false
+        binding.cardDetalleReceta.isVisible = true
+        binding.ivReceta.isVisible = true
+
+        binding.tvTituloReceta.text = receta.titulo
+        Glide.with(this)
+            .load(receta.imagen)
+            .into(binding.ivReceta)
+
+        binding.viewPage2Detalle.adapter = DetallePagerAdapter(
+            this,
+            ArrayList(receta.ingredientes),
+            ArrayList(receta.pasos)
+        )
+
+        mediator?.detach()
+        mediator = TabLayoutMediator(binding.tabLayoutDetalle, binding.viewPage2Detalle) { tab, pos ->
+            tab.text = if (pos == 0) "Ingredientes" else "Instrucciones"
+        }.also { it.attach() }
     }
 
     override fun onDestroyView() {
@@ -103,3 +109,4 @@ class DetalleRecetaFragment : Fragment() {
         return binding.root
     }
 }
+
