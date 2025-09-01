@@ -1,21 +1,12 @@
 package com.benjamin.proyectofeedo.pantallasPrincipales.data.repositoriosImpl
 
-import android.content.Context
-import android.net.Uri
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.ComidasFavoritosApiService
-import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.AddRecetaRequest
-import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasModel
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosRequestModel
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.AddComidaRepository
-import com.google.gson.internal.bind.TypeAdapters.UUID
-import io.github.jan.supabase.SupabaseClient
-import io.github.jan.supabase.storage.storage
 import javax.inject.Inject
 
 class AddComidaRepositoryImpl @Inject constructor(
     private val favoritosApiService: ComidasFavoritosApiService,
-    private val context: Context,
-    private val supabaseClient: SupabaseClient,
 
 ) : AddComidaRepository {
 

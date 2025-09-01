@@ -100,6 +100,7 @@
                 app:tabIndicatorAnimationMode="elastic"
                 app:tabTextColor="@color/color_text_tabs_perfil"
                 app:tabSelectedTextColor="@color/white"
+                android:background="@android:color/transparent"
                 app:tabIndicatorColor="@null"
                 app:tabIndicator="@drawable/tab_indicator_perfil"
                 style="@style/CustomTabLayout"

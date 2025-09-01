@@ -11,7 +11,7 @@
         android:layout_gravity="center"
         android:fontFamily="@font/balo_thambi"
         android:layout_marginHorizontal="30dp"
-        android:text="Proximamente se podra agregar los ingredientes..."
+        android:text="Pronto se podra agregar los ingredientes..."
         android:textSize="35sp"/>
 
 </FrameLayout>

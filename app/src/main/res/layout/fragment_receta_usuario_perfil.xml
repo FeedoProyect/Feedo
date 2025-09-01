@@ -3,8 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pink"
     tools:context=".pantallasPrincipales.UI.feedoPerfil.subFragmentTabLayout.RecetaUsuarioFragment.RecetaUsuarioPerfilFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/balo_thambi"
+        android:layout_marginHorizontal="30dp"
+        android:text="Pronto se veran las comidas que el usuario agrego..."
+        android:textSize="35sp"/>
 
 
 </LinearLayout>
