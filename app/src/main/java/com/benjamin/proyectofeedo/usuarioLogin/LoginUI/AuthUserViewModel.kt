@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.AuthRepository
 import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.modelUser.UserModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,10 +14,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.time.ExperimentalTime
 
 @HiltViewModel
 class AuthUserViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val supabaseClient: SupabaseClient
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<AuthState>(AuthState.Idle)
@@ -79,5 +83,11 @@ class AuthUserViewModel @Inject constructor(
                 AuthState.Error("No se pudo cerrar sesión")
             }
         }
+    }
+
+    @OptIn(ExperimentalTime::class)
+    fun checkIfEmailVerified(): Boolean {
+        val user = supabaseClient.auth.currentUserOrNull()
+        return user?.emailConfirmedAt != null
     }
 }

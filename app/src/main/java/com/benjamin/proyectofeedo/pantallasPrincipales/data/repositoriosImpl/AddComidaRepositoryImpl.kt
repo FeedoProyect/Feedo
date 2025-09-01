@@ -22,4 +22,18 @@ class AddComidaRepositoryImpl @Inject constructor(
             Result.failure(e) // 🚨 error (timeout, 400, etc.)
         }
     }
+
+    override suspend fun deleteFavorito(usuarioId: String, recetaId: Int): Result<Unit> {
+        return try {
+            val response = favoritosApiService.deleteFavorito("eq.$usuarioId", "eq.$recetaId")
+            if (response.isSuccessful) {
+                Result.success(Unit)
+            } else {
+                val error = response.errorBody()?.string()
+                Result.failure(Exception("Error al eliminar favorito: ${response.code()} - $error"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

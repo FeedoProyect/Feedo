@@ -10,4 +10,8 @@ class AddFavoritosUseCase @Inject constructor(
     suspend operator fun invoke(favoritos: FavoritosRequestModel): Result<Unit>{
         return favoritosRepository.addFavorito(favoritos)
     }
+
+    suspend operator fun invoke(usuarioId: String, recetaId: Int): Result<Unit>{
+        return favoritosRepository.deleteFavorito(usuarioId, recetaId)
+    }
 }

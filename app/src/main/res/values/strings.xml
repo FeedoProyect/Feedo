@@ -86,6 +86,7 @@
     <string name="register_bottom_registrarse">Registrarse</string>
     <string name="register_yaTengoCuenta">Ya tienes una cuenta?</string>
     <string name="register_iniciarSesion">Inicie Sesión</string>
+    <string name="validacion_account">Te enviamos un correo de verificación. Valida tu cuenta para continuar.</string>
 
 
     <!-- Pantalla de setting -->
