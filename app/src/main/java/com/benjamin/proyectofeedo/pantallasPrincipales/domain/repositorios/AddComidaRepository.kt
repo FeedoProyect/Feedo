@@ -5,5 +5,5 @@ import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosReq
 interface AddComidaRepository {
 
     suspend fun addFavorito(favoritos: FavoritosRequestModel): Result<Unit>
-    suspend fun  deleteFavorito(usuarioId: String, recetaId: Int): Result<Unit>
+    suspend fun deleteFavorito(usuarioId: String, recetaId: Int): Result<Unit>
 }
