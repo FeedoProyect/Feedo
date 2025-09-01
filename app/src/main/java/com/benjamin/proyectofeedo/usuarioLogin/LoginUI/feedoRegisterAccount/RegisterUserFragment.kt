@@ -24,6 +24,7 @@ class RegisterUserFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val authUserViewModel by viewModels<AuthUserViewModel>()
+    private var hasNavigatedToValidation = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,10 +67,12 @@ class RegisterUserFragment : Fragment() {
         binding.botonRegistrado.isEnabled = true
         Toast.makeText(requireContext(), "Registro exitoso: ${success.user.email}", Toast.LENGTH_SHORT).show()
 
-        // Redirigir a la pantalla principal (Home)
-        findNavController().navigate(
-            RegisterUserFragmentDirections.actionRegisterUserFragmentToLoginUserFragment()
-        )
+        if (!hasNavigatedToValidation) {
+            hasNavigatedToValidation = true
+            findNavController().navigate(
+                RegisterUserFragmentDirections.actionRegisterUserFragmentToLoginUserFragment()
+            )
+        }
     }
 
     private fun errorState(error: AuthState.Error) {
@@ -99,9 +102,7 @@ class RegisterUserFragment : Fragment() {
         }
 
         binding.tvInicieSesion.setOnClickListener {
-            findNavController().navigate(
-                RegisterUserFragmentDirections.actionRegisterUserFragmentToLoginUserFragment()
-            )
+            findNavController().popBackStack()
         }
     }
 

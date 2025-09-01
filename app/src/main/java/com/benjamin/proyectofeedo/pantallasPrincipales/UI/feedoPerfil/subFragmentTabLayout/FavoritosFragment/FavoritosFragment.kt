@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -54,7 +55,15 @@ class FavoritosFragment : Fragment() {
 
 
     private fun initList() {
-        adapterFav = ListaFavoritosAdapter()
+        adapterFav = ListaFavoritosAdapter(mutableListOf()) { comida ->
+            val userId = supabaseClient.auth.currentUserOrNull()?.id
+            if (userId != null) {
+                favoritoViewModel.deleteComidaFavorito(userId, comida.id)
+                adapterFav.removeItem(comida)
+            }
+            messageDeleteFav()
+        }
+
         binding.rvSeccionFavoritosPerfil.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = adapterFav
@@ -85,6 +94,10 @@ class FavoritosFragment : Fragment() {
 
     private fun successState(success: FavoritosState.Success) {
         adapterFav.updateListFavoritos(success.recetas?: emptyList())
+    }
+
+    private fun messageDeleteFav(){
+        Toast.makeText(requireContext(), "Se ha eliminado de favoritos", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateView(

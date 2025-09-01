@@ -11,6 +11,7 @@
     <color name="color_hint_buscador">#DFDADA</color>
     <color name="icon_piquito_color">#FFFFFF</color>
     <color name="fondo_buscador_color">#686767</color>
+    <color name="color_background_cardview">#383636</color>
 
     <color name="color_boton_welcome">#4B4949</color>
 </resources>

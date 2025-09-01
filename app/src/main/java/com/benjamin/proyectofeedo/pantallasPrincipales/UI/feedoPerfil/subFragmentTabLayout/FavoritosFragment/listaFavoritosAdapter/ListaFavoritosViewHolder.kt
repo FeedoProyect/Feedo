@@ -8,9 +8,11 @@ import com.squareup.picasso.Picasso
 class ListaFavoritosViewHolder(private val binding: ItemFavoritosPerfilBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun render(comidasModel: ComidasModel){
+    fun render(comidasModel: ComidasModel, onDeleteClick: (ComidasModel) -> Unit){
         binding.tvComidaFavoritos.text = comidasModel.titulo
 
         Picasso.get().load(comidasModel.imagen).into(binding.imgComidaFavoritos)
+
+        binding.imgDeleteFavComida.setOnClickListener { onDeleteClick(comidasModel) }
     }
 }

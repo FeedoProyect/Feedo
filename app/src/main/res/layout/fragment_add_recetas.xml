@@ -38,6 +38,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/color_background_cardview"
             android:padding="16dp">
 
             <!-- Título -->
@@ -45,7 +46,7 @@
                 android:id="@+id/tvAgregarTituloReceta"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="26dp"
                 android:fontFamily="@font/balo_thambi"
                 android:text="@string/textview_tituloAgregarReceta"
                 android:textSize="25sp"
