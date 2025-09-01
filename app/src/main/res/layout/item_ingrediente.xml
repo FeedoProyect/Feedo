@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:backgroundTint="#F6F6F6"
-    app:strokeColor="@color/white"
+    android:backgroundTint="@color/color_boton_welcome"
+    app:strokeColor="@color/color_boton_welcome"
     app:cardCornerRadius="16dp"
     app:cardElevation="2dp">
 
@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="18dp">
+        android:padding="14dp">
 
-        <!-- Título -->
+
         <TextView
             android:id="@+id/txtTituloIngredientes"
             android:layout_width="wrap_content"
@@ -22,15 +22,14 @@
             android:text="Ingredientes"
             android:textStyle="bold"
             android:textSize="18sp"
-
-            android:textColor="@color/black"
+            android:textColor="@color/text_de_items"
             android:layout_marginBottom="12dp"/>
 
-        <!-- Lista -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerIngredientes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
             android:clipToPadding="false"
             android:paddingBottom="8dp"/>
 

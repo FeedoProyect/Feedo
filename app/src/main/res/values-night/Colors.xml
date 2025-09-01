@@ -14,4 +14,9 @@
     <color name="color_background_cardview">#383636</color>
 
     <color name="color_boton_welcome">#4B4949</color>
+    <color name="dark_gray">#DDDADA</color>
+    <color name="fondodetalle">#1E1B1F</color>
+    <color name="detalleBtn">#FFAC00</color>
+    <color name="editText">#2F2E2E</color>
+    <color name="itemPersoPerfil">#242323</color>
 </resources>

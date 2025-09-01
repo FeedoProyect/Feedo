@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.ViewPager2
 import com.benjamin.proyectofeedo.databinding.FragmentPerfilBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoPerfil.subFragmentTabLayout.FragmentPageAdapter
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,11 +33,21 @@ class PerfilFragment : Fragment() {
 
     private fun initListener() {
         navSetting()
+        navEditarPerfil()
     }
 
     private fun navSetting() {
         binding.imgSettings.setOnClickListener {
             startRotationAnimation(binding.imgSettings)
+        }
+    }
+
+    private fun navEditarPerfil() {
+
+        binding.btnIrPerfil.setOnClickListener {
+            findNavController().navigate(
+                PerfilFragmentDirections.actionPerfilFragmentToEditarPerfilFragment()
+            )
         }
     }
 
