@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -21,7 +22,10 @@ import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoMenu.listaDeCatal
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.CatalogoInfo
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.CatalogosModel
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MenuFragment : Fragment() {
@@ -30,6 +34,9 @@ class MenuFragment : Fragment() {
 
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var supabaseClient: SupabaseClient
 
     private lateinit var listaCatalogosAdapter: ListaCatalogosAdapter
 
@@ -54,21 +61,51 @@ class MenuFragment : Fragment() {
 
     private fun initAdapters() {
         // 🔥 Paso el onItemClick a cada adapter
-        listaClasicoArgentinoAdapter = ListaClasicoArgentinoAdapter { receta ->
-            navigateToDetalle(receta.id)
-        }
-        listaEspecialMateAdapter = ListaEspecialMateAdapter { receta ->
-            navigateToDetalle(receta.id)
-        }
-        listaModoSaludableAdapter = ListaModoSaludableAdapter { receta ->
-            navigateToDetalle(receta.id)
-        }
-        listaExpresAdapter = ListaExpresAdapter { receta ->
-            navigateToDetalle(receta.id)
-        }
-        listaModoAhorroAdapter = ListaModoAhorroAdapter { receta ->
-            navigateToDetalle(receta.id)
-        }
+        listaClasicoArgentinoAdapter = ListaClasicoArgentinoAdapter(
+            auth = supabaseClient.auth,
+            onItemClick = { receta ->
+                navigateToDetalle(receta.id)
+            }, onItemSelectedFavs = { favoritos ->
+                feedoMenuViewModel.addComidasFavoritos(favoritos)
+                messageFavs()
+            }
+        )
+        listaEspecialMateAdapter = ListaEspecialMateAdapter(
+            auth = supabaseClient.auth,
+            onItemClick = { receta ->
+                navigateToDetalle(receta.id)
+            }, onItemSelectedFav = { favoritos ->
+                feedoMenuViewModel.addComidasFavoritos(favoritos)
+                messageFavs()
+            }
+        )
+        listaModoSaludableAdapter = ListaModoSaludableAdapter(
+            auth = supabaseClient.auth,
+            onItemClick = { receta ->
+                navigateToDetalle(receta.id)
+            }, onItemSelectedFavs = { favoritos ->
+                feedoMenuViewModel.addComidasFavoritos(favoritos)
+                messageFavs()
+            }
+        )
+        listaExpresAdapter = ListaExpresAdapter(
+            auth = supabaseClient.auth,
+            onItemClick = { receta ->
+                navigateToDetalle(receta.id)
+            }, onItemSelectedFavs = { favoritos ->
+                feedoMenuViewModel.addComidasFavoritos(favoritos)
+                messageFavs()
+            }
+        )
+        listaModoAhorroAdapter = ListaModoAhorroAdapter(
+            auth = supabaseClient.auth,
+            onItemClick = { receta ->
+                navigateToDetalle(receta.id)
+            }, onItemSelectedFavs = { favoritos ->
+                feedoMenuViewModel.addComidasFavoritos(favoritos)
+                messageFavs()
+            }
+        )
 
         binding.rvClasicosArgentinos.adapter = listaClasicoArgentinoAdapter
         binding.rvIdealParaElMate.adapter = listaEspecialMateAdapter
@@ -94,9 +131,18 @@ class MenuFragment : Fragment() {
                                 stateMap.forEach { (seccionId, state) ->
                                     if (state is FeedoMenuState.Success) {
                                         when (seccionId) {
-                                            1 -> listaClasicoArgentinoAdapter.updateListClasicoArgentino(state.recetas)
-                                            2 -> listaEspecialMateAdapter.updateListEspecialMate(state.recetas)
-                                            3 -> listaModoSaludableAdapter.updateListModoSaludable(state.recetas)
+                                            1 -> listaClasicoArgentinoAdapter.updateListClasicoArgentino(
+                                                state.recetas
+                                            )
+
+                                            2 -> listaEspecialMateAdapter.updateListEspecialMate(
+                                                state.recetas
+                                            )
+
+                                            3 -> listaModoSaludableAdapter.updateListModoSaludable(
+                                                state.recetas
+                                            )
+
                                             4 -> listaExpresAdapter.updateListExpres(state.recetas)
                                             5 -> listaModoAhorroAdapter.updateListModoAhorro(state.recetas)
                                         }
@@ -195,6 +241,11 @@ class MenuFragment : Fragment() {
     ): View {
         _binding = FragmentMenuBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+    //mensaje de agrego a favoritos
+    private fun messageFavs() {
+        Toast.makeText(requireContext(), "Se a añadido a favoritos", Toast.LENGTH_SHORT).show()
     }
 
     // para navegar al detalle

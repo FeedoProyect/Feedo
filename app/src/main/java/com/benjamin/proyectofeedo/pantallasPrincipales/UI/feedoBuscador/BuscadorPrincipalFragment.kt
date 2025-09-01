@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -20,17 +21,23 @@ import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoBuscador.Buscador
 import com.benjamin.proyectofeedo.databinding.FragmentBuscadorPrincipalBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasModel
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class BuscadorPrincipalFragment : Fragment() {
 
     private var _binding: FragmentBuscadorPrincipalBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var supabaseClient: SupabaseClient
 
     private val buscadorPrincipalViewModel by viewModels<BuscadorPrincipalViewModel>()
 
@@ -57,10 +64,14 @@ class BuscadorPrincipalFragment : Fragment() {
 
     private fun initList() {
         adapterBuscador = BuscadorPrincipalAdapter(
-            onItemClick = { comida -> // 👈 lo nuevo
+            auth = supabaseClient.auth,
+            onItemClick = { comida ->
                 val action = BuscadorPrincipalFragmentDirections
                     .actionBuscadorPrincipalFragmentToDetalleRecetaFragment(comida.id)
                 findNavController().navigate(action)
+            }, onItemSelectedFavs = { favoritos ->
+                buscadorPrincipalViewModel.addComidasFavoritos(favoritos)
+                messageFav()
             }
         )
 
@@ -149,6 +160,9 @@ class BuscadorPrincipalFragment : Fragment() {
         }
     }
 
+    private fun messageFav(){
+        Toast.makeText(requireContext(), "Se a añadido a favoritos", Toast.LENGTH_SHORT).show()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

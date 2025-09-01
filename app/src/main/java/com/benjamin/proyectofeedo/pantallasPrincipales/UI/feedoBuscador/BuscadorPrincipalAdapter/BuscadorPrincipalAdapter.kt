@@ -5,10 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.databinding.ItemComidaBuscadorBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasModel
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosRequestModel
+import io.github.jan.supabase.auth.Auth
 
 class BuscadorPrincipalAdapter(
+    private val auth: Auth,
     private var listComidaBuscador: List<ComidasModel> = emptyList(),
-    private val onItemClick: (ComidasModel) -> Unit // 👈 agregado
+    private val onItemClick: (ComidasModel) -> Unit,
+    private val onItemSelectedFavs: (FavoritosRequestModel) -> Unit
 ) : RecyclerView.Adapter<BuscadorPrincipalViewHolder>() {
 
     fun updateList(list: List<ComidasModel>) {
@@ -33,7 +37,7 @@ class BuscadorPrincipalAdapter(
         position: Int
     ) {
         val item = listComidaBuscador[position]
-        holder.render(item)
+        holder.render(item, onItemSelectedFavs, auth)
 
         // 👇 agregado
         holder.itemView.setOnClickListener {

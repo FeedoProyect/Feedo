@@ -23,6 +23,8 @@
     <color name="fondo_buscador_color">#F2F2F2</color>
     <color name="color_text_tabs_perfil">#FFAC00</color>
 
+    <color name="color_boton_welcome">#FFFFFF</color>
+
 
     <color name="light_gray">#E0E0E0</color>  <!-- gris clarito, para bordes -->
     <color name="dark_gray">#616161</color>   <!-- gris oscuro, para texto secundario -->

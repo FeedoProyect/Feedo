@@ -5,10 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.databinding.ItemEspecialMateBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasSeccionMenuModel
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosRequestModel
+import io.github.jan.supabase.auth.Auth
 
 class ListaEspecialMateAdapter(
+    private val auth: Auth,
     private var listaEspecialMate: List<ComidasSeccionMenuModel> = emptyList(),
-    private val onItemClick: (ComidasSeccionMenuModel) -> Unit
+    private val onItemClick: (ComidasSeccionMenuModel) -> Unit,
+    private val onItemSelectedFav: (FavoritosRequestModel) -> Unit
 ) : RecyclerView.Adapter<ListaEspecialMateViewHolder>() {
 
     fun updateListEspecialMate(list: List<ComidasSeccionMenuModel>) {
@@ -30,7 +34,7 @@ class ListaEspecialMateAdapter(
 
     override fun onBindViewHolder(holder: ListaEspecialMateViewHolder, position: Int) {
         val item = listaEspecialMate[position]
-        holder.render(item)
+        holder.render(item, onItemSelectedFav, auth)
 
         // 👇 click manejado acá
         holder.itemView.setOnClickListener {

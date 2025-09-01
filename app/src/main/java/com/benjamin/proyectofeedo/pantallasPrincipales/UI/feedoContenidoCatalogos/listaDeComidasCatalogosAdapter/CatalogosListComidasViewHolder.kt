@@ -6,7 +6,6 @@ import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasModel
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosRequestModel
 import com.squareup.picasso.Picasso
 import io.github.jan.supabase.auth.Auth
-import java.util.UUID
 
 class CatalogosListComidasViewHolder(private val binding: ItemComidasCatalogosBinding) :
     RecyclerView.ViewHolder(binding.root) {

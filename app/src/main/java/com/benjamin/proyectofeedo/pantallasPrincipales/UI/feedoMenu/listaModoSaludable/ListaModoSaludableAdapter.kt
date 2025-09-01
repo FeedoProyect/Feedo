@@ -5,10 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.databinding.ItemModoSaludableBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasSeccionMenuModel
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosRequestModel
+import io.github.jan.supabase.auth.Auth
 
 class ListaModoSaludableAdapter(
+    private val auth: Auth,
     private var listaModoSaludable: List<ComidasSeccionMenuModel> = emptyList(),
-    private val onItemClick: (ComidasSeccionMenuModel) -> Unit
+    private val onItemClick: (ComidasSeccionMenuModel) -> Unit,
+    private val onItemSelectedFavs: (FavoritosRequestModel) -> Unit
 ) : RecyclerView.Adapter<ListaModoSaludableViewHolder>() {
 
     fun updateListModoSaludable(list: List<ComidasSeccionMenuModel>) {
@@ -29,8 +33,9 @@ class ListaModoSaludableAdapter(
     }
 
     override fun onBindViewHolder(holder: ListaModoSaludableViewHolder, position: Int) {
+
         val item = listaModoSaludable[position]
-        holder.render(item)
+        holder.render(item, onItemSelectedFavs, auth)
 
         // 👇 click desde el adapter
         holder.itemView.setOnClickListener {

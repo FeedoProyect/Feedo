@@ -5,10 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.databinding.ItemClasicoArgentinoBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidasSeccionMenuModel
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosRequestModel
+import io.github.jan.supabase.auth.Auth
 
 class ListaClasicoArgentinoAdapter(
+    private val auth: Auth,
     private var listClasicoArgentino: List<ComidasSeccionMenuModel> = emptyList(),
-    private val onItemClick: (ComidasSeccionMenuModel) -> Unit
+    private val onItemClick: (ComidasSeccionMenuModel) -> Unit,
+    private val onItemSelectedFavs: (FavoritosRequestModel) -> Unit
 ) : RecyclerView.Adapter<ListaClasicoArgentinoViewHolder>() {
 
     fun updateListClasicoArgentino(list: List<ComidasSeccionMenuModel>) {
@@ -30,7 +34,7 @@ class ListaClasicoArgentinoAdapter(
 
     override fun onBindViewHolder(holder: ListaClasicoArgentinoViewHolder, position: Int) {
         val item = listClasicoArgentino[position]
-        holder.render(item)
+        holder.render(item, onItemSelectedFavs, auth)
 
         // 👇 Click lo manejamos aquí
         holder.itemView.setOnClickListener {

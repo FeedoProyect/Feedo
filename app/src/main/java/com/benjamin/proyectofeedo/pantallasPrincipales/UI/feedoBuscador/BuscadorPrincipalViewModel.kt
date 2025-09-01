@@ -1,8 +1,11 @@
 package com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoBuscador
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoContenidoCatalogos.CatalogosListComidasState
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosRequestModel
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.useCase.AddFavoritosUseCase
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.useCase.GetComidaBuscadorPrincipalUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BuscadorPrincipalViewModel @Inject constructor(
-    private val getComidaBuscadorPrincipalUseCase: GetComidaBuscadorPrincipalUseCase
+    private val getComidaBuscadorPrincipalUseCase: GetComidaBuscadorPrincipalUseCase,
+    private val addFavoritosUseCase: AddFavoritosUseCase
 ) : ViewModel() {
 
     private var _state = MutableStateFlow<BuscadorPrincipalState>(BuscadorPrincipalState.Loading)
@@ -34,6 +38,18 @@ class BuscadorPrincipalViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 _state.value = BuscadorPrincipalState.Error("Ha ocurrido un error, intentelo más tarde")
+            }
+        }
+    }
+
+    fun addComidasFavoritos(favoritos: FavoritosRequestModel) {
+        viewModelScope.launch {
+            val result = addFavoritosUseCase(favoritos)
+
+            if (result.isSuccess) {
+                Log.d("Favoritos", "Agregado OK")
+            } else {
+                Log.e("Favoritos", "Error: ${result.exceptionOrNull()?.message}")
             }
         }
     }

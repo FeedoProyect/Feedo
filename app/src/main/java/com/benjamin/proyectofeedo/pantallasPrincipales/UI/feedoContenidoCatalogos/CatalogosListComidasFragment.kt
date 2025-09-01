@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -105,10 +106,14 @@ class CatalogosListComidasFragment : Fragment() {
     private fun initList() {
         // ✅ Adapter para la lista destacada con onItemClick
         adapterComidaDestacadaCatalogo = ComidaDestacadaCatalogoAdapter(
+            auth = supabaseClient.auth,
             onItemClick = { comidaDestacada ->
                 val action = CatalogosListComidasFragmentDirections
                     .actionCatalogosListComidasFragmentToDetalleRecetaFragment(comidaDestacada.id)
                 findNavController().navigate(action)
+            }, onItemSelectedFav =  { favoritos ->
+                catalogosListComidasViewModel.addComidasFavoritos(favoritos)
+                addFavMessage()
             }
         )
 
@@ -122,6 +127,7 @@ class CatalogosListComidasFragment : Fragment() {
 
             }, onItemSelectedFav = { favoritos ->
                 catalogosListComidasViewModel.addComidasFavoritos(favoritos)
+                addFavMessage()
             },
         )
     }
@@ -174,6 +180,10 @@ class CatalogosListComidasFragment : Fragment() {
 
     private fun tituloDeCatalogo(catalogosModel: CatalogosModel) {
         binding.TituloCatalogo.text = catalogosModel.titulo
+    }
+
+    private fun addFavMessage(){
+        Toast.makeText(requireContext(), "Se a añadido a favoritos", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateView(

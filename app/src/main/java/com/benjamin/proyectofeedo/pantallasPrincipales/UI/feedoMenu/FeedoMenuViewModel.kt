@@ -1,9 +1,12 @@
 package com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoMenu
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.providers.CatalogoProvider
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.CatalogoInfo
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosRequestModel
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.useCase.AddFavoritosUseCase
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.useCase.GetComidaSeccionMenuUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class FeedoMenuViewModel @Inject constructor(
     catalogoProvider: CatalogoProvider,
-    private val getComidaSeccionMenuUseCase: GetComidaSeccionMenuUseCase
+    private val getComidaSeccionMenuUseCase: GetComidaSeccionMenuUseCase,
+    private val addFavoritosUseCase: AddFavoritosUseCase
 ): ViewModel() {
 
     private var _catalogos = MutableStateFlow<List<CatalogoInfo>>(emptyList())
@@ -49,6 +53,18 @@ class FeedoMenuViewModel @Inject constructor(
                 }
             }
 
+        }
+    }
+
+    fun addComidasFavoritos(favoritos: FavoritosRequestModel) {
+        viewModelScope.launch {
+            val result = addFavoritosUseCase(favoritos)
+
+            if (result.isSuccess) {
+                Log.d("Favoritos", "Agregado OK")
+            } else {
+                Log.e("Favoritos", "Error: ${result.exceptionOrNull()?.message}")
+            }
         }
     }
 }

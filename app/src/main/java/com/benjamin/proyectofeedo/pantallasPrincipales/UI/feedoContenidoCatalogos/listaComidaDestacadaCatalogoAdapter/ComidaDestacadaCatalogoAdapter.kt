@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.databinding.ItemComidaDestacadaCatalogoBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.ComidaDestacadaCatalogoModel
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosRequestModel
+import io.github.jan.supabase.auth.Auth
 
 class ComidaDestacadaCatalogoAdapter(
-
+    private val auth: Auth,
     private var listComidaDestacadaCatalogo: List<ComidaDestacadaCatalogoModel> = emptyList(),
-
-
-    private val onItemClick: ((ComidaDestacadaCatalogoModel) -> Unit)? = null
+    private val onItemClick: ((ComidaDestacadaCatalogoModel) -> Unit)? = null,
+    private val onItemSelectedFav: (FavoritosRequestModel) -> Unit
 ) : RecyclerView.Adapter<ComidaDestacadaCatalogoViewHolder>() {
 
     fun updateListComidaDestacadaCatalogo(list: List<ComidaDestacadaCatalogoModel>){
@@ -32,9 +33,9 @@ class ComidaDestacadaCatalogoAdapter(
         position: Int
     ) {
         val comida = listComidaDestacadaCatalogo[position]
-        holder.render(comida)
+        holder.render(comida, onItemSelectedFav, auth)
 
-        // 👇 AGREGA ESTO: disparar el click
+
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(comida)
         }

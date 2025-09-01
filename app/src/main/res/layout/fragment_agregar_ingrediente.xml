@@ -9,8 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginHorizontal="20dp"
+        android:fontFamily="@font/balo_thambi"
+        android:layout_marginHorizontal="30dp"
         android:text="Proximamente se podra agregar los ingredientes..."
-        android:textSize="40sp"/>
+        android:textSize="35sp"/>
 
 </FrameLayout>
