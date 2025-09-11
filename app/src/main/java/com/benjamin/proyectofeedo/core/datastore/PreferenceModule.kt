@@ -1,24 +1,30 @@
-package com.benjamin.proyectofeedo.settingsFeedo.data.Local
+package com.benjamin.proyectofeedo.core.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.benjamin.proyectofeedo.settingsFeedo.data.PreferenceRepositoryImpl
-import com.benjamin.proyectofeedo.settingsFeedo.domain.PreferenceRepository
+import com.benjamin.proyectofeedo.core.datastore.Local.DataStorePreferences
+import com.benjamin.proyectofeedo.settingsFeedo.data.ThemeRepositoryImpl
+import com.benjamin.proyectofeedo.settingsFeedo.domain.ThemeRepository
+import com.benjamin.proyectofeedo.usuarioLogin.LoginData.AuthRepositoryImpl
+import com.benjamin.proyectofeedo.usuarioLogin.LoginData.SessionRepositoryImpl
+import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.AuthRepository
+import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.SessionRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.github.jan.supabase.auth.Auth
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object PreferenceModule {
 
-    private const val PREFERENCES_NAME = "settings_prefs"
+    private const val PREFERENCES_NAME = "app_prefs"
 
     @Provides
     @Singleton
@@ -40,9 +46,17 @@ object PreferenceModule {
 
     @Provides
     @Singleton
-    fun providePreferenceRepository(
+    fun provideThemeRepository(
         dataStorePreferences: DataStorePreferences
-    ): PreferenceRepository {
-        return PreferenceRepositoryImpl(dataStorePreferences)
+    ): ThemeRepository {
+        return ThemeRepositoryImpl(dataStorePreferences)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSessionRepository(
+        dataStorePreference: DataStorePreferences
+    ) : SessionRepository {
+        return SessionRepositoryImpl(dataStorePreference)
     }
 }

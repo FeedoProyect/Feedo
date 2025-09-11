@@ -7,5 +7,5 @@ interface AuthRepository {
     suspend fun register(email: String, password: String): UserModel?
     suspend fun login(email: String, password: String): UserModel?
     suspend fun logout(): Boolean
-   // suspend fun loginWithGoogle(): UserModel?
 }
+// suspend fun loginWithGoogle(): UserModel?

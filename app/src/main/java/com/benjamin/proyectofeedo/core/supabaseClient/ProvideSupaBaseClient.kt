@@ -1,4 +1,4 @@
-package com.benjamin.proyectofeedo.usuarioLogin.LoginData.supabaseClient
+package com.benjamin.proyectofeedo.core.supabaseClient
 
 import com.benjamin.proyectofeedo.usuarioLogin.LoginData.AuthRepositoryImpl
 import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.AuthRepository

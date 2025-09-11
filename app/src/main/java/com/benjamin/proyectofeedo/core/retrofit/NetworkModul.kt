@@ -1,4 +1,4 @@
-package com.benjamin.proyectofeedo.core
+package com.benjamin.proyectofeedo.core.retrofit
 
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.ComidasApiService
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.ComidasFavoritosApiService

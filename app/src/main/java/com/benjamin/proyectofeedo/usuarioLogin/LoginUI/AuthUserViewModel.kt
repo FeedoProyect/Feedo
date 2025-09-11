@@ -3,6 +3,7 @@ package com.benjamin.proyectofeedo.usuarioLogin.LoginUI
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.AuthRepository
+import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.SessionRepository
 import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.modelUser.UserModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.jan.supabase.SupabaseClient
@@ -19,7 +20,8 @@ import kotlin.time.ExperimentalTime
 @HiltViewModel
 class AuthUserViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-    private val supabaseClient: SupabaseClient
+    private val supabaseClient: SupabaseClient,
+    private val sessionRepository: SessionRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<AuthState>(AuthState.Idle)
@@ -60,10 +62,13 @@ class AuthUserViewModel @Inject constructor(
                 val user = withContext(Dispatchers.IO) {
                     authRepository.login(email, password)
                 }
-                _state.value = if (user != null) {
-                    AuthState.Success(user)
+                if (user != null) {
+                    // ✅ Guardar sesión localmente
+                    sessionRepository.saveUserUuid(user.id)
+
+                    _state.value = AuthState.Success(user)
                 } else {
-                    AuthState.Error("Credenciales inválidas")
+                    _state.value = AuthState.Error("Credenciales inválidas")
                 }
             } catch (e: Exception) {
                 _state.value = AuthState.Error(e.message ?: "Error desconocido")
@@ -77,10 +82,12 @@ class AuthUserViewModel @Inject constructor(
             val success = withContext(Dispatchers.IO) {
                 authRepository.logout()
             }
-            _state.value = if (success) {
-                AuthState.LoggedOut   // 👈 Podés crear un estado específico para logout
+            if (success) {
+                // 🔑 Limpiar también la sesión local
+                sessionRepository.clearUserUuid()
+                _state.value = AuthState.LoggedOut
             } else {
-                AuthState.Error("No se pudo cerrar sesión")
+                _state.value = AuthState.Error("No se pudo cerrar sesión")
             }
         }
     }
