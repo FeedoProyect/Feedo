@@ -82,12 +82,13 @@ class RegisterUserFragment : Fragment() {
 
     private fun initListener() {
         binding.botonRegistrado.setOnClickListener {
+            val userName = binding.etUsuario.text.toString().trim()
             val email = binding.etRegisterEmail.text.toString().trim()
             val password = binding.etRegisterContraseA.text.toString()
             val confirmPassword = binding.etConfirmarContraseA.text.toString()
 
             // Validaciones básicas
-            if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || userName.isEmpty()) {
                 Toast.makeText(requireContext(), "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -98,7 +99,7 @@ class RegisterUserFragment : Fragment() {
             }
 
             // Llamamos al ViewModel
-            authUserViewModel.register(email, password)
+            authUserViewModel.register(email, password, userName)
         }
 
         binding.tvInicieSesion.setOnClickListener {

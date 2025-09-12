@@ -6,11 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.benjamin.proyectofeedo.databinding.FragmentPerfilBinding
 import com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoPerfil.subFragmentTabLayout.FragmentPageAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PerfilFragment : Fragment() {
@@ -19,6 +24,8 @@ class PerfilFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: FragmentPageAdapter
+
+    private val perfilViewModel by viewModels<PerfilViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,6 +36,7 @@ class PerfilFragment : Fragment() {
     private fun initUI() {
         initTab()
         initListener()
+        initUserInfo()
     }
 
     private fun initListener() {
@@ -42,8 +50,17 @@ class PerfilFragment : Fragment() {
         }
     }
 
-    private fun navEditarPerfil() {
+    private fun initUserInfo() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                perfilViewModel.username.collect { username ->
+                    binding.tvNombre.text = username
+                }
+            }
+        }
+    }
 
+    private fun navEditarPerfil() {
         binding.btnIrPerfil.setOnClickListener {
             findNavController().navigate(
                 PerfilFragmentDirections.actionPerfilFragmentToEditarPerfilFragment()

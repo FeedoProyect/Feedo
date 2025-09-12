@@ -20,7 +20,6 @@ import kotlin.time.ExperimentalTime
 @HiltViewModel
 class AuthUserViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-    private val supabaseClient: SupabaseClient,
     private val sessionRepository: SessionRepository
 ) : ViewModel() {
 
@@ -41,11 +40,11 @@ class AuthUserViewModel @Inject constructor(
         _password.value = password
     }
 
-    fun register(email: String, password: String) {
+    fun register(email: String, password: String, username: String) {
         viewModelScope.launch {
             _state.value = AuthState.Loading
             val user = withContext(Dispatchers.IO) {
-                authRepository.register(email, password)
+                authRepository.register(email, password, username)
             }
             _state.value = if (user != null) {
                 AuthState.Success(user)
@@ -92,9 +91,5 @@ class AuthUserViewModel @Inject constructor(
         }
     }
 
-    @OptIn(ExperimentalTime::class)
-    fun checkIfEmailVerified(): Boolean {
-        val user = supabaseClient.auth.currentUserOrNull()
-        return user?.emailConfirmedAt != null
-    }
+
 }

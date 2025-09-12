@@ -1,14 +1,14 @@
 package com.benjamin.proyectofeedo.pantallasPrincipales.data.repositoriosImpl
 
-import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.ComidasFavoritosApiService
+import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.AddComidasApiService
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.FavoritosRequestModel
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.AddComidaRepository
 import javax.inject.Inject
 
 class AddComidaRepositoryImpl @Inject constructor(
-    private val favoritosApiService: ComidasFavoritosApiService,
+    private val favoritosApiService: AddComidasApiService,
 
-) : AddComidaRepository {
+    ) : AddComidaRepository {
 
     override suspend fun addFavorito(favoritos: FavoritosRequestModel): Result<Unit> {
         return try {

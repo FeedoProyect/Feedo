@@ -14,20 +14,20 @@ class AuthRepositoryImpl @Inject constructor(
     private val supabaseClient: SupabaseClient
 ) : AuthRepository {
 
-    override suspend fun register(email: String, password: String): UserModel? {
+    override suspend fun register(email: String, password: String, username: String): UserModel? {
         return try {
             val userInfo: UserInfo? = auth.signUpWith(Email) {
                 this.email = email
                 this.password = password
             }
 
-
             if (userInfo != null) {
                 // Inserción simple en tabla usuarios
                 supabaseClient.postgrest["usuarios2"].insert(
                     mapOf(
                         "id_usuario" to userInfo.id,
-                        "correo" to (userInfo.email ?: email)
+                        "correo" to (userInfo.email ?: email),
+                        "username" to username
                     )
                 )
 
@@ -41,7 +41,6 @@ class AuthRepositoryImpl @Inject constructor(
             null
         }
     }
-
 
     override suspend fun login(email: String, password: String): UserModel? {
         return try {

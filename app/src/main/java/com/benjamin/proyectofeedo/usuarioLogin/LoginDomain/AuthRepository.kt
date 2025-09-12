@@ -4,7 +4,7 @@ import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.modelUser.UserModel
 
 
 interface AuthRepository {
-    suspend fun register(email: String, password: String): UserModel?
+    suspend fun register(email: String, password: String, username: String): UserModel?
     suspend fun login(email: String, password: String): UserModel?
     suspend fun logout(): Boolean
 }

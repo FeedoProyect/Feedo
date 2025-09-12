@@ -1,12 +1,15 @@
 package com.benjamin.proyectofeedo.core.retrofit
 
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.ComidasApiService
-import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.ComidasFavoritosApiService
+import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.AddComidasApiService
+import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.UserInformationApiService
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.SupaBase.SupabaseAuthInterceptor
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.repositoriosImpl.AddComidaRepositoryImpl
 import com.benjamin.proyectofeedo.pantallasPrincipales.data.repositoriosImpl.RepositoryImpl
+import com.benjamin.proyectofeedo.pantallasPrincipales.data.repositoriosImpl.UserInformationRepositoryImpl
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.AddComidaRepository
 import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.Repository
+import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.UserInformationRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -52,12 +55,22 @@ object NetworkModul {
     }
 
     @Provides
-    fun provideComidasFavoritasApiService(retrofit: Retrofit): ComidasFavoritosApiService {
-        return retrofit.create(ComidasFavoritosApiService::class.java)
+    fun provideAddComidaApiService(retrofit: Retrofit): AddComidasApiService {
+        return retrofit.create(AddComidasApiService::class.java)
     }
 
     @Provides
-    fun provideFavoritosRepository(favoritosApiService: ComidasFavoritosApiService): AddComidaRepository {
-        return AddComidaRepositoryImpl(favoritosApiService)
+    fun provideAddComidaRepository(addComidas: AddComidasApiService): AddComidaRepository {
+        return AddComidaRepositoryImpl(addComidas)
+    }
+
+    @Provides
+    fun provideUserInformationApiService(retrofit: Retrofit): UserInformationApiService {
+        return retrofit.create(UserInformationApiService::class.java)
+    }
+
+    @Provides
+    fun provideUserInformationRepository(userInformation: UserInformationApiService): UserInformationRepository {
+        return UserInformationRepositoryImpl(userInformation)
     }
 }
