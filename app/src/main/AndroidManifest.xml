@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".pantallasPrincipales.UI.home.MainActivity"
+            android:name=".PantallasPrincipales.UI.home.MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize|stateHidden" />
     </application>

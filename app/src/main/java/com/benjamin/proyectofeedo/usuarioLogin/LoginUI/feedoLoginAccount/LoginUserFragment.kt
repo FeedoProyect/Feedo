@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.benjamin.proyectofeedo.pantallasPrincipales.UI.home.MainActivity
+import com.benjamin.proyectofeedo.PantallasPrincipales.UI.home.MainActivity
 import com.benjamin.proyectofeedo.databinding.FragmentLoginUserBinding
 import com.benjamin.proyectofeedo.usuarioLogin.LoginUI.AuthState
 import com.benjamin.proyectofeedo.usuarioLogin.LoginUI.AuthUserViewModel

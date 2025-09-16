@@ -1,15 +1,15 @@
 package com.benjamin.proyectofeedo.core.retrofit
 
-import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.ComidasApiService
-import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.AddComidasApiService
-import com.benjamin.proyectofeedo.pantallasPrincipales.data.Network.apiService.UserInformationApiService
-import com.benjamin.proyectofeedo.pantallasPrincipales.data.SupaBase.SupabaseAuthInterceptor
-import com.benjamin.proyectofeedo.pantallasPrincipales.data.repositoriosImpl.AddComidaRepositoryImpl
-import com.benjamin.proyectofeedo.pantallasPrincipales.data.repositoriosImpl.RepositoryImpl
-import com.benjamin.proyectofeedo.pantallasPrincipales.data.repositoriosImpl.UserInformationRepositoryImpl
-import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.AddComidaRepository
-import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.Repository
-import com.benjamin.proyectofeedo.pantallasPrincipales.domain.repositorios.UserInformationRepository
+import com.benjamin.proyectofeedo.PantallasPrincipales.data.Network.apiService.ComidasApiService
+import com.benjamin.proyectofeedo.PantallasPrincipales.data.Network.apiService.AddComidasApiService
+import com.benjamin.proyectofeedo.PantallasPrincipales.data.Network.apiService.UserInformationApiService
+import com.benjamin.proyectofeedo.PantallasPrincipales.data.SupaBase.SupabaseAuthInterceptor
+import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.AddComidaRepositoryImpl
+import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.RepositoryImpl
+import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.UserInformationRepositoryImpl
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.AddComidaRepository
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.Repository
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.UserInformationRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

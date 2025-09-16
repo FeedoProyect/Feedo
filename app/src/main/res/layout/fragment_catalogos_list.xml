@@ -8,12 +8,13 @@
     <ScrollView
         android:id="@+id/pantallaCatalogo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".pantallasPrincipales.UI.feedoContenidoCatalogos.CatalogosListComidasFragment">
+            tools:context=".PantallasPrincipales.UI.feedoContenidoCatalogos.CatalogosListComidasFragment">
 
             <View
                 android:id="@+id/viewTittleCatalogo"
@@ -105,7 +106,7 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="8dp"
                     android:clipToPadding="false"
-                    android:paddingBottom="80dp"
+                    android:paddingBottom="100dp"
                     android:background="@android:color/transparent"
                     android:cacheColorHint="@android:color/transparent"
                     android:scrollbars="none"

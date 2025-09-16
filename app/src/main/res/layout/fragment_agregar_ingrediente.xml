@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pantallasPrincipales.UI.feedoAddRecetas.subFragmentTabLayout.AddIngredienteFragment.AddIngredienteFragment">
+    tools:context=".PantallasPrincipales.UI.feedoAddRecetas.subFragmentTabLayout.AddIngredienteFragment.AddIngredienteFragment">
 
     <TextView
         android:layout_width="wrap_content"

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoMenu.MenuFragment"
+        android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.MenuFragment"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu">
         <action
@@ -23,16 +23,19 @@
                 android:name="recetaId"
                 app:argType="integer" />
         </action>
+        <action
+            android:id="@+id/action_menuFragment_to_seccionesFragment"
+            app:destination="@id/seccionesFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/catalogosListComidasFragment"
-        android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoContenidoCatalogos.CatalogosListComidasFragment"
+        android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoContenidoCatalogos.CatalogosListComidasFragment"
         android:label="fragment_catalogos_list"
         tools:layout="@layout/fragment_catalogos_list">
         <argument
             android:name="type"
-            app:argType="com.benjamin.proyectofeedo.pantallasPrincipales.domain.model.CatalogosModel" />
+            app:argType="com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.CatalogosModel" />
         <action
             android:id="@+id/action_catalogosListComidasFragment_to_detalleRecetaFragment"
             app:destination="@id/detalleRecetaFragment" />
@@ -40,16 +43,19 @@
 
     <fragment
         android:id="@+id/buscadorPrincipalFragment"
-        android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoBuscador.BuscadorPrincipalFragment"
+        android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoBuscador.BuscadorPrincipalFragment"
         android:label="fragment_buscador_principal"
-        tools:layout="@layout/fragment_buscador_principal" />
-    <action
-        android:id="@+id/action_buscadorPrincipalFragment_to_detalleRecetaFragment"
-        app:destination="@id/detalleRecetaFragment" />
+        tools:layout="@layout/fragment_buscador_principal">
+
+        <action
+            android:id="@+id/action_buscadorPrincipalFragment_to_detalleRecetaFragment"
+            app:destination="@id/detalleRecetaFragment" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/perfilFragment"
-        android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoPerfil.PerfilFragment"
+        android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoPerfil.PerfilFragment"
         android:label="fragment_historial"
         tools:layout="@layout/fragment_perfil">
         <action
@@ -62,7 +68,7 @@
 
     <fragment
         android:id="@+id/addRecetasFragment"
-        android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoAddRecetas.AddRecetaFragment"
+        android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoAddRecetas.AddRecetaFragment"
         android:label="fragment_favoritos"
         tools:layout="@layout/fragment_add_recetas" />
 
@@ -105,12 +111,22 @@
 
     <fragment
         android:id="@+id/editarPerfilFragment"
-        android:name="com.benjamin.proyectofeedo.pantallasPrincipales.UI.feedoPerfil.EditarPerfilFragment"
+        android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoPerfil.EditarPerfilFragment"
         android:label="Editar Perfil">
         <action
             android:id="@+id/action_editarPerfilFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/seccionesFragment"
+        android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.PantallaSeccionesMenu.SeccionesFragment"
+        android:label="fragment_secciones"
+        tools:layout="@layout/fragment_secciones" >
+        <argument android:name="seccionId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_seccionesFragment_to_detalleRecetaFragment"
+            app:destination="@id/detalleRecetaFragment" />
+    </fragment>
 
 </navigation>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PantallasPrincipales.UI.feedoMenu.PantallaSeccionesMenu.SeccionesFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pantallaSecciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <View
+            android:id="@+id/viewTittleSeccion"
+            android:layout_width="0dp"
+            android:layout_height="175dp"
+            android:background="@color/ToolbarDeFeedo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/feedo_removebg"
+            app:layout_constraintBottom_toTopOf="@+id/etSearchFeedCatalogo"
+            app:layout_constraintEnd_toStartOf="@+id/TituloSeccion"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TituloSeccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/balo_thambi"
+            android:textColor="@color/tittle_color"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/etSearchFeedCatalogo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/Tittle" />
+
+        <EditText
+            android:id="@+id/etSearchFeedCatalogo"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext_corner"
+            android:drawableStart="@drawable/ic_search_edittext"
+            android:hint="@string/hintBuscadorPrincipal"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColorHint="@color/color_hint_buscador"
+            android:textSize="19sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TituloSeccion" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/LayoutBuscadorErroneo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewTittleSeccion">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvComidasSecciones"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                android:cacheColorHint="@android:color/transparent"
+                android:clipToPadding="false"
+                android:paddingBottom="250dp"
+                android:scrollbars="none"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/imgSinResultados"
+                android:layout_width="250dp"
+                android:layout_height="290dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_encontro_nada"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvNoSeencontroComida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/balo_thambi"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="@string/texteView_NoSeEncontro"
+                android:textColor="@color/tittle_color"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgSinResultados" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/ProgressbarSecciones"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/tittle_color" />
+
+
+</FrameLayout>

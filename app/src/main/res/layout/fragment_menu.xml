@@ -4,18 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pantallasPrincipales.UI.feedoMenu.MenuFragment">
+    tools:context=".PantallasPrincipales.UI.feedoMenu.MenuFragment">
 
     <ScrollView
         android:id="@+id/MenuFeedo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".pantallasPrincipales.UI.feedoMenu.MenuFragment">
+            tools:context=".PantallasPrincipales.UI.feedoMenu.MenuFragment">
 
             <View
                 android:id="@+id/viewTittle"
@@ -87,6 +86,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/viewTittle" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/piquitoDialogCatalogos"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="10dp"
@@ -127,6 +127,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/rvCatolgo" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/piquitoClasicoArgentino"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="10dp"
@@ -140,7 +141,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_piquito_feedo" />
-
 
             </androidx.cardview.widget.CardView>
 
@@ -166,12 +166,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/rvClasicosArgentinos" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/piquitoIdealMate"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 app:cardCornerRadius="16dp"
-                app:layout_constraintStart_toEndOf="@+id/tvClasicosArgentinos"
+                app:layout_constraintStart_toEndOf="@+id/tvIdealParaElMate"
                 app:layout_constraintTop_toBottomOf="@+id/rvClasicosArgentinos">
 
                 <ImageView
@@ -205,12 +206,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/rvIdealParaElMate" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/piquitoModoSaludable"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 app:cardCornerRadius="16dp"
-                app:layout_constraintStart_toEndOf="@+id/tvClasicosArgentinos"
+                app:layout_constraintStart_toEndOf="@+id/tvModoSaludable"
                 app:layout_constraintTop_toBottomOf="@+id/rvIdealParaElMate">
 
                 <ImageView
@@ -244,12 +246,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/rvModoSaludable" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/piquitoExpress"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 app:cardCornerRadius="16dp"
-                app:layout_constraintStart_toEndOf="@+id/tvClasicosArgentinos"
+                app:layout_constraintStart_toEndOf="@+id/tvExpres"
                 app:layout_constraintTop_toBottomOf="@+id/rvModoSaludable">
 
                 <ImageView
@@ -283,12 +286,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/rvExpres" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/piquitoModoAhorro"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 app:cardCornerRadius="16dp"
-                app:layout_constraintStart_toEndOf="@+id/tvClasicosArgentinos"
+                app:layout_constraintStart_toEndOf="@+id/tvModoAhorro"
                 app:layout_constraintTop_toBottomOf="@+id/rvExpres">
 
                 <ImageView
@@ -327,7 +331,7 @@
         android:indeterminateTint="@color/tittle_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_gravity="center"/>
 
 </FrameLayout>

@@ -25,13 +25,16 @@
 
     <TextView
         android:id="@+id/nameCatalogo"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:gravity="center"
+        android:textColor="@color/text_de_items"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imCatalogo"
-        android:textColor="@color/text_de_items"
-        android:textSize="18sp"
-        tools:text="Desayunos" />
+        tools:text="Vegetarianas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
