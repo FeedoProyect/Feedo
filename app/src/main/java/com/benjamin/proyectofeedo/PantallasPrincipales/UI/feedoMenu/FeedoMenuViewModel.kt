@@ -43,7 +43,7 @@ class FeedoMenuViewModel @Inject constructor(
             }
 
             try {
-                val recetas = getComidaSeccionMenuUseCase(seccionId) ?: emptyList()
+                val recetas = getComidaSeccionMenuUseCase(seccionId)
                 _state.value = _state.value.toMutableMap().apply {
                     put(seccionId, FeedoMenuState.Success(recetas))
                 }
@@ -58,7 +58,7 @@ class FeedoMenuViewModel @Inject constructor(
 
     fun addComidasFavoritos(favoritos: FavoritosRequestModel) {
         viewModelScope.launch {
-            val result = addFavoritosUseCase(favoritos)
+            val result = addFavoritosUseCase.add(favoritos)
 
             if (result.isSuccess) {
                 Log.d("Favoritos", "Agregado OK")

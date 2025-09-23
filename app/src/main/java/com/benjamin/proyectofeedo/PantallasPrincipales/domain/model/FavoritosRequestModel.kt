@@ -1,10 +1,12 @@
 package com.benjamin.proyectofeedo.PantallasPrincipales.domain.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class FavoritosRequestModel(
-    @SerializedName("id_usuario")
+    @SerialName("id_usuario")
     val usuarioId: String,
-    @SerializedName("receta_id")
+    @SerialName("receta_id")
     val recetaId: Int
 )

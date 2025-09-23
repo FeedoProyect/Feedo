@@ -1,38 +1,38 @@
 package com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl
 
-import com.benjamin.proyectofeedo.PantallasPrincipales.data.Network.apiService.AddComidasApiService
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.AddComidaRepository
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.postgrest.postgrest
 import javax.inject.Inject
 
 class AddComidaRepositoryImpl @Inject constructor(
-    private val favoritosApiService: AddComidasApiService,
+    private val client: SupabaseClient
+) : AddComidaRepository {
 
-    ) : AddComidaRepository {
-
-    override suspend fun addFavorito(favoritos: FavoritosRequestModel): Result<Unit> {
+    override suspend fun addFavorito(favoritos: FavoritosRequestModel): Result<FavoritosRequestModel> {
         return try {
-            val response = favoritosApiService.addFavorito(favoritos)
+            val response = client.postgrest["favoritos2"]
+                .insert(favoritos) {
+                    select()
+                }
+                .decodeSingle<FavoritosRequestModel>()
 
-            if (response.isNotEmpty()) {
-                Result.success(Unit) // ✅ éxito
-            } else {
-                Result.failure(Exception("No se insertó el favorito"))
-            }
-        }catch (e: Exception) {
-            Result.failure(e) // 🚨 error (timeout, 400, etc.)
+            Result.success(response) // ahora compila ✅
+        } catch (e: Exception) {
+            Result.failure(e)
         }
     }
 
-    override suspend fun deleteFavorito(usuarioId: String, recetaId: Int): Result<Unit> {
+    override suspend fun deleteFavorito(favoritosDelete: FavoritosRequestModel): Result<Unit> {
         return try {
-            val response = favoritosApiService.deleteFavorito("eq.$usuarioId", "eq.$recetaId")
-            if (response.isSuccessful) {
-                Result.success(Unit)
-            } else {
-                val error = response.errorBody()?.string()
-                Result.failure(Exception("Error al eliminar favorito: ${response.code()} - $error"))
+            client.postgrest["favoritos2"].delete{
+                filter {
+                    eq("id_usuario", favoritosDelete.usuarioId)
+                    eq("receta_id", favoritosDelete.recetaId)
+                }
             }
+            Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
         }

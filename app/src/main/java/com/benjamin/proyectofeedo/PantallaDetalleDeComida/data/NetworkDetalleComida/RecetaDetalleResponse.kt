@@ -1,4 +1,4 @@
-package com.benjamin.proyectofeedo.PantallaDetalleDeComida.data.response
+package com.benjamin.proyectofeedo.PantallaDetalleDeComida.data.NetworkDetalleComida
 
 import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.model.RecetaDetalleModel
 import com.google.gson.annotations.SerializedName

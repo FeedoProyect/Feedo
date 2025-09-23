@@ -16,8 +16,8 @@ class ListaModoAhorroViewHolder(
         onItemSelectedFav: (FavoritosRequestModel) -> Unit,
         auth: Auth
     ) {
-        binding.tvModoAhorro.text = comidasModel.titulo
-        Picasso.get().load(comidasModel.imagen).into(binding.imgModoAhorro)
+        binding.tvModoAhorro.text = comidasModel.recetas.titulo
+        Picasso.get().load(comidasModel.recetas.imagen).into(binding.imgModoAhorro)
 
         binding.imgAddFavsModoAhorro.setOnClickListener {
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener

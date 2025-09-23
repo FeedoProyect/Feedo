@@ -16,9 +16,9 @@ class ListaClasicoArgentinoViewHolder(
         onItemSelectedFav: (FavoritosRequestModel) -> Unit,
         auth: Auth
     ) {
-        binding.tvComidaClasicoArgentino.text = comidasModel.titulo
+        binding.tvComidaClasicoArgentino.text = comidasModel.recetas.titulo
 
-        Picasso.get().load(comidasModel.imagen).into(binding.imgComidaClasicoArgentino)
+        Picasso.get().load(comidasModel.recetas.imagen).into(binding.imgComidaClasicoArgentino)
 
         binding.imgAddClasicoArgentino.setOnClickListener {
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener

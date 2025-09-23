@@ -2,6 +2,7 @@ package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoPerfil.subFragme
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.useCase.AddFavoritosUseCase
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.useCase.GetComidasFavoritosUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,14 +36,14 @@ class FavoritosViewModel @Inject constructor(
         }
     }
 
-    fun deleteComidaFavorito(usuarioId: String, recetaId: Int) {
+    fun deleteComidaFavorito(favoritosDelete: FavoritosRequestModel) {
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO) {
-                    addFavoritosUseCase(usuarioId, recetaId) // 👈 acá usás el otro use case
+                    addFavoritosUseCase.delete(favoritosDelete) // 👈 acá usás el otro use case
                 }
                 // refrescar lista después de borrar
-                getComidaFavoritos(usuarioId)
+                getComidaFavoritos(favoritosDelete.usuarioId)
             } catch (e: Exception) {
                 _state.value = FavoritosState.Error("Error al eliminar favorito")
             }

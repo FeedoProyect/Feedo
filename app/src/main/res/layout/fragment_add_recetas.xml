@@ -11,10 +11,8 @@
         android:id="@+id/imgAgregarFotoComida"
         android:layout_width="match_parent"
         android:layout_height="270dp"
-        android:scaleType="center"
-        android:adjustViewBounds="true"
-        android:src="@drawable/ic_image"
-        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:src="@drawable/invitacion_foto_comida"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

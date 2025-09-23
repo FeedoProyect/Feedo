@@ -18,8 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CatalogosListComidasViewModel @Inject constructor(
     private val getComidasUseCase: GetComidaCatalogoUseCase,
-    private val addFavoritosUseCase: AddFavoritosUseCase,
-    private val getComidaBuscadorCatalogoUseCase: GetComidaBuscadorCatalogoUseCase
+    private val getComidaBuscadorCatalogoUseCase: GetComidaBuscadorCatalogoUseCase,
+    private val addFavoritosUseCase: AddFavoritosUseCase
 ) : ViewModel() {
 
     private var _state =
@@ -37,18 +37,6 @@ class CatalogosListComidasViewModel @Inject constructor(
             } catch (e: Exception) {
                 _state.value =
                     CatalogosListComidasState.Error("Ha ocurrido un error, intentelo más tarde")
-            }
-        }
-    }
-
-    fun addComidasFavoritos(favoritos: FavoritosRequestModel) {
-        viewModelScope.launch {
-            val result = addFavoritosUseCase(favoritos)
-
-            if (result.isSuccess) {
-                Log.d("Favoritos", "Agregado OK")
-            } else {
-                Log.e("Favoritos", "Error: ${result.exceptionOrNull()?.message}")
             }
         }
     }
@@ -71,6 +59,18 @@ class CatalogosListComidasViewModel @Inject constructor(
             } catch (e: Exception) {
                 _state.value =
                     CatalogosListComidasState.Error("Ha ocurrido un error, intentelo más tarde")
+            }
+        }
+    }
+
+    fun addComidasFavoritos(favoritos: FavoritosRequestModel) {
+        viewModelScope.launch {
+            val result = addFavoritosUseCase.add(favoritos)
+
+            if (result.isSuccess) {
+                Log.d("Favoritos", "Agregado OK")
+            } else {
+                Log.e("Favoritos", "Error: ${result.exceptionOrNull()?.message}")
             }
         }
     }

@@ -1,20 +1,33 @@
 package com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl
 
-import android.util.Log
-import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.model.RecetaDetalleModel
-import com.benjamin.proyectofeedo.PantallasPrincipales.data.Network.apiService.ComidasApiService
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidaDestacadaCatalogoModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosReceta
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.IdFavoritosRecetaModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.Repository
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.postgrest.postgrest
+import io.github.jan.supabase.postgrest.query.Columns
 import javax.inject.Inject
 
-class RepositoryImpl @Inject constructor(private val apiService: ComidasApiService) : Repository {
+class RepositoryImpl @Inject constructor(
+    private val client: SupabaseClient
+) : Repository {
 
     override suspend fun getComidas(catalogoId: Int): List<ComidasModel>? {
         return try {
-            val response = apiService.getRecetas("eq.$catalogoId")
-            response.map { it.toDomain() }
+            val response = client.postgrest["recetas"]
+                .select(
+                    Columns.raw("id, titulo, imagen, receta_catalogo!inner(catalogo_id)")
+                ) {
+                    filter {
+                        eq("receta_catalogo.catalogo_id", catalogoId)
+                    }
+                }
+                .decodeList<ComidasModel>()
+
+            response
         } catch (e: Exception) {
             e.printStackTrace()
             emptyList()
@@ -23,8 +36,17 @@ class RepositoryImpl @Inject constructor(private val apiService: ComidasApiServi
 
     override suspend fun getComidasDestacadasCatalogo(catalogoId: Int): List<ComidaDestacadaCatalogoModel>? {
         return try {
-            val response = apiService.getComidaCatalogoDestacada("eq.$catalogoId")
-            response.map { it.toDomain() }
+            val response = client.postgrest["recetas"]
+                .select(
+                    Columns.raw("id, titulo, imagen, tiempo_preparacion, receta_catalogo2!inner(catalogo_id)")
+                ){
+                    filter{
+                        eq("receta_catalogo2.catalogo_id", catalogoId)
+                    }
+                }
+                .decodeList<ComidaDestacadaCatalogoModel>()
+
+            response
         } catch (e: Exception) {
             e.printStackTrace()
             emptyList()
@@ -33,9 +55,17 @@ class RepositoryImpl @Inject constructor(private val apiService: ComidasApiServi
 
     override suspend fun getComidaCatalogoBuscador(name: String): List<ComidasModel>? {
         return try {
-            val response = apiService.buscarRecetasCatalogo("ilike.${name}%")
-            val mapped = response.map { it.toDomain() }
-            if (mapped.isEmpty()) null else mapped
+            val response = client.postgrest["recetas"]
+                .select(
+                    Columns.raw("id, titulo, imagen, receta_catalogo!inner(catalogo_id)")
+                ){
+                    filter{
+                        ilike("titulo", "$name%")
+                    }
+                }
+                .decodeList<ComidasModel>()
+
+            if (response.isEmpty()) null else response
         } catch (e: Exception) {
             e.printStackTrace()
             null
@@ -44,50 +74,54 @@ class RepositoryImpl @Inject constructor(private val apiService: ComidasApiServi
 
     override suspend fun getComidaBuscadorPrincipal(name: String): List<ComidasModel>? {
         return try {
-            val response = apiService.getComidaBuscador(nombre = "ilike.${name}%")
-            val mapped = response.map { it.toDomain() }
-            if (mapped.isEmpty()) null else mapped
+            val response = client.postgrest["recetas"]
+                .select(
+                    Columns.raw("*")
+                ){
+                    filter{
+                        ilike("titulo", "$name%")
+                    }
+                }
+                .decodeList<ComidasModel>()
+            if (response.isEmpty()) null else response
         } catch (e: Exception) {
             e.printStackTrace()
             null
         }
     }
 
-    override suspend fun getComidaSeccionMenu(seccionId: Int): List<ComidasSeccionMenuModel>? {
+    override suspend fun getComidaSeccionMenu(seccionId: Int): List<ComidasSeccionMenuModel> {
         return try {
-            val response = apiService.getComidaSeccion(seccionId = "eq.$seccionId")
-            response.map { it.toDomain() }
+            client.postgrest["receta_seccion"]
+                .select(
+                    Columns.raw("id, seccion_id, recetas(id,titulo,imagen)")
+                ) {
+                    filter { eq("seccion_id", seccionId) }
+                }
+                .decodeList<ComidasSeccionMenuModel>()
         } catch (e: Exception) {
             e.printStackTrace()
             emptyList()
         }
     }
 
-    override suspend fun getComidaFavoritos(recetaId: String): List<ComidasModel>? {
+
+    override suspend fun getComidaFavoritos(usuarioId: String): List<FavoritosReceta>? {
         return try {
-            val response = apiService.getComidaFavoritos(
-                usuarioId = "eq.$recetaId"
-            )
-            response.map { it.toDomain() }
+            val response = client.postgrest["favoritos2"]
+                .select(
+                    Columns.raw("id_usuario, receta_id, recetas(id, titulo, imagen)")
+                ){
+                    filter{
+                        eq("id_usuario", usuarioId)
+                    }
+                }
+                .decodeList<IdFavoritosRecetaModel>()
+
+            response.map { it.recetas }
         } catch (e: Exception){
             e.printStackTrace()
             emptyList()
-        }
-    }
-
-
-
-    //fari sacame este metodo para la carpeta detalle comida en data hijo de puta
-    suspend fun getRecetaDetalle(id: Int): RecetaDetalleModel? {
-        return try {
-            val list = apiService.getRecetaDetalleById(id = "eq.$id")
-
-            val response = list.firstOrNull()
-            response?.toDomain()
-
-        } catch (e: Exception) {
-            Log.e("RepositoryImpl", "Error al obtener detalle receta", e)
-            null
         }
     }
 }

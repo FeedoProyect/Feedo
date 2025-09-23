@@ -16,8 +16,8 @@ class ListaEspecialMateViewHolder(
         onItemSelectedFav: (FavoritosRequestModel) -> Unit,
         auth: Auth
     ) {
-        binding.tvEspecialMate.text = comidasModel.titulo
-        Picasso.get().load(comidasModel.imagen).into(binding.imgEspecialMate)
+        binding.tvEspecialMate.text = comidasModel.recetas.titulo
+        Picasso.get().load(comidasModel.recetas.imagen).into(binding.imgEspecialMate)
 
         binding.imgAddFavMate.setOnClickListener {
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener

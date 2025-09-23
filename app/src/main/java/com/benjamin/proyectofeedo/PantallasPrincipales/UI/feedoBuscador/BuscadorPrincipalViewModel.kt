@@ -43,7 +43,7 @@ class BuscadorPrincipalViewModel @Inject constructor(
 
     fun addComidasFavoritos(favoritos: FavoritosRequestModel) {
         viewModelScope.launch {
-            val result = addFavoritosUseCase(favoritos)
+            val result = addFavoritosUseCase.add(favoritos)
 
             if (result.isSuccess) {
                 Log.d("Favoritos", "Agregado OK")

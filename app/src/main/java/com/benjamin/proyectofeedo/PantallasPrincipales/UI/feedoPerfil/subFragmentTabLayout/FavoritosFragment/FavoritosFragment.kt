@@ -42,26 +42,18 @@ class FavoritosFragment : Fragment() {
     private fun initUI() {
         initList()
         iniState()
-
-        val userId = supabaseClient.auth.currentUserOrNull()?.id
-        if (userId != null) {
-            favoritoViewModel.getComidaFavoritos(userId)
-        } else {
-            Log.e("Favoritos", "⚠️ No hay usuario logueado")
-        }
+        userSession()
     }
 
-
-
     private fun initList() {
-        adapterFav = ListaFavoritosAdapter(mutableListOf()) { comida ->
-            val userId = supabaseClient.auth.currentUserOrNull()?.id
-            if (userId != null) {
-                favoritoViewModel.deleteComidaFavorito(userId, comida.id)
-                adapterFav.removeItem(comida)
-            }
-            messageDeleteFav()
-        }
+        adapterFav = ListaFavoritosAdapter(mutableListOf(),
+            onDeleteClick = {
+                favoritoViewModel.deleteComidaFavorito(it)
+                adapterFav.removeItem(it.recetaId) //Maneja por id
+                messageDeleteFav()
+            },
+            auth = supabaseClient.auth
+        )
 
         binding.rvSeccionFavoritosPerfil.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
@@ -93,6 +85,15 @@ class FavoritosFragment : Fragment() {
 
     private fun successState(success: FavoritosState.Success) {
         adapterFav.updateListFavoritos(success.recetas?: emptyList())
+    }
+
+    private fun userSession() {
+        val userId = supabaseClient.auth.currentUserOrNull()?.id
+        if (userId != null) {
+            favoritoViewModel.getComidaFavoritos(userId)
+        } else {
+            Toast.makeText(requireContext(), "Usuario no autenticado", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun messageDeleteFav(){

@@ -7,11 +7,11 @@ import javax.inject.Inject
 class AddFavoritosUseCase @Inject constructor(
     private val favoritosRepository: AddComidaRepository
 ) {
-    suspend operator fun invoke(favoritos: FavoritosRequestModel): Result<Unit>{
+    suspend fun add(favoritos: FavoritosRequestModel): Result<FavoritosRequestModel>{
         return favoritosRepository.addFavorito(favoritos)
     }
 
-    suspend operator fun invoke(usuarioId: String, recetaId: Int): Result<Unit>{
-        return favoritosRepository.deleteFavorito(usuarioId, recetaId)
+    suspend fun delete(favoritosDelete: FavoritosRequestModel): Result<Unit>{
+        return favoritosRepository.deleteFavorito(favoritosDelete)
     }
 }

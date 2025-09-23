@@ -22,7 +22,7 @@ class AuthRepositoryImpl @Inject constructor(
             }
 
             if (userInfo != null) {
-                // Inserción simple en tabla usuarios
+                // Inserción en tabla usuarios
                 supabaseClient.postgrest["usuarios2"].insert(
                     mapOf(
                         "id_usuario" to userInfo.id,

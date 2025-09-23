@@ -1,5 +1,11 @@
 package com.benjamin.proyectofeedo.core.supabaseClient
 
+import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.AddComidaRepositoryImpl
+import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.RepositoryImpl
+import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.UserInformationRepositoryImpl
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.AddComidaRepository
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.Repository
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.UserInformationRepository
 import com.benjamin.proyectofeedo.usuarioLogin.LoginData.AuthRepositoryImpl
 import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.AuthRepository
 import dagger.Module
@@ -53,5 +59,23 @@ object ProvideSupaBaseClient {
     @Singleton
     fun provideAuthRepository(auth: Auth, client: SupabaseClient): AuthRepository {
         return AuthRepositoryImpl(auth, client)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRepository(client: SupabaseClient): Repository{
+        return RepositoryImpl(client)
+    }
+
+    @Provides
+    @Singleton
+    fun provideuserInformationRepository(client: SupabaseClient): UserInformationRepository{
+        return UserInformationRepositoryImpl(client)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAddComidaRepository(client: SupabaseClient): AddComidaRepository{
+        return AddComidaRepositoryImpl(client)
     }
 }

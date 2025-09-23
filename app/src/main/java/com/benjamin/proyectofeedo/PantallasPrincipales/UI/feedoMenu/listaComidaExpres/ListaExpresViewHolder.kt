@@ -16,8 +16,8 @@ class ListaExpresViewHolder(
         onItemSelectedFav: (FavoritosRequestModel) -> Unit,
         auth: Auth
     ) {
-        binding.tvExpres.text = comidasModel.titulo
-        Picasso.get().load(comidasModel.imagen).into(binding.imgExpres)
+        binding.tvExpres.text = comidasModel.recetas.titulo
+        Picasso.get().load(comidasModel.recetas.imagen).into(binding.imgExpres)
 
         binding.imgAddExpress.setOnClickListener {
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener

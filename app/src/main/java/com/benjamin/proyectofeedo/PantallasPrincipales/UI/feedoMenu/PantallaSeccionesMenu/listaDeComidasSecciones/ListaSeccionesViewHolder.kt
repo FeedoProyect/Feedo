@@ -15,8 +15,8 @@ class ListaSeccionesViewHolder(private val binding: ItemComidaSeccionesBinding) 
         auth: Auth,
         onItemSelectedFav: (FavoritosRequestModel) -> Unit
     ){
-        binding.tvComidaNameSecciones.text = comidasModel.titulo
-        Picasso.get().load(comidasModel.imagen).into(binding.imgComidaSecciones)
+        binding.tvComidaNameSecciones.text = comidasModel.recetas.titulo
+        Picasso.get().load(comidasModel.recetas.imagen).into(binding.imgComidaSecciones)
 
         binding.imgAgregarFavComidaSecciones.setOnClickListener {
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener

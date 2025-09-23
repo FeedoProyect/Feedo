@@ -4,5 +4,5 @@ import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.Repos
 import javax.inject.Inject
 
 class GetComidasFavoritosUseCase @Inject constructor( private val repository: Repository ) {
-    suspend operator fun invoke(recetaId: String) = repository.getComidaFavoritos(recetaId)
+    suspend operator fun invoke(usuarioId: String) = repository.getComidaFavoritos(usuarioId)
 }

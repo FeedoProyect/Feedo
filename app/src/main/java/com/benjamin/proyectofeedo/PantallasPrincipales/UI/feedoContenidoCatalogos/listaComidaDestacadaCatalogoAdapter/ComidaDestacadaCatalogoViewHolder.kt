@@ -16,7 +16,7 @@ class ComidaDestacadaCatalogoViewHolder(private val binding: ItemComidaDestacada
         auth: Auth
     ) {
         binding.tvTituloComidaDestacadaCatalogo.text = comidaDestacadaCatalogoInfo.titulo
-        binding.tvTiempoComidaDestacadaCatalogo.text = comidaDestacadaCatalogoInfo.tiempo
+        binding.tvTiempoComidaDestacadaCatalogo.text = comidaDestacadaCatalogoInfo.tiempo_preparacion
         Picasso.get().load(comidaDestacadaCatalogoInfo.imagen)
             .into(binding.imgComidaDestacadaCatalogo)
 

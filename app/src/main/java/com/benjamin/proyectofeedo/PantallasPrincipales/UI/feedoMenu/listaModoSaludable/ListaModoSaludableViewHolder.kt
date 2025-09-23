@@ -16,8 +16,8 @@ class ListaModoSaludableViewHolder(
         onItemSelectedFav: (FavoritosRequestModel) -> Unit,
         auth: Auth
     ) {
-        binding.tvModoSaludable.text = comidasModel.titulo
-        Picasso.get().load(comidasModel.imagen).into(binding.imgModoSaludable)
+        binding.tvModoSaludable.text = comidasModel.recetas.titulo
+        Picasso.get().load(comidasModel.recetas.imagen).into(binding.imgModoSaludable)
 
         binding.imgAddFavsModoSaludable.setOnClickListener {
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener

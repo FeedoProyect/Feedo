@@ -3,6 +3,8 @@ package com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidaDestacadaCatalogoModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosReceta
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
 
 interface Repository {
     suspend fun getComidas(catalogoId: Int): List<ComidasModel>?
@@ -15,5 +17,5 @@ interface Repository {
 
     suspend fun getComidaSeccionMenu(seccionId: Int): List<ComidasSeccionMenuModel>?
 
-    suspend fun getComidaFavoritos(recetaId: String): List<ComidasModel>?
+    suspend fun getComidaFavoritos(usuarioId: String): List<FavoritosReceta>?
 }

@@ -1,15 +1,9 @@
 package com.benjamin.proyectofeedo.core.retrofit
 
-import com.benjamin.proyectofeedo.PantallasPrincipales.data.Network.apiService.ComidasApiService
-import com.benjamin.proyectofeedo.PantallasPrincipales.data.Network.apiService.AddComidasApiService
-import com.benjamin.proyectofeedo.PantallasPrincipales.data.Network.apiService.UserInformationApiService
-import com.benjamin.proyectofeedo.PantallasPrincipales.data.SupaBase.SupabaseAuthInterceptor
-import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.AddComidaRepositoryImpl
-import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.RepositoryImpl
-import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.UserInformationRepositoryImpl
-import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.AddComidaRepository
-import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.Repository
-import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.UserInformationRepository
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.data.NetworkDetalleComida.DetalleComidaApiService
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.data.DetalleComidaRepositoryImpl
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.DetalleComidaRepository
+import com.benjamin.proyectofeedo.core.SupaBaseRetrofit.SupabaseAuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,32 +39,12 @@ object NetworkModul {
     }
 
     @Provides
-    fun provideComidasApiService(retrofit: Retrofit): ComidasApiService {
-        return retrofit.create(ComidasApiService::class.java)
+    fun provideDetalleComidaApiService(retrofit: Retrofit): DetalleComidaApiService {
+        return retrofit.create(DetalleComidaApiService::class.java)
     }
 
     @Provides
-    fun provideRepository(apiService: ComidasApiService): Repository {
-        return RepositoryImpl(apiService)
-    }
-
-    @Provides
-    fun provideAddComidaApiService(retrofit: Retrofit): AddComidasApiService {
-        return retrofit.create(AddComidasApiService::class.java)
-    }
-
-    @Provides
-    fun provideAddComidaRepository(addComidas: AddComidasApiService): AddComidaRepository {
-        return AddComidaRepositoryImpl(addComidas)
-    }
-
-    @Provides
-    fun provideUserInformationApiService(retrofit: Retrofit): UserInformationApiService {
-        return retrofit.create(UserInformationApiService::class.java)
-    }
-
-    @Provides
-    fun provideUserInformationRepository(userInformation: UserInformationApiService): UserInformationRepository {
-        return UserInformationRepositoryImpl(userInformation)
+    fun provideDeatalleComidaRepository(apiService: DetalleComidaApiService): DetalleComidaRepository {
+        return DetalleComidaRepositoryImpl(apiService)
     }
 }

@@ -1,4 +1,4 @@
-package com.benjamin.proyectofeedo.PantallasPrincipales.data.SupaBase
+package com.benjamin.proyectofeedo.core.SupaBaseRetrofit
 
 import io.github.jan.supabase.auth.Auth
 import kotlinx.coroutines.runBlocking
