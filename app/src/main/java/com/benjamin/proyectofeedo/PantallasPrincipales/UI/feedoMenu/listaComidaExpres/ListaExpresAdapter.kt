@@ -3,9 +3,9 @@ package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaComida
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.benjamin.proyectofeedo.databinding.ItemExpresBinding
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
+import com.benjamin.proyectofeedo.databinding.ItemSeccionesMenuBinding
 import io.github.jan.supabase.auth.Auth
 
 class ListaExpresAdapter(
@@ -24,7 +24,7 @@ class ListaExpresAdapter(
         parent: ViewGroup,
         viewType: Int
     ): ListaExpresViewHolder {
-        val binding = ItemExpresBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemSeccionesMenuBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListaExpresViewHolder(binding)
     }
 

@@ -3,9 +3,9 @@ package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaEspeci
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.benjamin.proyectofeedo.databinding.ItemEspecialMateBinding
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
+import com.benjamin.proyectofeedo.databinding.ItemSeccionesMenuBinding
 import io.github.jan.supabase.auth.Auth
 
 class ListaEspecialMateAdapter(
@@ -24,7 +24,7 @@ class ListaEspecialMateAdapter(
         parent: ViewGroup,
         viewType: Int
     ): ListaEspecialMateViewHolder {
-        val binding = ItemEspecialMateBinding.inflate(
+        val binding = ItemSeccionesMenuBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

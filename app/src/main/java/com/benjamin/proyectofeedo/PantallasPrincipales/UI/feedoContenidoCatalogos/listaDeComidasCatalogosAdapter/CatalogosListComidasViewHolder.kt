@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.databinding.ItemComidasCatalogosBinding
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
+import com.benjamin.proyectofeedo.R
 import com.squareup.picasso.Picasso
 import io.github.jan.supabase.auth.Auth
 
@@ -16,7 +17,7 @@ class CatalogosListComidasViewHolder(private val binding: ItemComidasCatalogosBi
         auth: Auth
     ) {
         binding.tvComidaName.text = comidasModel.titulo
-        Picasso.get().load(comidasModel.imagen).into(binding.imgComidaCatalogo)
+        Picasso.get().load(comidasModel.imagen).error(R.drawable.img_error).into(binding.imgComidaCatalogo)
 
         binding.imgAgregarFavComidaCatalogo.setOnClickListener {
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener

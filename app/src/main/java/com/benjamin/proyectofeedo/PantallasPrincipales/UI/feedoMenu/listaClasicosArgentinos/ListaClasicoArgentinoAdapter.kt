@@ -3,9 +3,9 @@ package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaClasic
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.benjamin.proyectofeedo.databinding.ItemClasicoArgentinoBinding
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
+import com.benjamin.proyectofeedo.databinding.ItemSeccionesMenuBinding
 import io.github.jan.supabase.auth.Auth
 
 class ListaClasicoArgentinoAdapter(
@@ -24,7 +24,7 @@ class ListaClasicoArgentinoAdapter(
         parent: ViewGroup,
         viewType: Int
     ): ListaClasicoArgentinoViewHolder {
-        val binding = ItemClasicoArgentinoBinding.inflate(
+        val binding = ItemSeccionesMenuBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

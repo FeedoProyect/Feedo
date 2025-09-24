@@ -23,6 +23,7 @@
     <color name="fondo_buscador_color">#F2F2F2</color>
     <color name="color_text_tabs_perfil">#FFAC00</color>
     <color name="color_background_cardview">#FFFFFF</color>
+    <color name="color_textAddTime">#BEBEBE</color>
 
     <color name="color_boton_welcome">#FFFFFF</color>
 

@@ -12,9 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.benjamin.proyectofeedo.R
 import com.benjamin.proyectofeedo.databinding.FragmentDetalleRecetaBinding
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -58,15 +59,15 @@ class DetalleRecetaFragment : Fragment() {
     private fun loadingState() {
         binding.progressBarDetalle.isVisible = true
         binding.cardDetalleReceta.isVisible = false
-        binding.ivReceta.isVisible = false
+        binding.imgReceta.isVisible = false
     }
 
     private fun errorState() {
         binding.progressBarDetalle.isVisible = false
         binding.cardDetalleReceta.isVisible = true
-        binding.ivReceta.isVisible = true
+        binding.imgReceta.isVisible = true
         binding.tvTituloReceta.text = "Ocurrió un error"
-        binding.ivReceta.setImageDrawable(null)
+        binding.imgReceta.setImageDrawable(null)
     }
 
     private fun successState(state: DetalleRecetaState.Success) {
@@ -74,12 +75,14 @@ class DetalleRecetaFragment : Fragment() {
 
         binding.progressBarDetalle.isVisible = false
         binding.cardDetalleReceta.isVisible = true
-        binding.ivReceta.isVisible = true
+        binding.imgReceta.isVisible = true
 
         binding.tvTituloReceta.text = receta.titulo
-        Glide.with(this)
+        Picasso
+            .get()
             .load(receta.imagen)
-            .into(binding.ivReceta)
+            .error(R.drawable.img_error)
+            .into(binding.imgReceta)
 
         binding.viewPage2Detalle.adapter = DetallePagerAdapter(
             this,

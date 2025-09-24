@@ -129,7 +129,7 @@ class MenuFragment : Fragment() {
         listaClasicoArgentinoAdapter = ListaClasicoArgentinoAdapter(
             auth = supabaseClient.auth,
             onItemClick = { receta ->
-                navigateToDetalle(receta.id)
+                navigateToDetalle(receta.recetas.id)
             }, onItemSelectedFavs = { favoritos ->
                 feedoMenuViewModel.addComidasFavoritos(favoritos)
                 messageFavs()
@@ -138,7 +138,7 @@ class MenuFragment : Fragment() {
         listaEspecialMateAdapter = ListaEspecialMateAdapter(
             auth = supabaseClient.auth,
             onItemClick = { receta ->
-                navigateToDetalle(receta.id)
+                navigateToDetalle(receta.recetas.id)
             }, onItemSelectedFav = { favoritos ->
                 feedoMenuViewModel.addComidasFavoritos(favoritos)
                 messageFavs()
@@ -147,7 +147,7 @@ class MenuFragment : Fragment() {
         listaModoSaludableAdapter = ListaModoSaludableAdapter(
             auth = supabaseClient.auth,
             onItemClick = { receta ->
-                navigateToDetalle(receta.id)
+                navigateToDetalle(receta.recetas.id)
             }, onItemSelectedFavs = { favoritos ->
                 feedoMenuViewModel.addComidasFavoritos(favoritos)
                 messageFavs()
@@ -156,7 +156,7 @@ class MenuFragment : Fragment() {
         listaExpresAdapter = ListaExpresAdapter(
             auth = supabaseClient.auth,
             onItemClick = { receta ->
-                navigateToDetalle(receta.id)
+                navigateToDetalle(receta.recetas.id)
             }, onItemSelectedFavs = { favoritos ->
                 feedoMenuViewModel.addComidasFavoritos(favoritos)
                 messageFavs()
@@ -165,7 +165,7 @@ class MenuFragment : Fragment() {
         listaModoAhorroAdapter = ListaModoAhorroAdapter(
             auth = supabaseClient.auth,
             onItemClick = { receta ->
-                navigateToDetalle(receta.id)
+                navigateToDetalle(receta.recetas.id)
             }, onItemSelectedFavs = { favoritos ->
                 feedoMenuViewModel.addComidasFavoritos(favoritos)
                 messageFavs()

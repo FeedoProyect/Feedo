@@ -85,7 +85,7 @@ class SeccionesFragment : Fragment() {
     private fun initAdapter() {
         listaSeccionesAdapter = ListaSeccionesAdapter(
             auth = supabaseClient.auth,
-            onItemClick = { receta -> navigateToDetalle(receta.id) },
+            onItemClick = { receta -> navigateToDetalle(receta.recetas.id) },
             onItemSelectedFav = { favoritos ->
                 feedoMenuViewModel.addComidasFavoritos(favoritos)
                 mensajeFavoritos()

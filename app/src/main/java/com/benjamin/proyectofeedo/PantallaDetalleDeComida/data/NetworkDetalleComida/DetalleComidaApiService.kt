@@ -1,6 +1,5 @@
 package com.benjamin.proyectofeedo.PantallaDetalleDeComida.data.NetworkDetalleComida
 
-import com.benjamin.proyectofeedo.PantallaDetalleDeComida.data.NetworkDetalleComida.RecetaDetalleResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

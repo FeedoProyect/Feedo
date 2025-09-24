@@ -7,7 +7,7 @@
     app:cardElevation="8dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/imgAddExpress"
+        android:id="@+id/imgAddComidaSeccionFav"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="8dp"
@@ -25,7 +25,7 @@
     </androidx.cardview.widget.CardView>
 
     <ImageView
-        android:id="@+id/imgExpres"
+        android:id="@+id/imgComidaSeccionesMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
@@ -37,7 +37,7 @@
         android:background="@drawable/gradient_overlay" />
 
     <TextView
-        android:id="@+id/tvExpres"
+        android:id="@+id/tvComidaSeccionesMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"

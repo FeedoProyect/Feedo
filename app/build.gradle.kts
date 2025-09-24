@@ -92,11 +92,6 @@ android {
         //Verision de dataStore
         val dataStore_Version = "1.1.7"
 
-
-        implementation(libs.glide)
-        kapt(libs.glide.compiler)
-
-
         // DataStore
         implementation("androidx.datastore:datastore-preferences:$dataStore_Version")
 

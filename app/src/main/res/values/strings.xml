@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Feedo</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Bottom Bar -->
@@ -105,6 +105,7 @@
     <string name="textView_ingredientes">Ingredientes</string>
     <string name="hint_addcomida">Añade el nombre de tu comida</string>
     <string name="textBotom_Añadir">Añadir</string>
+    <string name="textView_addTime">Agregar\nTiempo</string>
 
 
 </resources>

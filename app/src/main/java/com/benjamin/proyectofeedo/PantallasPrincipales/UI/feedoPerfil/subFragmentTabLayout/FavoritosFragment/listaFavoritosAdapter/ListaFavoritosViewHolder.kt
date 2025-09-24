@@ -5,6 +5,7 @@ import com.benjamin.proyectofeedo.databinding.ItemFavoritosPerfilBinding
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosReceta
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
+import com.benjamin.proyectofeedo.R
 import com.squareup.picasso.Picasso
 import io.github.jan.supabase.auth.Auth
 
@@ -18,7 +19,7 @@ class ListaFavoritosViewHolder(private val binding: ItemFavoritosPerfilBinding) 
     ){
         binding.tvComidaFavoritos.text = comidasModel.titulo
 
-        Picasso.get().load(comidasModel.imagen).into(binding.imgComidaFavoritos)
+        Picasso.get().load(comidasModel.imagen).error(R.drawable.img_error).into(binding.imgComidaFavoritos)
 
         binding.imgDeleteFavComida.setOnClickListener {
 

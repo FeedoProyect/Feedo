@@ -26,7 +26,6 @@ class IngredientesAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ingrediente = data[position]
         holder.binding.txtTituloIngredientes.text = ingrediente
-
     }
 
     override fun getItemCount(): Int = data.size

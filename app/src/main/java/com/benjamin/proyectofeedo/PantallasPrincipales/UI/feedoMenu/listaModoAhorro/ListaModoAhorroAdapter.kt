@@ -3,9 +3,9 @@ package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaModoAh
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.benjamin.proyectofeedo.databinding.ItemModoAhorroBinding
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
+import com.benjamin.proyectofeedo.databinding.ItemSeccionesMenuBinding
 import io.github.jan.supabase.auth.Auth
 
 class ListaModoAhorroAdapter(
@@ -24,7 +24,7 @@ class ListaModoAhorroAdapter(
         parent: ViewGroup,
         viewType: Int
     ): ListaModoAhorroViewHolder {
-        val binding = ItemModoAhorroBinding.inflate(
+        val binding = ItemSeccionesMenuBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

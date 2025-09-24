@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.databinding.ItemComidaBuscadorBinding
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
+import com.benjamin.proyectofeedo.R
 import com.squareup.picasso.Picasso
 import io.github.jan.supabase.auth.Auth
 
@@ -16,7 +17,7 @@ class BuscadorPrincipalViewHolder(private val binding: ItemComidaBuscadorBinding
         auth: Auth
     ) {
         binding.tvComidaBuscador.text = comidaBuscadorInfo.titulo
-        Picasso.get().load(comidaBuscadorInfo.imagen).into(binding.imgComidaBuscador)
+        Picasso.get().load(comidaBuscadorInfo.imagen).error(R.drawable.img_error).into(binding.imgComidaBuscador)
 
         binding.imgAddFavsBuscador.setOnClickListener {
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener

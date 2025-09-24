@@ -1,14 +1,15 @@
 package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaComidaExpres
 
 import androidx.recyclerview.widget.RecyclerView
-import com.benjamin.proyectofeedo.databinding.ItemExpresBinding
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
+import com.benjamin.proyectofeedo.R
+import com.benjamin.proyectofeedo.databinding.ItemSeccionesMenuBinding
 import com.squareup.picasso.Picasso
 import io.github.jan.supabase.auth.Auth
 
 class ListaExpresViewHolder(
-    private val binding: ItemExpresBinding
+    private val binding: ItemSeccionesMenuBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun render(
@@ -16,10 +17,10 @@ class ListaExpresViewHolder(
         onItemSelectedFav: (FavoritosRequestModel) -> Unit,
         auth: Auth
     ) {
-        binding.tvExpres.text = comidasModel.recetas.titulo
-        Picasso.get().load(comidasModel.recetas.imagen).into(binding.imgExpres)
+        binding.tvComidaSeccionesMenu.text = comidasModel.recetas.titulo
+        Picasso.get().load(comidasModel.recetas.imagen).error(R.drawable.img_error).into(binding.imgComidaSeccionesMenu)
 
-        binding.imgAddExpress.setOnClickListener {
+        binding.imgAddComidaSeccionFav.setOnClickListener {
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener
             val favorito = FavoritosRequestModel(
                 recetaId = comidasModel.id,
