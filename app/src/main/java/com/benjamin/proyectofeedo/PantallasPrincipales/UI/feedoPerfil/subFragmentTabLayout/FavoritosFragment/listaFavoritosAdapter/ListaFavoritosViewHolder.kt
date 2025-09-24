@@ -2,7 +2,6 @@ package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoPerfil.subFragme
 
 import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.databinding.ItemFavoritosPerfilBinding
-import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosReceta
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
 import com.benjamin.proyectofeedo.R
@@ -15,20 +14,28 @@ class ListaFavoritosViewHolder(private val binding: ItemFavoritosPerfilBinding) 
     fun render(
         comidasModel: FavoritosReceta,
         onDeleteClick: (FavoritosRequestModel) -> Unit,
+        onItemClick: (FavoritosReceta) -> Unit,
         auth: Auth
-    ){
+    ) {
         binding.tvComidaFavoritos.text = comidasModel.titulo
 
-        Picasso.get().load(comidasModel.imagen).error(R.drawable.img_error).into(binding.imgComidaFavoritos)
+        Picasso.get()
+            .load(comidasModel.imagen)
+            .error(R.drawable.img_error)
+            .into(binding.imgComidaFavoritos)
 
         binding.imgDeleteFavComida.setOnClickListener {
-
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener
             val deleteFavorito = FavoritosRequestModel(
                 recetaId = comidasModel.id,
                 usuarioId = userId
             )
             onDeleteClick(deleteFavorito)
+        }
+
+
+        binding.root.setOnClickListener {
+            onItemClick(comidasModel)
         }
     }
 }

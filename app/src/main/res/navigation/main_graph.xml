@@ -5,17 +5,21 @@
     android:id="@+id/main_graph"
     app:startDestination="@id/menuFragment">
 
+    <!-- Menu principal -->
     <fragment
         android:id="@+id/menuFragment"
         android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.MenuFragment"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu">
+
         <action
             android:id="@+id/action_menuFragment_to_catalogosListComidasFragment"
             app:destination="@id/catalogosListComidasFragment" />
+
         <action
             android:id="@+id/action_menuFragment_to_buscadorPrincipalFragment"
             app:destination="@id/buscadorPrincipalFragment" />
+
         <action
             android:id="@+id/action_menuFragment_to_detalleRecetaFragment"
             app:destination="@id/detalleRecetaFragment" >
@@ -23,24 +27,29 @@
                 android:name="recetaId"
                 app:argType="integer" />
         </action>
+
         <action
             android:id="@+id/action_menuFragment_to_seccionesFragment"
             app:destination="@id/seccionesFragment" />
     </fragment>
 
+    <!-- Lista de comidas (catálogos) -->
     <fragment
         android:id="@+id/catalogosListComidasFragment"
         android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoContenidoCatalogos.CatalogosListComidasFragment"
         android:label="fragment_catalogos_list"
         tools:layout="@layout/fragment_catalogos_list">
+
         <argument
             android:name="type"
             app:argType="com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.CatalogosModel" />
+
         <action
             android:id="@+id/action_catalogosListComidasFragment_to_detalleRecetaFragment"
             app:destination="@id/detalleRecetaFragment" />
     </fragment>
 
+    <!-- Buscador -->
     <fragment
         android:id="@+id/buscadorPrincipalFragment"
         android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoBuscador.BuscadorPrincipalFragment"
@@ -52,51 +61,65 @@
             app:destination="@id/detalleRecetaFragment" />
     </fragment>
 
-
+    <!-- Perfil -->
     <fragment
         android:id="@+id/perfilFragment"
         android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoPerfil.PerfilFragment"
         android:label="fragment_historial"
         tools:layout="@layout/fragment_perfil">
+
         <action
             android:id="@+id/action_perfilFragment_to_settingViewFragment"
             app:destination="@id/settingViewFragment" />
+
         <action
             android:id="@+id/action_perfilFragment_to_editarPerfilFragment"
             app:destination="@id/editarPerfilFragment" />
+
+        <!-- ⚡ ESTA ES LA QUE FALTABA -->
+        <action
+            android:id="@+id/action_perfilFragment_to_detalleRecetaFragment"
+            app:destination="@id/detalleRecetaFragment" />
     </fragment>
 
+    <!-- Agregar recetas -->
     <fragment
         android:id="@+id/addRecetasFragment"
         android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoAddRecetas.AddRecetaFragment"
         android:label="fragment_favoritos"
         tools:layout="@layout/fragment_add_recetas" />
 
+    <!-- Settings -->
     <fragment
         android:id="@+id/settingViewFragment"
         android:name="com.benjamin.proyectofeedo.settingsFeedo.UI.feedoSetting.SettingViewFragment"
         android:label="fragment_setting_view"
         tools:layout="@layout/fragment_setting_view">
+
         <action
             android:id="@+id/action_settingViewFragment_to_darkModeFragment"
             app:destination="@id/darkModeFragment" />
+
         <action
             android:id="@+id/action_settingViewFragment_to_informationOfTeamFragment"
             app:destination="@id/informationOfTeamFragment" />
     </fragment>
 
+    <!-- Dark mode -->
     <fragment
         android:id="@+id/darkModeFragment"
         android:name="com.benjamin.proyectofeedo.settingsFeedo.UI.darkMode.DarkModeFragment"
         android:label="fragment_dark_mode"
         tools:layout="@layout/fragment_dark_mode" />
 
+    <!-- Info del equipo -->
     <fragment
         android:id="@+id/informationOfTeamFragment"
         android:name="com.benjamin.proyectofeedo.settingsFeedo.UI.feedoInformation.InformationOfTeamFragment"
         android:label="fragment_information_of_team"
         tools:layout="@layout/fragment_information_of_team" />
 
+    <!-- Detalle receta -->
     <fragment
         android:id="@+id/detalleRecetaFragment"
         android:name="com.benjamin.proyectofeedo.PantallaDetalleDeComida.ui.detalleReceta.DetalleRecetaFragment"
@@ -107,23 +130,28 @@
             app:argType="integer" />
     </fragment>
 
-
-
+    <!-- Editar perfil -->
     <fragment
         android:id="@+id/editarPerfilFragment"
         android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoPerfil.EditarPerfilFragment"
         android:label="Editar Perfil">
+
         <action
             android:id="@+id/action_editarPerfilFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
     </fragment>
+
+    <!-- Secciones -->
     <fragment
         android:id="@+id/seccionesFragment"
         android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.PantallaSeccionesMenu.SeccionesFragment"
         android:label="fragment_secciones"
-        tools:layout="@layout/fragment_secciones" >
-        <argument android:name="seccionId"
+        tools:layout="@layout/fragment_secciones">
+
+        <argument
+            android:name="seccionId"
             app:argType="integer" />
+
         <action
             android:id="@+id/action_seccionesFragment_to_detalleRecetaFragment"
             app:destination="@id/detalleRecetaFragment" />
