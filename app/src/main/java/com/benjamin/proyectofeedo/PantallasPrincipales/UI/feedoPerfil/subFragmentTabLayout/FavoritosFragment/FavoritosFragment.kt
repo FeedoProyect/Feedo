@@ -1,7 +1,6 @@
 package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoPerfil.subFragmentTabLayout.FavoritosFragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.benjamin.proyectofeedo.databinding.FragmentFavoritosBinding
+import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoPerfil.PerfilFragmentDirections
 import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoPerfil.subFragmentTabLayout.FavoritosFragment.listaFavoritosAdapter.ListaFavoritosAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.jan.supabase.SupabaseClient
@@ -35,7 +36,6 @@ class FavoritosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initUI()
     }
 
@@ -46,11 +46,21 @@ class FavoritosFragment : Fragment() {
     }
 
     private fun initList() {
-        adapterFav = ListaFavoritosAdapter(mutableListOf(),
+        adapterFav = ListaFavoritosAdapter(
+            mutableListOf(),
             onDeleteClick = {
                 favoritoViewModel.deleteComidaFavorito(it)
-                adapterFav.removeItem(it.recetaId) //Maneja por id
+                adapterFav.removeItem(it.recetaId)
                 messageDeleteFav()
+            },
+            onItemClick = { receta ->
+
+                val action = PerfilFragmentDirections
+                    .actionPerfilFragmentToDetalleRecetaFragment(receta.id)
+
+                requireParentFragment()
+                    .findNavController()
+                    .navigate(action)
             },
             auth = supabaseClient.auth
         )
@@ -63,9 +73,9 @@ class FavoritosFragment : Fragment() {
 
     private fun iniState() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 favoritoViewModel.state.collect {
-                    when(it) {
+                    when (it) {
                         is FavoritosState.Error -> errorState()
                         FavoritosState.Loading -> loadingState()
                         is FavoritosState.Success -> successState(it)
@@ -75,16 +85,16 @@ class FavoritosFragment : Fragment() {
         }
     }
 
-    private fun errorState(){
-
+    private fun errorState() {
+        Toast.makeText(requireContext(), "Error al cargar favoritos", Toast.LENGTH_SHORT).show()
     }
 
-    private fun loadingState(){
-
+    private fun loadingState() {
+        // Podés agregar un progress si querés
     }
 
     private fun successState(success: FavoritosState.Success) {
-        adapterFav.updateListFavoritos(success.recetas?: emptyList())
+        adapterFav.updateListFavoritos(success.recetas ?: emptyList())
     }
 
     private fun userSession() {
@@ -96,7 +106,7 @@ class FavoritosFragment : Fragment() {
         }
     }
 
-    private fun messageDeleteFav(){
+    private fun messageDeleteFav() {
         Toast.makeText(requireContext(), "Se ha eliminado de favoritos", Toast.LENGTH_SHORT).show()
     }
 
