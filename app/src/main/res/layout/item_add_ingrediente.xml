@@ -1,0 +1,33 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="8dp"
+    android:backgroundTint="@color/color_boton_welcome"
+    app:strokeColor="@color/color_boton_welcome"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+
+        <TextView
+            android:id="@+id/tvListAddIngrediente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            tools:text="Ingredientes"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/text_de_items"
+            android:layout_marginBottom="12dp"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

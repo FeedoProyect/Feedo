@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/parentDialogTime"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <EditText
+            android:id="@+id/etDialogAddTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/text_de_items"
+            android:hint="@string/hintDialogTime_addTime"
+            android:textColor="@color/text_de_items"
+            android:textColorHint="@color/color_hint_buscador" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonDialogAddTime"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/balo_thambi"
+            android:text="@string/botonDialog_add"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:backgroundTint="@color/tittle_color"
+            app:cornerRadius="15dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/parentDialogPasos"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/etDialogAddPasos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/text_de_items"
+            android:hint="@string/hintDialogTime_addPasos"
+            android:textColor="@color/text_de_items"
+            android:textColorHint="@color/color_hint_buscador" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonDialogAddPasos"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/balo_thambi"
+            android:text="@string/botonDialog_add"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:backgroundTint="@color/tittle_color"
+            app:cornerRadius="15dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

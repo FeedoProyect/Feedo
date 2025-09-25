@@ -96,13 +96,6 @@ class DetalleRecetaFragment : Fragment() {
         }.also { it.attach() }
     }
 
-    override fun onDestroyView() {
-        mediator?.detach()
-        mediator = null
-        _binding = null
-        super.onDestroyView()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

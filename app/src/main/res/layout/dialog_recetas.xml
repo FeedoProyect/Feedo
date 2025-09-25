@@ -10,7 +10,7 @@
         android:id="@+id/etAddComida"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/hint_addcomida"
+        android:hint="@string/hintDialog_addcomida"
         android:textColorHint="@color/color_hint_buscador"
         android:textColor="@color/text_de_items"
         android:backgroundTint="@color/text_de_items"/>
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="40dp"
-        android:text="@string/textBotom_Añadir"
+        android:text="@string/botonDialog_add"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:fontFamily="@font/balo_thambi"
