@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.databinding.ItemPasoBinding
 
-data class Paso(val numero: String, val descripcion: String)
+data class Pasos(val numero: String, val descripcion: String)
 
-class PasoAdapter(private val pasos: List<Paso>) :
+class PasoAdapter(private val pasos: List<Pasos>) :
     RecyclerView.Adapter<PasoAdapter.PasoViewHolder>() {
 
     inner class PasoViewHolder(val binding: ItemPasoBinding) :
@@ -19,9 +19,9 @@ class PasoAdapter(private val pasos: List<Paso>) :
     }
 
     override fun onBindViewHolder(holder: PasoViewHolder, position: Int) {
-        val paso = pasos[position]
-        holder.binding.tvPasoNumero.text = paso.numero
-        holder.binding.tvPasoDescripcion.text = paso.descripcion
+        val pasos = pasos[position]
+        holder.binding.tvPasoNumero.text = pasos.numero
+        holder.binding.tvPasoDescripcion.text = pasos.descripcion
     }
 
     override fun getItemCount(): Int = pasos.size

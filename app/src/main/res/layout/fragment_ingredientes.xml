@@ -1,26 +1,27 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    android:backgroundTint="@color/color_boton_welcome">
 
-    <!-- Título -->
-    <TextView
-        android:id="@+id/txtTituloIngredientes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingredientes"
-        android:textStyle="bold"
-        android:textSize="22sp"
-        android:textColor="@color/text_de_items"
-        android:layout_marginBottom="12dp"/>
-
-    <!-- Lista -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerIngredientes"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:paddingBottom="8dp"/>
+        android:orientation="vertical"
+        android:padding="14dp">
 
-</LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerIngredientes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:clipToPadding="false"
+            android:paddingBottom="8dp"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

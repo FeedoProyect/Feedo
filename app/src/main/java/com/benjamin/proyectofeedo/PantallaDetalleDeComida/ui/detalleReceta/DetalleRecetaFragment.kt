@@ -36,10 +36,12 @@ class DetalleRecetaFragment : Fragment() {
             findNavController().popBackStack()
         }
 
+
         binding.viewPage2Detalle.adapter = DetallePagerAdapter(this, arrayListOf(), arrayListOf())
         mediator = TabLayoutMediator(binding.tabLayoutDetalle, binding.viewPage2Detalle) { tab, pos ->
             tab.text = if (pos == 0) "Ingredientes" else "Preparación"
         }.also { it.attach() }
+
 
         viewModel.load(args.recetaId)
 
@@ -84,10 +86,18 @@ class DetalleRecetaFragment : Fragment() {
             .error(R.drawable.img_error)
             .into(binding.imgReceta)
 
+        // 🔥 Convertimos los pasos en lista separada
+        val pasosList = receta.pasos
+            ?.mapIndexed { index, paso -> "${index + 1}. $paso" } // numeramos
+            ?.map { it.trim() }
+            ?.filter { it.isNotEmpty() }
+            ?: emptyList()
+
+
         binding.viewPage2Detalle.adapter = DetallePagerAdapter(
             this,
             ArrayList(receta.ingredientes),
-            ArrayList(receta.pasos)
+            ArrayList(pasosList)
         )
 
         mediator?.detach()
@@ -112,4 +122,5 @@ class DetalleRecetaFragment : Fragment() {
         return binding.root
     }
 }
+
 

@@ -1,8 +1,4 @@
 package com.benjamin.proyectofeedo.core.retrofit
-
-import com.benjamin.proyectofeedo.PantallaDetalleDeComida.data.NetworkDetalleComida.DetalleComidaApiService
-import com.benjamin.proyectofeedo.PantallaDetalleDeComida.data.DetalleComidaRepositoryImpl
-import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.DetalleComidaRepository
 import com.benjamin.proyectofeedo.core.SupaBaseRetrofit.SupabaseAuthInterceptor
 import dagger.Module
 import dagger.Provides
@@ -36,15 +32,5 @@ object NetworkModul {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    }
-
-    @Provides
-    fun provideDetalleComidaApiService(retrofit: Retrofit): DetalleComidaApiService {
-        return retrofit.create(DetalleComidaApiService::class.java)
-    }
-
-    @Provides
-    fun provideDeatalleComidaRepository(apiService: DetalleComidaApiService): DetalleComidaRepository {
-        return DetalleComidaRepositoryImpl(apiService)
     }
 }

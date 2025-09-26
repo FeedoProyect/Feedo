@@ -1,4 +1,3 @@
-// com/benjamin/proyectofeedo/pantallasPrincipales/UI/detalleReceta/tabs/IngredientesFragment.kt
 package com.benjamin.proyectofeedo.PantallaDetalleDeComida.ui.tabs
 
 import android.os.Bundle
@@ -7,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.model.IngredienteModel
 import com.benjamin.proyectofeedo.databinding.FragmentIngredientesBinding
 
 class IngredientesFragment : Fragment() {
@@ -17,8 +17,10 @@ class IngredientesFragment : Fragment() {
     companion object {
         private const val KEY_INGREDIENTES = "key_ingredientes"
 
-        fun newInstance(items: ArrayList<String>) = IngredientesFragment().apply {
-            arguments = Bundle().apply { putStringArrayList(KEY_INGREDIENTES, items) }
+        fun newInstance(items: ArrayList<IngredienteModel>) = IngredientesFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(KEY_INGREDIENTES, items)
+            }
         }
     }
 
@@ -31,18 +33,20 @@ class IngredientesFragment : Fragment() {
         return binding.root
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val data = arguments?.getStringArrayList(KEY_INGREDIENTES) ?: arrayListOf()
+        val data = arguments?.getSerializable(KEY_INGREDIENTES) as? ArrayList<IngredienteModel>
+            ?: arrayListOf()
 
         binding.recyclerIngredientes.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = IngredientesAdapter(data)
+            adapter = IngredienteAdapter(data) //
         }
     }
 
     override fun onDestroyView() {
-        _binding = null
         super.onDestroyView()
+        _binding = null
     }
 }
 
