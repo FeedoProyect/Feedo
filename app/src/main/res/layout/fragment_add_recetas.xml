@@ -6,16 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".PantallasPrincipales.UI.feedoAddRecetas.AddRecetaFragment">
 
-    <!-- Imagen principal -->
+    <!-- Imagen principal light -->
     <ImageView
-        android:id="@+id/imgAgregarFotoComida"
+        android:id="@+id/imgAgregarFotoComidaLight"
         android:layout_width="match_parent"
         android:layout_height="270dp"
         android:scaleType="centerCrop"
+        android:src="@drawable/invitacion_foto_comida"
         app:layout_constraintBottom_toTopOf="@+id/cdAgregarDetalleReceta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <!-- Imagen principal dark -->
+
+    <ImageView
+        android:id="@+id/imgAgregarFotoComidaDark"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/invitacion_foto_comida_dark"
+        app:layout_constraintBottom_toTopOf="@+id/cdAgregarDetalleReceta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 
     <!-- Card principal -->
     <androidx.cardview.widget.CardView
@@ -52,22 +69,23 @@
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imgAddTimeFood"
-                tools:ignore="NotSibling" />
+                app:layout_constraintEnd_toStartOf="@+id/barrierTitulo" />
+
+            <!-- Agregar tiempo primero -->
 
             <ImageView
                 android:id="@+id/imgAddTimeFood"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginEnd="5dp"
-                android:src="@drawable/img_pasos_receta"
+                android:src="@drawable/ic_reloj"
                 app:layout_constraintBottom_toTopOf="@+id/tabLayoutAgregarReceta"
-                app:layout_constraintEnd_toStartOf="@+id/addTimeFood"
+                app:layout_constraintEnd_toStartOf="@+id/tvaddTimeFood"
                 app:layout_constraintStart_toEndOf="@+id/tvAgregarTituloReceta"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/addTimeFood"
+                android:id="@+id/tvaddTimeFood"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/textView_addTime"
@@ -76,7 +94,36 @@
                 app:layout_constraintBottom_toTopOf="@+id/tabLayoutAgregarReceta"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imgAddTimeFood"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+            <!-- Agregar pasos aparece despues al cambiar pantalla -->
+
+            <ImageView
+                android:id="@+id/imgAddPasosFood"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/img_pasos_receta"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toTopOf="@+id/tabLayoutAgregarReceta"
+                app:layout_constraintEnd_toStartOf="@+id/tvAddPasosFood"
+                app:layout_constraintStart_toEndOf="@+id/tvAgregarTituloReceta"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tvAddPasosFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textView_addCantidadPasos"
+                android:textSize="15sp"
+                android:textColor="@color/color_textAddTime"
+                app:layout_constraintBottom_toTopOf="@+id/tabLayoutAgregarReceta"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgAddTimeFood"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
 
             <!-- Tabs -->
             <com.google.android.material.tabs.TabLayout
@@ -103,10 +150,33 @@
                 android:id="@+id/viewPage2AgregarComida"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tabLayoutAgregarReceta" />
+                app:layout_constraintTop_toBottomOf="@id/tabLayoutAgregarReceta"
+                app:layout_constraintBottom_toTopOf="@+id/botonGoComidaInsert"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/botonGoComidaInsert"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="100dp"
+                android:text="@string/botonAddComida"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:fontFamily="@font/balo_thambi"
+                app:backgroundTint="@color/tittle_color"
+                app:cornerRadius="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierTitulo"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="imgAddTimeFood, imgAddPasosFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

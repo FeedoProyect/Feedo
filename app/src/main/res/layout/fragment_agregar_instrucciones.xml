@@ -1,18 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
     tools:context=".PantallasPrincipales.UI.feedoAddRecetas.subFragmentTabLayout.AddInstruccionesFragment.AddInstruccionesFragment">
 
 
+    <ImageView
+        android:id="@+id/imgAddPasos"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="3dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_add_ingrediente"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvAddPasos"/>
+
     <TextView
+        android:id="@+id/tvAddPasos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:fontFamily="@font/balo_thambi"
-        android:layout_marginHorizontal="30dp"
-        android:text="Pronto se podra agregar los pasos..."
-        android:textSize="35sp"/>
+        android:text="@string/textView_addPasos"
+        android:textSize="20sp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgAddPasos"/>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

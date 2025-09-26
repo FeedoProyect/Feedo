@@ -9,10 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.benjamin.proyectofeedo.databinding.DialogRecetasBinding
 import com.benjamin.proyectofeedo.databinding.FragmentAddRecetasBinding
 import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoAddRecetas.subFragmentTabLayout.FragmentPageAddRecetaAdapter
+import com.benjamin.proyectofeedo.databinding.DialogAddFeatureBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,14 +57,16 @@ class AddRecetaFragment : Fragment() {
             if (resultado.resultCode == Activity.RESULT_OK) {
                 val data = resultado.data
                 imageUri = data!!.data
-                binding.imgAgregarFotoComida.setImageURI(imageUri)
+                binding.imgAgregarFotoComidaLight.setImageURI(imageUri)
+                binding.imgAgregarFotoComidaDark.setImageURI(imageUri)
             } else {
                 Toast.makeText(requireContext(), "Accion cancelada", Toast.LENGTH_SHORT).show()
             }
         }
 
     private fun initListeners() {
-        binding.imgAgregarFotoComida.setOnClickListener { initImage() }
+        binding.imgAgregarFotoComidaLight.setOnClickListener { initImage() }
+        binding.imgAgregarFotoComidaDark.setOnClickListener { initImage() }
 
         binding.tvAgregarTituloReceta.setOnClickListener { initDialog() }
     }
@@ -101,6 +106,93 @@ class AddRecetaFragment : Fragment() {
         ) { tab, position ->
             tab.text = tabTitle[position]
         }.attach()
+
+        // Escuchar cuando cambia de página
+        binding.viewPage2AgregarComida.registerOnPageChangeCallback(
+            object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+
+                    when (position) {
+                        0 -> { // Ingredientes
+                            binding.imgAddTimeFood.visibility = View.VISIBLE
+                            binding.tvaddTimeFood.visibility = View.VISIBLE
+                            binding.imgAddPasosFood.visibility = View.GONE
+                            binding.tvAddPasosFood.visibility = View.GONE
+
+                            binding.tvaddTimeFood.setOnClickListener {
+                                initDialogsAddFeature(
+                                    position
+                                )
+                            }
+                            binding.imgAddTimeFood.setOnClickListener {
+                                initDialogsAddFeature(
+                                    position
+                                )
+                            }
+                        }
+
+                        1 -> { // Instrucciones
+                            binding.imgAddTimeFood.visibility = View.GONE
+                            binding.tvaddTimeFood.visibility = View.GONE
+                            binding.imgAddPasosFood.visibility = View.VISIBLE
+                            binding.tvAddPasosFood.visibility = View.VISIBLE
+
+                            binding.tvAddPasosFood.setOnClickListener {
+                                initDialogsAddFeature(
+                                    position
+                                )
+                            }
+                            binding.imgAddPasosFood.setOnClickListener {
+                                initDialogsAddFeature(
+                                    position
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        )
+    }
+
+    private fun initDialogsAddFeature(position: Int) {
+        val dialogFeature = Dialog(requireContext())
+        val dialogBindingFeature = DialogAddFeatureBinding.inflate(layoutInflater)
+        dialogFeature.setContentView(dialogBindingFeature.root)
+
+        when (position) {
+            0 -> {
+                dialogBindingFeature.parentDialogTime.visibility = View.VISIBLE
+                dialogBindingFeature.botonDialogAddTime.setOnClickListener {
+                    val tiempoComida = dialogBindingFeature.etDialogAddTime.text.toString()
+
+                    if (tiempoComida.isNotBlank()) {
+                        binding.tvaddTimeFood.text = tiempoComida
+
+                        dialogFeature.dismiss()
+                    } else {
+                        dialogBindingFeature.etDialogAddTime.error =
+                            "Debes añadir el tiempo de preparacion"
+                    }
+                }
+            }
+            1 -> {
+                dialogBindingFeature.parentDialogPasos.visibility = View.VISIBLE
+                dialogBindingFeature.botonDialogAddPasos.setOnClickListener {
+                    val pasosComida = dialogBindingFeature.etDialogAddPasos.text.toString()
+
+                    if (pasosComida.isNotBlank()) {
+                        binding.tvAddPasosFood.text = pasosComida
+
+                        dialogFeature.dismiss()
+                    } else {
+                        dialogBindingFeature.etDialogAddPasos.error =
+                            "Debes añadir la cantidad de pasos"
+                    }
+                }
+            }
+        }
+        dialogFeature.show()
     }
 
     override fun onCreateView(

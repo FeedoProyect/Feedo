@@ -21,5 +21,4 @@ class FragmentPageAddRecetaAdapter(
     }
 
     override fun getItemCount() = 2
-
 }
