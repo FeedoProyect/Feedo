@@ -112,6 +112,7 @@
     <string name="botonAddComida">¡Listo!</string>
     <string name="hintDialogTime_addTime">Añade el tiempo de preparación</string>
     <string name="hintDialogTime_addPasos">Añade la cantidad de pasos</string>
+    <string name="hintDialog_addStepItem">Añade una instrucción</string>
 
 
 </resources>

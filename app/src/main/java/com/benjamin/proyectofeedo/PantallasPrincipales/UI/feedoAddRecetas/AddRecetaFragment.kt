@@ -11,6 +11,11 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewpager2.widget.ViewPager2
 import com.benjamin.proyectofeedo.databinding.DialogRecetasBinding
 import com.benjamin.proyectofeedo.databinding.FragmentAddRecetasBinding
@@ -19,6 +24,8 @@ import com.benjamin.proyectofeedo.databinding.DialogAddFeatureBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import kotlin.getValue
 
 @AndroidEntryPoint
 class AddRecetaFragment : Fragment() {
@@ -30,6 +37,7 @@ class AddRecetaFragment : Fragment() {
 
     private lateinit var adapter: FragmentPageAddRecetaAdapter
 
+    private val addRecetaViewModel by activityViewModels<AddRecetaViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -121,14 +129,10 @@ class AddRecetaFragment : Fragment() {
                             binding.tvAddPasosFood.visibility = View.GONE
 
                             binding.tvaddTimeFood.setOnClickListener {
-                                initDialogsAddFeature(
-                                    position
-                                )
+                                initDialogsAddFeature(position)
                             }
                             binding.imgAddTimeFood.setOnClickListener {
-                                initDialogsAddFeature(
-                                    position
-                                )
+                                initDialogsAddFeature(position)
                             }
                         }
 
@@ -139,15 +143,12 @@ class AddRecetaFragment : Fragment() {
                             binding.tvAddPasosFood.visibility = View.VISIBLE
 
                             binding.tvAddPasosFood.setOnClickListener {
-                                initDialogsAddFeature(
-                                    position
-                                )
+                                initDialogsAddFeature(position)
                             }
                             binding.imgAddPasosFood.setOnClickListener {
-                                initDialogsAddFeature(
-                                    position
-                                )
+                                initDialogsAddFeature(position)
                             }
+                            ListenSteps()
                         }
                     }
                 }
@@ -182,17 +183,38 @@ class AddRecetaFragment : Fragment() {
                     val pasosComida = dialogBindingFeature.etDialogAddPasos.text.toString()
 
                     if (pasosComida.isNotBlank()) {
-                        binding.tvAddPasosFood.text = pasosComida
+                        val cantidad = pasosComida.toIntOrNull()
 
-                        dialogFeature.dismiss()
-                    } else {
-                        dialogBindingFeature.etDialogAddPasos.error =
-                            "Debes añadir la cantidad de pasos"
+                        if (cantidad != null && cantidad >= 0) {
+                            binding.tvAddPasosFood.text = pasosComida
+
+                            addRecetaViewModel.setCantidadPasos(cantidad)
+
+                            dialogFeature.dismiss()
+                        } else {
+                            dialogBindingFeature.etDialogAddPasos.error =
+                                "Debes añadir la cantidad de pasos"
+                        }
                     }
                 }
             }
         }
         dialogFeature.show()
+    }
+
+    fun ListenSteps() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                addRecetaViewModel.pasos.collect {
+                    if(it.size == 0){
+                        val texto = "¿Cantidad\npasos?"
+                        binding.tvAddPasosFood.text = texto
+                    } else {
+                        binding.tvAddPasosFood.text = it.size.toString()
+                    }
+                }
+            }
+        }
     }
 
     override fun onCreateView(
