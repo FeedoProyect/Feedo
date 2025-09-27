@@ -1,4 +1,3 @@
-
 package com.benjamin.proyectofeedo.PantallaDetalleDeComida.ui.tabs
 
 import android.os.Bundle
@@ -18,12 +17,19 @@ class InstruccionesFragment : Fragment() {
 
     companion object {
         private const val KEY_PASOS = "key_pasos"
+
         fun newInstance(items: ArrayList<String>) = InstruccionesFragment().apply {
-            arguments = Bundle().apply { putStringArrayList(KEY_PASOS, items) }
+            arguments = Bundle().apply {
+                putStringArrayList(KEY_PASOS, items)
+            }
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentInstruccionesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -33,7 +39,7 @@ class InstruccionesFragment : Fragment() {
 
         // Convertimos los strings a objetos Paso
         val pasos = data.mapIndexed { index, texto ->
-            Paso("Paso ${index + 1}", texto)
+            Pasos("Paso ${index + 1}", texto)
         }
 
         binding.recyclerInstrucciones.apply {
@@ -47,3 +53,5 @@ class InstruccionesFragment : Fragment() {
         _binding = null
     }
 }
+
+

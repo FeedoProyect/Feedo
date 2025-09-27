@@ -1,25 +1,51 @@
-package com.benjamin.proyectofeedo.PantallaDetalleDeComida.data
+package com.benjamin.proyectofeedo.PantallaDetalleDeComida.data.repositoriosImpl
 
-import android.util.Log
-import com.benjamin.proyectofeedo.PantallaDetalleDeComida.data.NetworkDetalleComida.DetalleComidaApiService
+import RecetaDetalleResponse
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.data.NetworkDetalleComida.toDomain
 import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.DetalleComidaRepository
 import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.model.RecetaDetalleModel
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.postgrest.postgrest
+import io.github.jan.supabase.postgrest.query.Columns
 import javax.inject.Inject
 
 class DetalleComidaRepositoryImpl @Inject constructor(
-    private val apiService: DetalleComidaApiService
-): DetalleComidaRepository {
-    //fari sacame este metodo para la carpeta detalle comida en data hijo de puta
+    private val client: SupabaseClient
+) : DetalleComidaRepository {
+
     override suspend fun getRecetaDetalle(id: Int): RecetaDetalleModel? {
         return try {
-            val list = apiService.getRecetaDetalleById(id = "eq.$id")
+            val response = client.postgrest["recetas"]
+                .select(
+                    Columns.raw(
+                        """
+                        id,
+                        titulo,
+                        imagen,
+                        descripcion,
+                        tiempo_preparacion,
+                        pasos,
+                        receta_ingredientes (
+                            ingredientes (
+                                id,
+                                nombre,
+                                img_ingrediente
+                            )
+                        )
+                        """.trimIndent()
+                    )
+                ) {
+                    filter { eq("id", id) }
+                    single() //
+                }
+                .decodeAs<RecetaDetalleResponse>()
 
-            val response = list.firstOrNull()
-            response?.toDomain()
-
+            response.toDomain()
         } catch (e: Exception) {
-            Log.e("RepositoryImpl", "Error al obtener detalle receta", e)
+            e.printStackTrace()
             null
         }
     }
 }
+
+

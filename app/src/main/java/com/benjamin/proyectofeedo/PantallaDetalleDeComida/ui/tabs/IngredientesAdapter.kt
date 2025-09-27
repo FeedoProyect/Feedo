@@ -3,31 +3,45 @@ package com.benjamin.proyectofeedo.PantallaDetalleDeComida.ui.tabs
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.model.IngredienteModel
 import com.benjamin.proyectofeedo.databinding.ItemIngredienteBinding
-import com.benjamin.proyectofeedo.R
+import com.squareup.picasso.Picasso
 
+class IngredienteAdapter(
+    private val ingredientes: List<IngredienteModel>
+) : RecyclerView.Adapter<IngredienteAdapter.IngredienteViewHolder>() {
 
-class IngredientesAdapter(
-    private val data: List<String>
-) : RecyclerView.Adapter<IngredientesAdapter.ViewHolder>() {
-
-    inner class ViewHolder(val binding: ItemIngredienteBinding) :
+    inner class IngredienteViewHolder(val binding: ItemIngredienteBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredienteViewHolder {
         val binding = ItemIngredienteBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return ViewHolder(binding)
+        return IngredienteViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val ingrediente = data[position]
-        holder.binding.txtTituloIngredientes.text = ingrediente
+    override fun onBindViewHolder(holder: IngredienteViewHolder, position: Int) {
+        val ingrediente = ingredientes[position]
+
+
+        holder.binding.NombreIngrediente.text = ingrediente.nombre
+
+
+        ingrediente.imagen?.let { url ->
+            if (url.isNotEmpty()) {
+                Picasso.get()
+                    .load(url)
+                    .placeholder(android.R.color.darker_gray) // mientras carga
+                    .error(android.R.color.darker_gray)    // si np hay imagenn
+                    .into(holder.binding.imgIngredientes)
+            }
+        }
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int = ingredientes.size
 }
+
 
