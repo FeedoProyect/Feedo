@@ -17,15 +17,16 @@ class AddRecetaViewModel @Inject constructor() : ViewModel() {
         val pasosActuales = _pasos.value.toMutableList()
         val cantidadActual = pasosActuales.size
 
-        when{
-            cantidad > cantidadActual ->{
-                for(i in cantidadActual until cantidad){
+        when {
+            cantidad > cantidadActual -> {
+                for (i in cantidadActual until cantidad) {
                     val pasoNuevo = Paso("Paso ${i + 1}", "")
                     pasosActuales.add(pasoNuevo)
                 }
             }
-            cantidad < cantidadActual ->{
-                while (pasosActuales.size > cantidad){
+
+            cantidad < cantidadActual -> {
+                while (pasosActuales.size > cantidad) {
                     pasosActuales.removeAt(pasosActuales.size - 1)
                 }
             }
@@ -49,5 +50,16 @@ class AddRecetaViewModel @Inject constructor() : ViewModel() {
             pasosActuales[index] = paso.copy(instruccion = nuevaInstruccion)
             _pasos.value = pasosActuales
         }
+    }
+
+    fun eliminarPaso(posicion: Int) {
+        val pasosActuales = _pasos.value.toMutableList()
+        if(posicion > 0 && posicion < pasosActuales.size){
+            pasosActuales.removeAt(posicion)
+        }
+        val pasosRenumerados = pasosActuales.mapIndexed { index, pasoExistente ->
+            pasoExistente.copy(numero = "Paso ${index + 1}")
+        }
+        _pasos.value = pasosRenumerados
     }
 }

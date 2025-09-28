@@ -4,10 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.model.Paso
-import com.benjamin.proyectofeedo.databinding.ItemPasoBinding
+import com.benjamin.proyectofeedo.databinding.ItemEditPasosBinding
 
 class AddPasosAdapter(
-    private val OnItemSelected: (Paso) -> Unit
+    private val OnItemSelected: (Paso) -> Unit,
+    private val OnClickDelete: (Int) -> Unit
 ) : RecyclerView.Adapter<AddPasosViewHolder>() {
 
     private val listNewSteps = mutableListOf<Paso>()
@@ -22,7 +23,7 @@ class AddPasosAdapter(
         parent: ViewGroup,
         viewType: Int
     ): AddPasosViewHolder {
-        val binding = ItemPasoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemEditPasosBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AddPasosViewHolder(binding)
     }
 
@@ -30,7 +31,7 @@ class AddPasosAdapter(
         holder: AddPasosViewHolder,
         position: Int
     ) {
-        holder.render(listNewSteps[position], OnItemSelected)
+        holder.render(listNewSteps[position], OnItemSelected, OnClickDelete, position)
     }
 
     override fun getItemCount() = listNewSteps.size

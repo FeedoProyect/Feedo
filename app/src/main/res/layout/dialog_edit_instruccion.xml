@@ -13,14 +13,14 @@
         android:id="@+id/tvPosicionStep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Paso 1"
         android:layout_marginBottom="10dp"
-        android:textSize="15sp"
         android:textColor="@color/text_de_items"
-        android:textStyle="bold"/>
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:text="Paso 1" />
 
     <EditText
-        android:id="@+id/etDialogAddTime"
+        android:id="@+id/etDialogEditStep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/text_de_items"
@@ -28,16 +28,42 @@
         android:textColor="@color/text_de_items"
         android:textColorHint="@color/color_hint_buscador" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/botonDialogAddTime"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:fontFamily="@font/balo_thambi"
-        android:text="@string/botonDialog_add"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        app:backgroundTint="@color/tittle_color"
-        app:cornerRadius="15dp" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="2">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonDialogEditStep"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:padding="4dp"
+            android:fontFamily="@font/balo_thambi"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:backgroundTint="@color/tittle_color"
+            app:cornerRadius="15dp"
+            android:text="@string/boton_guardarcambios" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonDialogEditDeleteStep"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:padding="4dp"
+            android:fontFamily="@font/balo_thambi"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:backgroundTint="@color/red"
+            app:cornerRadius="15dp"
+            android:text="@string/boton_dialogdeletestep" />
+
+    </LinearLayout>
 
 </LinearLayout>

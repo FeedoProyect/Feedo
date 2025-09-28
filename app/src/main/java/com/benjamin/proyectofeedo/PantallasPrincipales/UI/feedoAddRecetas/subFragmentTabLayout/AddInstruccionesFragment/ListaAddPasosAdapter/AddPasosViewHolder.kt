@@ -2,15 +2,24 @@ package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoAddRecetas.subFr
 
 import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.model.Paso
-import com.benjamin.proyectofeedo.databinding.ItemPasoBinding
+import com.benjamin.proyectofeedo.databinding.ItemEditPasosBinding
 
-class AddPasosViewHolder(private val binding: ItemPasoBinding) :
+class AddPasosViewHolder(private val binding: ItemEditPasosBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun render(pasos: Paso, OnItemSelected: (Paso) -> Unit){
-        binding.tvPasoNumero.text = pasos.numero
-        binding.tvPasoDescripcion.text = pasos.instruccion
+    fun render(
+        pasos: Paso,
+        OnItemSelected: (Paso) -> Unit,
+        OnClickDelete: (Int) -> Unit,
+        position: Int
+    ){
+        binding.tvEditPasoNumero.text = pasos.numero
+        binding.tvEditPasoDescripcion.text = pasos.instruccion
 
         binding.parentAddPaso.setOnClickListener { OnItemSelected(pasos) }
+        binding.imgDeleteStep.setOnClickListener {
+            OnClickDelete(position)
+            true
+        }
     }
 }

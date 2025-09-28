@@ -47,5 +47,3 @@ class DetalleComidaRepositoryImpl @Inject constructor(
         }
     }
 }
-
-

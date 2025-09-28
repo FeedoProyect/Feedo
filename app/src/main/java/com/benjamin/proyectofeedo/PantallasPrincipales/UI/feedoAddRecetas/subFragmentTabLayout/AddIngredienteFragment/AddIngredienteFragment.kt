@@ -62,7 +62,6 @@ class AddIngredienteFragment : Fragment() {
                 dialogAddIngrediente.dismiss()
             }
         }
-
         dialogAddIngrediente.show()
     }
 

@@ -2,13 +2,20 @@ package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoAddRecetas
 
 import android.app.Activity
 import android.app.Dialog
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -20,8 +27,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.benjamin.proyectofeedo.databinding.DialogRecetasBinding
 import com.benjamin.proyectofeedo.databinding.FragmentAddRecetasBinding
 import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoAddRecetas.subFragmentTabLayout.FragmentPageAddRecetaAdapter
+import com.benjamin.proyectofeedo.R
 import com.benjamin.proyectofeedo.databinding.DialogAddFeatureBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -115,6 +124,9 @@ class AddRecetaFragment : Fragment() {
             tab.text = tabTitle[position]
         }.attach()
 
+        //aplica la fuente al tab seleccionado
+        applyCustomFontToTabs()
+
         // Escuchar cuando cambia de página
         binding.viewPage2AgregarComida.registerOnPageChangeCallback(
             object : ViewPager2.OnPageChangeCallback() {
@@ -170,6 +182,7 @@ class AddRecetaFragment : Fragment() {
                     if (tiempoComida.isNotBlank()) {
                         binding.tvaddTimeFood.text = tiempoComida
 
+
                         dialogFeature.dismiss()
                     } else {
                         dialogBindingFeature.etDialogAddTime.error =
@@ -215,6 +228,23 @@ class AddRecetaFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun applyCustomFontToTabs(){
+        binding.tabLayoutAgregarReceta.post {
+            binding.tabLayoutAgregarReceta.selectTab(binding.tabLayoutAgregarReceta.getTabAt(0))
+        }
+    }
+
+    private fun confirmarReduccionPasos(nuevaCantidad: Int, cantidadActual: Int) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Reducir pasos")
+            .setMessage("Esto eliminará ${cantidadActual - nuevaCantidad} paso(s). ¿Continuar?")
+            .setPositiveButton("Sí") { _, _ ->
+                addRecetaViewModel.setCantidadPasos(nuevaCantidad)
+            }
+            .setNegativeButton("Cancelar", null)
+            .show()
     }
 
     override fun onCreateView(

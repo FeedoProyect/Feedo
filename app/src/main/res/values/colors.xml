@@ -5,7 +5,7 @@
     <color name="transparente">#00000000</color>
 
     <!--Colores de prueba para fragments-->
-    <color name="red">#F80202</color>
+    <color name="red">#F67171</color>
     <color name="orange">#FF5722</color>
     <color name="pink">#D113C6</color>
     <color name="blue">#2317D3</color>
@@ -23,7 +23,8 @@
     <color name="fondo_buscador_color">#F2F2F2</color>
     <color name="color_text_tabs_perfil">#FFAC00</color>
     <color name="color_background_cardview">#FFFFFF</color>
-    <color name="color_textAddTime">#BEBEBE</color>
+    <color name="color_textAddTime">#748189</color>
+    <color name="color_fondoTabLayout">#E6EBF2</color>
 
     <color name="color_boton_welcome">#FFFFFF</color>
 

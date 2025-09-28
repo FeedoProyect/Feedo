@@ -45,9 +45,13 @@ class AddInstruccionesFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        adapterAddPasos = AddPasosAdapter{ paso ->
-            initDialogEditStep(paso)
-        }
+        adapterAddPasos = AddPasosAdapter(
+            OnItemSelected = { paso ->
+                initDialogEditStep(paso)
+            }, OnClickDelete = { paso ->
+                addRecetaViewModel.eliminarPaso(paso)
+            }
+        )
 
 
         binding.rvAddInstrucciones.apply {
@@ -56,7 +60,7 @@ class AddInstruccionesFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 addRecetaViewModel.pasos.collect { pasos ->
                     adapterAddPasos.submitList(pasos)
                 }
@@ -65,7 +69,7 @@ class AddInstruccionesFragment : Fragment() {
 
         val listaVacia = binding.rvAddInstrucciones
 
-        if(listaVacia.isEmpty()){
+        if (listaVacia.isEmpty()) {
             binding.parentInstrucciones.setOnClickListener { initDialogAddSteps() }
         } else {
             binding.tvAddPasos.setOnClickListener { initDialogAddSteps() }
@@ -73,7 +77,7 @@ class AddInstruccionesFragment : Fragment() {
         }
     }
 
-    private fun initDialogAddSteps(){
+    private fun initDialogAddSteps() {
         val dialogSteps = Dialog(requireContext())
         val dialogBindingSteps = DialogRecetasBinding.inflate(layoutInflater)
         dialogSteps.setContentView(dialogBindingSteps.root)
@@ -81,7 +85,7 @@ class AddInstruccionesFragment : Fragment() {
         dialogBindingSteps.botonAddNameComida.setOnClickListener {
             val instruccion = dialogBindingSteps.etAddComida.text.toString()
 
-            if(instruccion.isNotBlank()){
+            if (instruccion.isNotBlank()) {
                 addRecetaViewModel.addInstruccion(instruccion)
                 dialogSteps.dismiss()
             }
@@ -90,7 +94,7 @@ class AddInstruccionesFragment : Fragment() {
         dialogSteps.show()
     }
 
-    private fun initDialogEditStep(paso: Paso){
+    private fun initDialogEditStep(paso: Paso) {
         val dialogEditStep = Dialog(requireContext())
         val dialogBinding = DialogEditInstruccionBinding.inflate(layoutInflater)
         dialogEditStep.setContentView(dialogBinding.root)
@@ -103,25 +107,29 @@ class AddInstruccionesFragment : Fragment() {
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-        // Cambiar el texto del botón
-        val guardarCambios = "Guardar Cambios"
-        dialogBinding.botonDialogAddTime.text = guardarCambios
-
         val texto = paso.numero
+        val soloNumero = paso.numero.replace("Paso ", "")
+        val numeroInt = soloNumero.toIntOrNull() ?: 0
 
         dialogBinding.tvPosicionStep.text = texto
-        dialogBinding.etDialogAddTime.setText(paso.instruccion)
+        dialogBinding.etDialogEditStep.setText(paso.instruccion)
 
-        dialogBinding.botonDialogAddTime.setOnClickListener {
-            val editInstruccion = dialogBinding.etDialogAddTime.text.toString()
+        dialogBinding.botonDialogEditStep.setOnClickListener {
+            val editInstruccion = dialogBinding.etDialogEditStep.text.toString()
 
             if (editInstruccion.isNotBlank()) {
                 addRecetaViewModel.editarInstruccion(paso, editInstruccion)
                 dialogEditStep.dismiss()
-                Toast.makeText(requireContext(), "Instrucción actualizada", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Instrucción actualizada", Toast.LENGTH_SHORT)
+                    .show()
             } else {
-                dialogBinding.etDialogAddTime.error = "La instrucción no puede estar vacía"
+                dialogBinding.etDialogEditStep.error = "La instrucción no puede estar vacía"
             }
+        }
+
+        dialogBinding.botonDialogEditDeleteStep.setOnClickListener {
+            addRecetaViewModel.eliminarPaso(numeroInt)
+            dialogEditStep.dismiss()
         }
         dialogEditStep.show()
     }

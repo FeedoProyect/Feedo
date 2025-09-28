@@ -12,6 +12,23 @@
     app:strokeColor="@color/color_boton_welcome"
     app:strokeWidth="1dp">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/imgDeleteStep"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="16dp"
+        android:layout_gravity="end|top"
+        android:backgroundTint="@color/white">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_delete_step" />
+
+    </androidx.cardview.widget.CardView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +37,7 @@
 
         <!-- Paso número -->
         <TextView
-            android:id="@+id/tvPasoNumero"
+            android:id="@+id/tvEditPasoNumero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
@@ -31,9 +48,10 @@
 
         <!-- Descripción -->
         <TextView
-            android:id="@+id/tvPasoDescripcion"
+            android:id="@+id/tvEditPasoDescripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:lineSpacingExtra="4dp"
             android:textColor="@color/dark_gray"
             android:textSize="14sp"
