@@ -7,51 +7,53 @@
     android:padding="24dp"
     android:background="@color/color_background_cardview">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Perfil"
+        android:textStyle="bold"
+        android:fontFamily="@font/balo_thambi"
+        android:textSize="22sp"
+        android:textColor="@color/text_de_items"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Contenedor de la foto con loading (centrado correctamente) -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_marginBottom="24dp">
+        android:layout_marginBottom="24dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:foregroundGravity="center"
+        android:gravity="center">
 
-        <TextView
-            android:layout_width="90dp"
-            android:layout_height="40dp"
-            android:text="Perfil"
-            android:textStyle="bold"
-            android:fontFamily="@font/balo_thambi"
-            android:textSize="25dp"
-            android:layout_marginEnd="130dp"/>
+        <!-- Imagen de perfil redonda (mismo tamaño que pediste) -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:src="@drawable/agregarperfil"
+            android:scaleType="centerCrop"
+            android:clickable="true"
+            android:focusable="true"
+            app:shapeAppearanceOverlay="@style/CircularImagePerfil"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="120dp"
-            android:layout_height="110dp"
-            app:cardCornerRadius="60dp"
-            app:cardElevation="4dp"
-            android:backgroundTint="@color/tittle_color">
+        <!-- Loading centrado arriba de la imagen -->
+        <ProgressBar
+            android:id="@+id/progressBarFoto"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:layout_gravity="center"/>
+    </FrameLayout>
 
-            <ImageView
-                android:id="@+id/imgProfile"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_gravity="center"
-                android:layout_marginVertical="70dp"
-                android:contentDescription="Foto de perfil"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_image" />
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Agrega una foto"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/text_de_items"/>
-    </LinearLayout>
-
-
+    <!-- Nombre -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,7 +68,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="12dp"
         app:cardElevation="2dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/itemPersoPerfil">
 
         <EditText
@@ -80,7 +82,6 @@
             android:textColorHint="@color/dark_gray"
             android:background="@android:color/transparent"/>
     </androidx.cardview.widget.CardView>
-
 
     <!-- Biografía -->
     <TextView
@@ -97,7 +98,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="12dp"
         app:cardElevation="2dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="32dp"
         android:backgroundTint="@color/itemPersoPerfil">
 
         <EditText
@@ -113,13 +114,12 @@
             android:background="@android:color/transparent"/>
     </androidx.cardview.widget.CardView>
 
-
-
+    <!-- Botón Guardar -->
     <androidx.cardview.widget.CardView
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:layout_gravity="center"
+        android:layout_marginTop="24dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
         android:backgroundTint="@color/tittle_color">
@@ -138,4 +138,6 @@
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>
+
+
 
