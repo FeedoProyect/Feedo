@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt")
     id("androidx.navigation.safeargs.kotlin")
     kotlin("plugin.serialization") version "2.2.0"
-    id("kotlin-parcelize")
+
 }
 
 android {

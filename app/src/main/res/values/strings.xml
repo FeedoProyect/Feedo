@@ -51,8 +51,9 @@
     <!-- Pantalla perfil -->
     <string name="perfil_text_perfil">Perfil</string>
     <string name="perfil_biografia_more...">Mas...</string>
-
-
+    <string name="perfil_default">usuario</string>
+    <string name="perfil_biografia_more">Ver más</string>
+    <string name="perfil_biografia_less">Ver menos</string>
     <!-- Pantalla de bienvenidos -->
     <string name="description_feedo">
         Con Feedo, cocinar es simple, divertido y sabdroso: aprendé nuevas recetas

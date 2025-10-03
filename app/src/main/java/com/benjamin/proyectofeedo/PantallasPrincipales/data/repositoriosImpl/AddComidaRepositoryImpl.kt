@@ -18,7 +18,7 @@ class AddComidaRepositoryImpl @Inject constructor(
                 }
                 .decodeSingle<FavoritosRequestModel>()
 
-            Result.success(response) // ahora compila ✅
+            Result.success(response)
         } catch (e: Exception) {
             Result.failure(e)
         }
