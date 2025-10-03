@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DarkModeViewModel @Inject constructor(
-    private val getDarkModeUseCase: GetDarkModeUseCase,
+    getDarkModeUseCase: GetDarkModeUseCase,
     private val saveDarkModeUseCase: SaveDarkModeUseCase
 ) : ViewModel() {
 

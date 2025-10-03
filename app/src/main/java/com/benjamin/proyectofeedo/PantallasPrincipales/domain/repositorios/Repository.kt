@@ -5,6 +5,7 @@ import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosReceta
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FotoIngredientesModel
 
 interface Repository {
     suspend fun getComidas(catalogoId: Int): List<ComidasModel>?
@@ -18,4 +19,6 @@ interface Repository {
     suspend fun getComidaSeccionMenu(seccionId: Int): List<ComidasSeccionMenuModel>?
 
     suspend fun getComidaFavoritos(usuarioId: String): List<FavoritosReceta>?
+
+    suspend fun getFotosIngredientes(name: String): List<FotoIngredientesModel>?
 }

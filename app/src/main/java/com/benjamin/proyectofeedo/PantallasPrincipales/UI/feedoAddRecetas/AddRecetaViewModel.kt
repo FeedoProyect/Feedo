@@ -52,11 +52,10 @@ class AddRecetaViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun eliminarPaso(posicion: Int) {
+    fun eliminarPaso(paso: Paso) {
         val pasosActuales = _pasos.value.toMutableList()
-        if(posicion > 0 && posicion < pasosActuales.size){
-            pasosActuales.removeAt(posicion)
-        }
+        pasosActuales.remove(paso)
+
         val pasosRenumerados = pasosActuales.mapIndexed { index, pasoExistente ->
             pasoExistente.copy(numero = "Paso ${index + 1}")
         }

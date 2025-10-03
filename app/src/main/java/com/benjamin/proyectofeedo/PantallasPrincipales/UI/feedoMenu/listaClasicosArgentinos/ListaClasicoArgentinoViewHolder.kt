@@ -24,7 +24,7 @@ class ListaClasicoArgentinoViewHolder(
         binding.imgAddComidaSeccionFav.setOnClickListener {
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener
             val favorito = FavoritosRequestModel(
-                recetaId = comidasModel.id,
+                recetaId = comidasModel.recetas.id,
                 usuarioId = userId
             )
             onItemSelectedFav(favorito)

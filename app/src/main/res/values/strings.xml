@@ -104,17 +104,23 @@
     <string name="textview_tituloAgregarReceta">Agregar titulo: </string>
     <string name="textView_ingredientes">Ingredientes</string>
     <string name="hintDialog_addcomida">Añade el nombre de tu comida</string>
-    <string name="botonDialog_add">Añadir</string>
+    <string name="botonDialog_add">Agregar</string>
     <string name="textView_addTime">Agregar\nTiempo</string>
     <string name="textView_addCantidadPasos">¿Cuantos\npasos?</string>
     <string name="textView_addIngrediente">Agregar ingrediente</string>
     <string name="textView_addPasos">Agregar instrucción</string>
+    <string name="textView_addNombreIngrediente">Agregar nombre de ingrediente</string>
+    <string name="textView_addImgIngrediente">Agregar foto del ingrediente</string>
     <string name="botonAddComida">¡Listo!</string>
-    <string name="hintDialogTime_addTime">Añade el tiempo de preparación</string>
-    <string name="hintDialogTime_addPasos">Añade la cantidad de pasos</string>
-    <string name="hintDialog_addStepItem">Añade una instrucción</string>
+    <string name="textViewDialog_addTime">Tiempo de preparación</string>
+    <string name="textViewDialogStep_addPasos">Añade la cantidad de pasos</string>
     <string name="boton_dialogdeletestep">Borrar</string>
     <string name="boton_guardarcambios">Guardar</string>
+    <string name="tv_descriptionAddTime">Agregar un numero y\nponer el tiempo abreviado\n(hs, min, seg).</string>
+    <string name="tv_modificarInstruccion">Agregar o modificar instruccion</string>
+    <string name="tv_descriptionAddCantidadSteps">Agregar solamente UN NUMERO que determina la cantidad de pasos.</string>
+    <string name="textView_edit_foto_ingredientes">Modificar foto del ingrediente</string>
+    <string name="textView_edit_nombre_ingredientes">Modificar nombre y cantidad del ingrediente</string>
 
 
 </resources>

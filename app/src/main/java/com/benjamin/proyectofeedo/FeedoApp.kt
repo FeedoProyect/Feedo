@@ -18,8 +18,8 @@ class FeedoApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // Usamos un scope porque DataStore devuelve Flow
-        CoroutineScope(Dispatchers.IO).launch {
+        // Corremos en Main porque afecta la UI
+        CoroutineScope(Dispatchers.Main).launch {
             themeRepository.getDarkMode().collect { darkMode ->
                 val mode = if (darkMode.darkMode) {
                     AppCompatDelegate.MODE_NIGHT_YES

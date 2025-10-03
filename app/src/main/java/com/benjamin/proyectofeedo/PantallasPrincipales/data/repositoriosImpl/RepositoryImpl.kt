@@ -4,6 +4,7 @@ import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidaDestac
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosReceta
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FotoIngredientesModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.IdFavoritosRecetaModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.Repository
 import io.github.jan.supabase.SupabaseClient
@@ -39,8 +40,8 @@ class RepositoryImpl @Inject constructor(
             val response = client.postgrest["recetas"]
                 .select(
                     Columns.raw("id, titulo, imagen, tiempo_preparacion, receta_catalogo2!inner(catalogo_id)")
-                ){
-                    filter{
+                ) {
+                    filter {
                         eq("receta_catalogo2.catalogo_id", catalogoId)
                     }
                 }
@@ -58,8 +59,8 @@ class RepositoryImpl @Inject constructor(
             val response = client.postgrest["recetas"]
                 .select(
                     Columns.raw("id, titulo, imagen, receta_catalogo!inner(catalogo_id)")
-                ){
-                    filter{
+                ) {
+                    filter {
                         ilike("titulo", "$name%")
                     }
                 }
@@ -77,8 +78,8 @@ class RepositoryImpl @Inject constructor(
             val response = client.postgrest["recetas"]
                 .select(
                     Columns.raw("*")
-                ){
-                    filter{
+                ) {
+                    filter {
                         ilike("titulo", "$name%")
                     }
                 }
@@ -111,17 +112,35 @@ class RepositoryImpl @Inject constructor(
             val response = client.postgrest["favoritos2"]
                 .select(
                     Columns.raw("id_usuario, receta_id, recetas(id, titulo, imagen)")
-                ){
-                    filter{
+                ) {
+                    filter {
                         eq("id_usuario", usuarioId)
                     }
                 }
                 .decodeList<IdFavoritosRecetaModel>()
 
             response.map { it.recetas }
-        } catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
             emptyList()
+        }
+    }
+
+    override suspend fun getFotosIngredientes(name: String): List<FotoIngredientesModel>? {
+        return try {
+            val response = client.postgrest["menu_ingredientes"]
+                .select(
+                    Columns.raw("*")
+                ) {
+                    filter {
+                        ilike("nombre", "$name%")
+                    }
+                }
+                .decodeList<FotoIngredientesModel>()
+            if (response.isEmpty()) null else response
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         }
     }
 }

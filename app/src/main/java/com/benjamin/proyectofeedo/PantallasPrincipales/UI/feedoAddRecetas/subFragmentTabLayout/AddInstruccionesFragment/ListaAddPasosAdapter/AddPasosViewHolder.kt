@@ -10,15 +10,14 @@ class AddPasosViewHolder(private val binding: ItemEditPasosBinding) :
     fun render(
         pasos: Paso,
         OnItemSelected: (Paso) -> Unit,
-        OnClickDelete: (Int) -> Unit,
-        position: Int
+        OnClickDelete: (Paso) -> Unit,
     ){
         binding.tvEditPasoNumero.text = pasos.numero
         binding.tvEditPasoDescripcion.text = pasos.instruccion
 
         binding.parentAddPaso.setOnClickListener { OnItemSelected(pasos) }
         binding.imgDeleteStep.setOnClickListener {
-            OnClickDelete(position)
+            OnClickDelete(pasos)
             true
         }
     }

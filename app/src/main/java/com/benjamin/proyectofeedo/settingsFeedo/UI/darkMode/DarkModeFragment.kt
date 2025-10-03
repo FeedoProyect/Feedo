@@ -35,30 +35,14 @@ class DarkModeFragment : Fragment() {
     private fun observeViewModel() {
         darkModeViewModel.isDarkMode
             .onEach { darkMode ->
-                // Remueve temporalmente el listener para evitar loop
+                // Refleja el estado actual en el switch
                 binding.SwDarkMode.setOnCheckedChangeListener(null)
                 binding.SwDarkMode.isChecked = darkMode.darkMode
                 binding.SwDarkMode.setOnCheckedChangeListener { _, value ->
-                    onSwitchChanged(value)
+                    darkModeViewModel.toggleDarkMode(DarkModeModel(value))
                 }
-
-                // Aplica el modo oscuro al iniciar
-                applyDarkMode(darkMode.darkMode)
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
-    }
-
-    private fun onSwitchChanged(value: Boolean) {
-        applyDarkMode(value)
-        darkModeViewModel.toggleDarkMode(DarkModeModel(value))
-    }
-
-    private fun applyDarkMode(enabled: Boolean) {
-        if(enabled) {
-            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
-        }
     }
 
 

@@ -19,4 +19,6 @@
     <color name="detalleBtn">#FFAC00</color>
     <color name="editText">#2F2E2E</color>
     <color name="itemPersoPerfil">#242323</color>
+
+    <color name="color_fondo_item_steps">#7C7B7B</color>
 </resources>

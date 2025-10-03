@@ -22,7 +22,7 @@ class ListaSeccionesViewHolder(private val binding: ItemComidaSeccionesBinding) 
         binding.imgAgregarFavComidaSecciones.setOnClickListener {
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener
             val favorito = FavoritosRequestModel(
-                recetaId = comidasModel.id,
+                recetaId = comidasModel.recetas.id,
                 usuarioId = userId
             )
             onItemSelectedFav(favorito)

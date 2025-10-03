@@ -6,20 +6,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_de_items"
+        android:text="@string/hintDialog_addcomida"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="30dp"
+        android:gravity="center"/>
+
     <EditText
         android:id="@+id/etAddComida"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/hintDialog_addcomida"
-        android:textColorHint="@color/color_hint_buscador"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_dialog_corner"
         android:textColor="@color/text_de_items"
-        android:backgroundTint="@color/text_de_items"/>
+        android:gravity="center_vertical"
+        android:inputType="text"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/botonAddNameComida"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:text="@string/botonDialog_add"
         android:textColor="@color/white"
         android:textSize="22sp"

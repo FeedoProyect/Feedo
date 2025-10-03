@@ -29,15 +29,3 @@ class CatalogosListComidasViewHolder(private val binding: ItemComidasCatalogosBi
         }
     }
 }
-
-
-//proyecto a largo plazo lo de abajo
-
-// Cambiar ícono dependiendo si es favorito o no
-
-//        val iconRes = if (comidasModel.isFavorite) {
-//            R.drawable.ic_fav_filled
-//        } else {
-//            R.drawable.ic_fav_outline
-//        }
-//        binding.imgFav.setImageResource(iconRes)

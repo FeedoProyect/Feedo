@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -17,12 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.benjamin.proyectofeedo.PantallaDetalleDeComida.domain.model.Paso
 import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoAddRecetas.AddRecetaViewModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoAddRecetas.subFragmentTabLayout.AddInstruccionesFragment.ListaAddPasosAdapter.AddPasosAdapter
+import com.benjamin.proyectofeedo.databinding.DialogAddInstruccionBinding
 import com.benjamin.proyectofeedo.databinding.DialogEditInstruccionBinding
-import com.benjamin.proyectofeedo.databinding.DialogRecetasBinding
 import com.benjamin.proyectofeedo.databinding.FragmentAgregarInstruccionesBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.observeOn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddInstruccionesFragment : Fragment() {
@@ -33,6 +32,7 @@ class AddInstruccionesFragment : Fragment() {
     private lateinit var adapterAddPasos: AddPasosAdapter
 
     private val addRecetaViewModel by activityViewModels<AddRecetaViewModel>()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,13 +63,15 @@ class AddInstruccionesFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 addRecetaViewModel.pasos.collect { pasos ->
                     adapterAddPasos.submitList(pasos)
+
+                    updateDialogAddPasos(pasos.isEmpty())
                 }
             }
         }
+    }
 
-        val listaVacia = binding.rvAddInstrucciones
-
-        if (listaVacia.isEmpty()) {
+    private fun updateDialogAddPasos(isEmpty: Boolean) {
+        if (isEmpty) {
             binding.parentInstrucciones.setOnClickListener { initDialogAddSteps() }
         } else {
             binding.tvAddPasos.setOnClickListener { initDialogAddSteps() }
@@ -79,11 +81,16 @@ class AddInstruccionesFragment : Fragment() {
 
     private fun initDialogAddSteps() {
         val dialogSteps = Dialog(requireContext())
-        val dialogBindingSteps = DialogRecetasBinding.inflate(layoutInflater)
+        val dialogBindingSteps = DialogAddInstruccionBinding.inflate(layoutInflater)
         dialogSteps.setContentView(dialogBindingSteps.root)
 
-        dialogBindingSteps.botonAddNameComida.setOnClickListener {
-            val instruccion = dialogBindingSteps.etAddComida.text.toString()
+        val posicion = adapterAddPasos.itemCount + 1
+        val nuevaPosicion = "Paso ${posicion}"
+
+        dialogBindingSteps.tvPosicionAddStep.text = nuevaPosicion
+
+        dialogBindingSteps.botonAddStep.setOnClickListener {
+            val instruccion = dialogBindingSteps.etDialogAddStep.text.toString()
 
             if (instruccion.isNotBlank()) {
                 addRecetaViewModel.addInstruccion(instruccion)
@@ -108,8 +115,6 @@ class AddInstruccionesFragment : Fragment() {
         )
 
         val texto = paso.numero
-        val soloNumero = paso.numero.replace("Paso ", "")
-        val numeroInt = soloNumero.toIntOrNull() ?: 0
 
         dialogBinding.tvPosicionStep.text = texto
         dialogBinding.etDialogEditStep.setText(paso.instruccion)
@@ -128,7 +133,7 @@ class AddInstruccionesFragment : Fragment() {
         }
 
         dialogBinding.botonDialogEditDeleteStep.setOnClickListener {
-            addRecetaViewModel.eliminarPaso(numeroInt)
+            addRecetaViewModel.eliminarPaso(paso)
             dialogEditStep.dismiss()
         }
         dialogEditStep.show()

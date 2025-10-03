@@ -29,6 +29,7 @@ import com.benjamin.proyectofeedo.databinding.FragmentAddRecetasBinding
 import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoAddRecetas.subFragmentTabLayout.FragmentPageAddRecetaAdapter
 import com.benjamin.proyectofeedo.R
 import com.benjamin.proyectofeedo.databinding.DialogAddFeatureBinding
+import com.benjamin.proyectofeedo.settingsFeedo.UI.darkMode.DarkModeViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -47,6 +48,8 @@ class AddRecetaFragment : Fragment() {
     private lateinit var adapter: FragmentPageAddRecetaAdapter
 
     private val addRecetaViewModel by activityViewModels<AddRecetaViewModel>()
+    private val darkModeViewModel by activityViewModels<DarkModeViewModel>()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,8 +58,27 @@ class AddRecetaFragment : Fragment() {
 
 
     private fun initUI() {
+        observeDarkMode()
         initTab()
         initListeners()
+    }
+
+    private fun observeDarkMode() {
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                darkModeViewModel.isDarkMode.collect { darkMode ->
+                    if (darkMode.darkMode) {
+                        // Mostrar imagen dark
+                        binding.imgAgregarFotoComidaDark.visibility = View.VISIBLE
+                        binding.imgAgregarFotoComidaLight.visibility = View.GONE
+                    } else {
+                        // Mostrar imagen light
+                        binding.imgAgregarFotoComidaLight.visibility = View.VISIBLE
+                        binding.imgAgregarFotoComidaDark.visibility = View.GONE
+                    }
+                }
+            }
+        }
     }
 
     private fun initImage() {
@@ -173,6 +195,7 @@ class AddRecetaFragment : Fragment() {
         val dialogBindingFeature = DialogAddFeatureBinding.inflate(layoutInflater)
         dialogFeature.setContentView(dialogBindingFeature.root)
 
+
         when (position) {
             0 -> {
                 dialogBindingFeature.parentDialogTime.visibility = View.VISIBLE
@@ -193,7 +216,7 @@ class AddRecetaFragment : Fragment() {
             1 -> {
                 dialogBindingFeature.parentDialogPasos.visibility = View.VISIBLE
                 dialogBindingFeature.botonDialogAddPasos.setOnClickListener {
-                    val pasosComida = dialogBindingFeature.etDialogAddPasos.text.toString()
+                    val pasosComida = dialogBindingFeature.etDialogAddCantidadPasos.text.toString()
 
                     if (pasosComida.isNotBlank()) {
                         val cantidad = pasosComida.toIntOrNull()
@@ -205,7 +228,7 @@ class AddRecetaFragment : Fragment() {
 
                             dialogFeature.dismiss()
                         } else {
-                            dialogBindingFeature.etDialogAddPasos.error =
+                            dialogBindingFeature.etDialogAddCantidadPasos.error =
                                 "Debes añadir la cantidad de pasos"
                         }
                     }

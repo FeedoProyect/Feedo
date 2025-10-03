@@ -8,7 +8,7 @@ import com.benjamin.proyectofeedo.databinding.ItemEditPasosBinding
 
 class AddPasosAdapter(
     private val OnItemSelected: (Paso) -> Unit,
-    private val OnClickDelete: (Int) -> Unit
+    private val OnClickDelete: (Paso) -> Unit
 ) : RecyclerView.Adapter<AddPasosViewHolder>() {
 
     private val listNewSteps = mutableListOf<Paso>()
@@ -31,7 +31,7 @@ class AddPasosAdapter(
         holder: AddPasosViewHolder,
         position: Int
     ) {
-        holder.render(listNewSteps[position], OnItemSelected, OnClickDelete, position)
+        holder.render(listNewSteps[position], OnItemSelected, OnClickDelete)
     }
 
     override fun getItemCount() = listNewSteps.size

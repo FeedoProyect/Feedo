@@ -76,7 +76,6 @@
             android:id="@+id/action_perfilFragment_to_editarPerfilFragment"
             app:destination="@id/editarPerfilFragment" />
 
-        <!-- ⚡ ESTA ES LA QUE FALTABA -->
         <action
             android:id="@+id/action_perfilFragment_to_detalleRecetaFragment"
             app:destination="@id/detalleRecetaFragment" />
@@ -87,7 +86,12 @@
         android:id="@+id/addRecetasFragment"
         android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoAddRecetas.AddRecetaFragment"
         android:label="fragment_favoritos"
-        tools:layout="@layout/fragment_add_recetas" />
+        tools:layout="@layout/fragment_add_recetas" >
+
+        <action
+            android:id="@+id/action_addRecetasFragment_to_fotoIngredientesFragment"
+            app:destination="@id/fotoIngredientesFragment" />
+    </fragment>
 
     <!-- Settings -->
     <fragment
@@ -156,5 +160,10 @@
             android:id="@+id/action_seccionesFragment_to_detalleRecetaFragment"
             app:destination="@id/detalleRecetaFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/fotoIngredientesFragment"
+        android:name="com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoAddRecetas.subFragmentTabLayout.AddIngredienteFragment.PantallaFotoIngredientes.FotoIngredientesFragment"
+        android:label="fragment_foto_ingredientes"
+        tools:layout="@layout/fragment_foto_ingredientes" />
 
 </navigation>

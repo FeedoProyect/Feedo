@@ -25,6 +25,10 @@
     <color name="color_background_cardview">#FFFFFF</color>
     <color name="color_textAddTime">#748189</color>
     <color name="color_fondoTabLayout">#E6EBF2</color>
+    <color name="color_fondoBuscadorDialog">#BEBCBC</color>
+    <color name="color_text_stepsDescription">#616161</color>
+    <color name="color_fondo_item_steps">#D9D6D6</color>
+
 
     <color name="color_boton_welcome">#FFFFFF</color>
 

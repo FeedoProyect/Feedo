@@ -1,33 +1,62 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="8dp"
-    android:backgroundTint="@color/color_boton_welcome"
+    android:id="@+id/parent"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    android:backgroundTint="@color/color_fondo_item_steps"
+    app:cardCornerRadius="17dp"
+    app:cardElevation="4dp"
     app:strokeColor="@color/color_boton_welcome"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="2dp">
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="14dp">
+
+        <ImageView
+            android:id="@+id/imgAddIngredientes"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/corner_foto_ingrediente"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop" />
 
 
         <TextView
-            android:id="@+id/tvListAddIngrediente"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvAddIngrediente"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            tools:text="Ingredientes"
-            android:textStyle="bold"
-            android:textSize="18sp"
+            android:layout_weight="1"
             android:textColor="@color/text_de_items"
-            android:layout_marginBottom="12dp"/>
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Nombre del ingrediente" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imgDeleteIngrediente"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:cardCornerRadius="16dp"
+            android:layout_margin="8dp"
+            android:layout_gravity="end|top"
+            android:backgroundTint="@color/white">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_delete_step" />
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

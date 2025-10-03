@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:layout_marginHorizontal="16dp"
-    android:backgroundTint="#D9D6D6"
+    android:backgroundTint="@color/color_fondo_item_steps"
     app:cardCornerRadius="17dp"
     app:cardElevation="4dp"
     app:strokeColor="@color/color_boton_welcome"
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:textColor="@color/text_de_items"
+            android:textColor="@color/color_text_stepsDescription"
             android:textSize="15sp"
             android:textStyle="bold"
             tools:text="Paso 1" />
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:lineSpacingExtra="4dp"
-            android:textColor="@color/dark_gray"
+            android:textColor="@color/color_text_stepsDescription"
             android:textSize="14sp"
             tools:text="Descripción del paso..." />
 
