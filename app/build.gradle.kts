@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt")
     id("androidx.navigation.safeargs.kotlin")
     kotlin("plugin.serialization") version "2.2.0"
-
+    id("kotlin-parcelize")
 }
 
 android {
@@ -86,6 +86,7 @@ android {
 
         implementation(platform("io.github.jan-tennert.supabase:bom:$supabase_version"))
         implementation("io.github.jan-tennert.supabase:postgrest-kt")
+        implementation("io.github.jan-tennert.supabase:storage-kt")
         implementation("io.ktor:ktor-client-android:$ktor_version")
 
 
