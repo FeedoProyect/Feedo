@@ -1,5 +1,7 @@
 package com.benjamin.proyectofeedo.usuarioLogin.LoginUI
 
+import android.app.Activity
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.AuthRepository
@@ -26,9 +28,9 @@ class AuthUserViewModel @Inject constructor(
     private val _state = MutableStateFlow<AuthState>(AuthState.Idle)
     val state: StateFlow<AuthState> = _state
 
-
     private val _email = MutableStateFlow("")
     val email: Flow<String> = _email
+
     private val _password = MutableStateFlow("")
     val password = _password
 
@@ -64,13 +66,39 @@ class AuthUserViewModel @Inject constructor(
                 if (user != null) {
                     // ✅ Guardar sesión localmente
                     sessionRepository.saveUserUuid(user.id)
-
                     _state.value = AuthState.Success(user)
                 } else {
-                    _state.value = AuthState.Error("Credenciales inválidas")
+                    _state.value = AuthState.Error("Credenciales inválidas o email no verificado")
                 }
             } catch (e: Exception) {
                 _state.value = AuthState.Error(e.message ?: "Error desconocido")
+            }
+        }
+    }
+
+    /**
+     * Verifica si el email fue confirmado intentando hacer login.
+     * Supabase no permite login si el email no está verificado.
+     * @return true si el email fue verificado, false si aún no
+     */
+    suspend fun checkEmailVerification(email: String, password: String): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                // Intentar login - Supabase rechazará si el email no está verificado
+                val user = authRepository.login(email, password)
+
+                if (user != null) {
+                    // Login exitoso = email verificado
+                    // Cerrar sesión inmediatamente (solo estamos verificando)
+                    authRepository.logout()
+                    true
+                } else {
+                    // Login falló = email aún no verificado
+                    false
+                }
+            } catch (e: Exception) {
+                Log.e("AuthViewModel", "Error checking email verification", e)
+                false
             }
         }
     }
@@ -91,17 +119,15 @@ class AuthUserViewModel @Inject constructor(
         }
     }
 
-    fun loginWithGoogle() {
+    fun loginWithGoogle(activity: Activity) {
         viewModelScope.launch {
             _state.value = AuthState.Loading
             try {
                 val user = withContext(Dispatchers.IO) {
-                    authRepository.loginWithGoogle()
+                    authRepository.loginWithGoogle(activity)
                 }
                 if (user != null) {
-                    // ✅ Guardar sesión localmente
                     sessionRepository.saveUserUuid(user.id)
-
                     _state.value = AuthState.Success(user)
                 } else {
                     _state.value = AuthState.Error("No se pudo iniciar sesión con Google")

@@ -82,19 +82,29 @@ android {
 
         //versiones de supabase
         val supabase_version = "3.2.2"
-        val ktor_version = "3.2.3"
+        val ktor_version = "3.0.3"
 
-        implementation(platform("io.github.jan-tennert.supabase:bom:$supabase_version"))
-        implementation("io.github.jan-tennert.supabase:postgrest-kt")
-        implementation("io.github.jan-tennert.supabase:storage-kt")
+        // Agregar los módulos que necesitás explícitamente
+        implementation("io.github.jan-tennert.supabase:postgrest-kt:$supabase_version")
+        implementation("io.github.jan-tennert.supabase:storage-kt:$supabase_version")
+        implementation("io.github.jan-tennert.supabase:auth-kt:$supabase_version") // 👈 auth-kt en vez de gotrue-kt
         implementation("io.ktor:ktor-client-android:$ktor_version")
-
+        implementation("io.ktor:ktor-client-core:$ktor_version")
 
         //Verision de dataStore
         val dataStore_Version = "1.1.7"
 
         // DataStore
         implementation("androidx.datastore:datastore-preferences:$dataStore_Version")
+
+        // Google in nativo abajo
+
+        // Credential Manager (para el flujo nativo de Google)
+        implementation("androidx.credentials:credentials:1.3.0")
+        implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
+
+        // Google ID Token
+        implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
 
 
         //image picker

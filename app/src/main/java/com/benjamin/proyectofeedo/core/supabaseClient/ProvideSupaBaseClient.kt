@@ -44,7 +44,7 @@ object ProvideSupaBaseClient {
                 scheme = "app"
                 host = "supabase.com"
             }
-            install(Storage) // ✅ instalamos módulo de Storage
+            install(Storage)
         }
     }
 
@@ -94,5 +94,3 @@ object ProvideSupaBaseClient {
         return AddComidaRepositoryImpl(client)
     }
 }
-
-

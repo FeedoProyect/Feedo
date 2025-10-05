@@ -71,6 +71,10 @@ class LoginUserFragment : Fragment() {
         binding.tvRegistrarCuenta.setOnClickListener {
             ingresoRegistroCuenta()
         }
+
+        binding.cdLoginWhithGoogle.setOnClickListener {
+            initSessionGoogle()
+        }
     }
 
     private fun ingresoRegistroCuenta(){
@@ -88,6 +92,10 @@ class LoginUserFragment : Fragment() {
         } else {
             Toast.makeText(requireContext(), "Completa los campos", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun initSessionGoogle() {
+        authUserViewModel.loginWithGoogle(requireActivity())
     }
 
     override fun onCreateView(
