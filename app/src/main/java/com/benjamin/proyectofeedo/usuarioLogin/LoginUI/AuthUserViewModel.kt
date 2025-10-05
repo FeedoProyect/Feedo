@@ -91,5 +91,24 @@ class AuthUserViewModel @Inject constructor(
         }
     }
 
+    fun loginWithGoogle() {
+        viewModelScope.launch {
+            _state.value = AuthState.Loading
+            try {
+                val user = withContext(Dispatchers.IO) {
+                    authRepository.loginWithGoogle()
+                }
+                if (user != null) {
+                    // ✅ Guardar sesión localmente
+                    sessionRepository.saveUserUuid(user.id)
 
+                    _state.value = AuthState.Success(user)
+                } else {
+                    _state.value = AuthState.Error("No se pudo iniciar sesión con Google")
+                }
+            } catch (e: Exception) {
+                _state.value = AuthState.Error(e.message ?: "Error al iniciar sesión con Google")
+            }
+        }
+    }
 }

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".usuarioLogin.LoginUI.feedoRegisterAccount.RegisterUserFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tvCreaUnaCuenta"
@@ -19,11 +21,7 @@
             android:text="@string/register_text_creaCuenta"
             android:textColor="@color/text_de_items"
             android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/tvUsuario"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imgfeedoregister"/>
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imgfeedoregister"
@@ -31,210 +29,276 @@
             android:layout_height="100dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="40dp"
-            android:src="@drawable/feedo_removebg"
-            app:layout_constraintStart_toEndOf="@+id/tvCreaUnaCuenta"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:src="@drawable/feedo_removebg" />
 
-        <TextView
-            android:id="@+id/tvUsuario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/register_text_usuario"
-            android:textColor="@color/text_de_items"
-            android:textSize="17sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCreaUnaCuenta" />
+    </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/usuario"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvUsuario">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etUsuario"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="@drawable/edit_text_login"
-                android:hint="@string/register_hint_usuario"
-                android:maxLines="1"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:singleLine="true"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parent_datos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/register_text_usuario"
                 android:textColor="@color/text_de_items"
-                android:textSize="16sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvRegisterEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/register_text_email"
-            android:textColor="@color/text_de_items"
-            android:textSize="17sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usuario" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/usuario"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvUsuario">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/registerEmail"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvRegisterEmail">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUsuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/edit_text_login"
+                    android:hint="@string/register_hint_usuario"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:singleLine="true"
+                    android:textColor="@color/text_de_items"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etRegisterEmail"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="@drawable/edit_text_login"
-                android:hint="@string/register_hint_email"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:singleLine="true"
+            <TextView
+                android:id="@+id/tvRegisterEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/register_text_email"
                 android:textColor="@color/text_de_items"
-                android:textSize="16sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usuario" />
 
-        <TextView
-            android:id="@+id/tvRegisterContraseña"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/register_text_contraseña"
-            android:textColor="@color/text_de_items"
-            android:textSize="17sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registerEmail" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerEmail"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRegisterEmail">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/contra"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            app:endIconMode="password_toggle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvRegisterContraseña">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRegisterEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/edit_text_login"
+                    android:hint="@string/register_hint_email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:singleLine="true"
+                    android:textColor="@color/text_de_items"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etRegisterContraseña"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="@drawable/edit_text_login"
-                android:hint="@string/register_hint_contraseña"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:singleLine="true"
+            <TextView
+                android:id="@+id/tvRegisterContraseña"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/register_text_contraseña"
                 android:textColor="@color/text_de_items"
-                android:textSize="16sp" />
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/registerEmail" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/contra"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                app:endIconMode="password_toggle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRegisterContraseña">
 
-        <TextView
-            android:id="@+id/tvRegisterConfirmarContraseña"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/register_text_confirmarContraseña"
-            android:textColor="@color/text_de_items"
-            android:textSize="17sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contra" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRegisterContraseña"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/edit_text_login"
+                    android:hint="@string/register_hint_contraseña"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:singleLine="true"
+                    android:textColor="@color/text_de_items"
+                    android:textSize="16sp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/confirmarContraseña"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            app:endIconMode="password_toggle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvRegisterConfirmarContraseña">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etConfirmarContraseña"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="@drawable/edit_text_login"
-                android:hint="@string/register_hint_confirmarLacontraseña"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:singleLine="true"
+            <TextView
+                android:id="@+id/tvRegisterConfirmarContraseña"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/register_text_confirmarContraseña"
                 android:textColor="@color/text_de_items"
-                android:textSize="16sp" />
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contra" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/confirmarContraseña"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                app:endIconMode="password_toggle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRegisterConfirmarContraseña">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/botonRegistrado"
-            android:layout_width="320dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="60dp"
-            android:fontFamily="@font/balo_thambi"
-            android:text="@string/register_bottom_registrarse"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            app:backgroundTint="@color/tittle_color"
-            app:cornerRadius="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/confirmarContraseña" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etConfirmarContraseña"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/edit_text_login"
+                    android:hint="@string/register_hint_confirmarLacontraseña"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:singleLine="true"
+                    android:textColor="@color/text_de_items"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tvYatengoCuenta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="60dp"
-            android:layout_marginVertical="70dp"
-            android:text="@string/register_yaTengoCuenta"
-            android:textColor="@color/text_de_items"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/botonRegistrado" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tvInicieSesion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginVertical="70dp"
-            android:text="@string/register_iniciarSesion"
-            android:textColor="@color/tittle_color"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvYatengoCuenta"
-            app:layout_constraintTop_toBottomOf="@+id/botonRegistrado" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/botonRegistrado"
+                android:layout_width="320dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="60dp"
+                android:fontFamily="@font/balo_thambi"
+                android:text="@string/register_bottom_registrarse"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                app:backgroundTint="@color/tittle_color"
+                app:cornerRadius="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/confirmarContraseña" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- DIVISOR CON TEXTO "ALTERNATIVAS" -->
+            <LinearLayout
+                android:id="@+id/dividerAlternativas"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/botonRegistrado">
 
-</ScrollView>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="#CCCCCC" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/textView_vista_alternativas"
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="#CCCCCC" />
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cdRegisterWithGoogle"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dividerAlternativas">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_google" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvYatengoCuenta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginBottom="70dp"
+                android:text="@string/register_yaTengoCuenta"
+                android:textColor="@color/text_de_items"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cdRegisterWithGoogle" />
+
+            <TextView
+                android:id="@+id/tvInicieSesion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="70dp"
+                android:text="@string/register_iniciarSesion"
+                android:textColor="@color/tittle_color"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvYatengoCuenta"
+                app:layout_constraintTop_toBottomOf="@+id/cdRegisterWithGoogle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</LinearLayout>

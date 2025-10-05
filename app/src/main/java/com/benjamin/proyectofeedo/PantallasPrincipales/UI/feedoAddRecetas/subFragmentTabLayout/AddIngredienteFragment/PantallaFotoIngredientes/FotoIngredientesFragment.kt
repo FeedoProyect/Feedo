@@ -12,8 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoAddRecetas.subFragmentTabLayout.AddIngredienteFragment.PantallaFotoIngredientes.FotosIngredientesAdapter.FotosIngredientesAdapter
-import com.benjamin.proyectofeedo.R
 import com.benjamin.proyectofeedo.databinding.FragmentFotoIngredientesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.channels.awaitClose
@@ -30,7 +28,7 @@ class FotoIngredientesFragment : Fragment() {
 
     private val fotoIngredienteViewModel by viewModels<FotoIngredienteViewModel>()
 
-    private lateinit var adapterFotoIngrediente: FotosIngredientesAdapter
+    private lateinit var adapterFotoIngrediente: FtIngredAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,7 +49,7 @@ class FotoIngredientesFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        adapterFotoIngrediente = FotosIngredientesAdapter(
+        adapterFotoIngrediente = FtIngredAdapter(
             onItemClick = { ingrediente ->
                 // Guarda el OBJETO COMPLETO
                 findNavController().previousBackStackEntry

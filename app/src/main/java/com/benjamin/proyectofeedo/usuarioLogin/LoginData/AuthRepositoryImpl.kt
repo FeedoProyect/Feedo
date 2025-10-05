@@ -4,6 +4,7 @@ import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.AuthRepository
 import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.modelUser.UserModel
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.Auth
+import io.github.jan.supabase.auth.providers.Google
 import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.auth.user.UserInfo
 import io.github.jan.supabase.postgrest.postgrest
@@ -71,20 +72,43 @@ class AuthRepositoryImpl @Inject constructor(
             false
         }
     }
-}
 
-//    override suspend fun loginWithGoogle(): UserModel? {
-//        return try {
-//            auth.signInWith(Google)
-//
-//            val user = auth.currentUserOrNull()
-//            if (user != null) {
-//                UserModel(
-//                    email = user.email ?: "",
-//                    id = user.id
-//                )
-//            } else null
-//        } catch (e: Exception) {
-//            null
-//        }
-//    }
+    override suspend fun loginWithGoogle(): UserModel? {
+        return try {
+            // Iniciamos el flujo de autenticación con Google
+            auth.signInWith(Google)
+
+            // Obtenemos el usuario actual después de la autenticación
+            val user = auth.currentUserOrNull()
+
+            if (user != null) {
+                // Verificamos si el usuario ya existe en nuestra tabla usuarios2
+                val existingUser = supabaseClient.postgrest["usuarios2"]
+                    .select {
+                        filter {
+                            eq("id_usuario", user.id)
+                        }
+                    }.decodeSingleOrNull<Map<String, Any>>()
+
+                // Si es la primera vez que inicia sesión, lo insertamos en la BD
+                if (existingUser == null) {
+                    supabaseClient.postgrest["usuarios2"].insert(
+                        mapOf(
+                            "id_usuario" to user.id,
+                            "correo" to (user.email ?: ""),
+                            "username" to (user.email?.substringBefore("@") ?: "user_${user.id.take(8)}")
+                        )
+                    )
+                }
+
+                UserModel(
+                    email = user.email ?: "",
+                    id = user.id
+                )
+            } else null
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+}

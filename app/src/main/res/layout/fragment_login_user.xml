@@ -125,23 +125,77 @@
         android:id="@+id/botonGoApp"
         android:layout_width="320dp"
         android:layout_height="80dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:text="@string/bottom_iniciar_sesion_welcome"
         android:textColor="@color/white"
         android:textSize="17sp"
         android:fontFamily="@font/balo_thambi"
-        android:layout_marginBottom="80dp"
         app:backgroundTint="@color/tittle_color"
         app:cornerRadius="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contra"/>
 
+    <!-- DIVISOR CON TEXTO "ALTERNATIVAS" -->
+    <LinearLayout
+        android:id="@+id/dividerAlternativas"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/botonGoApp">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#CCCCCC" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="@string/textView_vista_alternativas"
+            android:textColor="#999999"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#CCCCCC" />
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cdLoginWhithGoogle"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="25dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dividerAlternativas">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:src="@drawable/img_google"/>
+
+    </androidx.cardview.widget.CardView>
+
     <TextView
         android:id="@+id/tvPeticionDeCuenta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_peticion_registrarse"
+        android:layout_marginTop="40dp"
         android:layout_marginBottom="60dp"
         android:layout_marginEnd="60dp"
         android:textColor="@color/text_de_items"
@@ -149,6 +203,7 @@
         android:textSize="13dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cdLoginWhithGoogle"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
@@ -156,12 +211,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_registrate"
+        android:layout_marginTop="40dp"
         android:layout_marginBottom="60dp"
         android:layout_marginStart="10dp"
         android:textColor="@color/tittle_color"
         android:textStyle="bold"
         android:textSize="13dp"
         app:layout_constraintStart_toEndOf="@+id/tvPeticionDeCuenta"
+        app:layout_constraintTop_toBottomOf="@+id/cdLoginWhithGoogle"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 

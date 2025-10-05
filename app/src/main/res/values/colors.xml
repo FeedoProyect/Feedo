@@ -29,6 +29,8 @@
     <color name="color_text_stepsDescription">#616161</color>
     <color name="color_fondo_item_steps">#D9D6D6</color>
 
+    <color name="color_hint_register">#C21717</color>
+
 
     <color name="color_boton_welcome">#FFFFFF</color>
 
