@@ -23,7 +23,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoAddRecetas.subFragmentTabLayout.AddIngredienteFragment.AddIngredienteViewModel
 import com.benjamin.proyectofeedo.databinding.DialogRecetasBinding
 import com.benjamin.proyectofeedo.databinding.FragmentAddRecetasBinding
 import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoAddRecetas.subFragmentTabLayout.FragmentPageAddRecetaAdapter
@@ -50,6 +52,8 @@ class AddRecetaFragment : Fragment() {
     private val addRecetaViewModel by activityViewModels<AddRecetaViewModel>()
     private val darkModeViewModel by activityViewModels<DarkModeViewModel>()
 
+    private val addIngredienteViewModel by activityViewModels<AddIngredienteViewModel>()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,6 +65,53 @@ class AddRecetaFragment : Fragment() {
         observeDarkMode()
         initTab()
         initListeners()
+        observeIngredientes()
+        observeInsertState()
+    }
+
+    private fun observeIngredientes() {
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                addIngredienteViewModel.ingredientesList.collect { ingredientes ->
+                    // Cada vez que cambian los ingredientes en AddIngredienteViewModel,
+                    // se actualizan en AddRecetaViewModel también
+                    addRecetaViewModel.setIngredientes(ingredientes)
+                }
+            }
+        }
+    }
+
+    private fun observeInsertState() {
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                addRecetaViewModel.insertState.collect { state ->
+                    when (state) {
+                        is InsertState.Loading -> {
+                            // Mostrar ProgressBar
+                        }
+                        is InsertState.Success -> {
+                            Toast.makeText(
+                                requireContext(),
+                                "¡Receta guardada exitosamente!",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            binding.botonGoComidaInsert.isEnabled = true
+
+                            // Resetear el estado para poder agregar otra
+                            addRecetaViewModel.resetInsertState()
+                        }
+                        is InsertState.Error -> {
+                            Toast.makeText(
+                                requireContext(),
+                                state.message,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                        InsertState.Idle -> { /* No hacer nada */ }
+                    }
+                }
+            }
+        }
     }
 
     private fun observeDarkMode() {
@@ -91,6 +142,7 @@ class AddRecetaFragment : Fragment() {
             }
     }
 
+    // Actualizar el metodo de imagen para guardarla en el ViewModel
     private val resultadoImage =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { resultado ->
             if (resultado.resultCode == Activity.RESULT_OK) {
@@ -98,6 +150,9 @@ class AddRecetaFragment : Fragment() {
                 imageUri = data!!.data
                 binding.imgAgregarFotoComidaLight.setImageURI(imageUri)
                 binding.imgAgregarFotoComidaDark.setImageURI(imageUri)
+
+                // GUARDAR EN EL VIEWMODEL
+                addRecetaViewModel.setImageUri(imageUri)
             } else {
                 Toast.makeText(requireContext(), "Accion cancelada", Toast.LENGTH_SHORT).show()
             }
@@ -108,6 +163,10 @@ class AddRecetaFragment : Fragment() {
         binding.imgAgregarFotoComidaDark.setOnClickListener { initImage() }
 
         binding.tvAgregarTituloReceta.setOnClickListener { initDialog() }
+
+        binding.botonGoComidaInsert.setOnClickListener {
+            addRecetaViewModel.guardarReceta()
+        }
     }
 
     private fun initDialog() {
@@ -121,6 +180,9 @@ class AddRecetaFragment : Fragment() {
             if (comidaNombre.isNotBlank()) {
                 // Poner el texto en el TextView del fragment
                 binding.tvAgregarTituloReceta.text = comidaNombre
+
+                // GUARDAR EN EL VIEWMODEL
+                addRecetaViewModel.setTitulo(comidaNombre)
 
                 // Cerrar el dialog
                 dialog.dismiss()
@@ -205,6 +267,7 @@ class AddRecetaFragment : Fragment() {
                     if (tiempoComida.isNotBlank()) {
                         binding.tvaddTimeFood.text = tiempoComida
 
+                        addRecetaViewModel.setTiempoPreparacion(tiempoComida)
 
                         dialogFeature.dismiss()
                     } else {

@@ -64,8 +64,8 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.menuFragment,
-                R.id.perfilFragment,
-                R.id.addRecetasFragment -> {
+                R.id.addRecetasFragment,
+                R.id.perfilFragment -> {
                     binding.bottomBar.visibility = View.VISIBLE
                 }
 

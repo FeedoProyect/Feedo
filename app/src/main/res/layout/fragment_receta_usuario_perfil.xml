@@ -3,16 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".PantallasPrincipales.UI.feedoPerfil.subFragmentTabLayout.RecetaUsuarioFragment.RecetaUsuarioPerfilFragment">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="170dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/img_pollo_cocinando"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:gravity="center"
         android:fontFamily="@font/balo_thambi"
         android:layout_marginHorizontal="30dp"
-        android:text="Pronto se veran las comidas que el usuario agrego..."
-        android:textSize="35sp"/>
+        android:textColor="@color/tittle_color"
+        android:text="Parece que no tienes ninguna comida agregada..."
+        android:textSize="25sp"/>
+
+    <Button
+        android:layout_width="220dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Crear receta!"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/balo_thambi"
+        android:backgroundTint="@color/tittle_color"/>
 
 
 </LinearLayout>

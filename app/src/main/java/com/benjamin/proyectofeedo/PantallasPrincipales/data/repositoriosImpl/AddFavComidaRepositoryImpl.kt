@@ -1,14 +1,14 @@
 package com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl
 
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
-import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.AddComidaRepository
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.AddFavComidaRepository
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.postgrest
 import javax.inject.Inject
 
-class AddComidaRepositoryImpl @Inject constructor(
+class AddFavComidaRepositoryImpl @Inject constructor(
     private val client: SupabaseClient
-) : AddComidaRepository {
+) : AddFavComidaRepository {
 
     override suspend fun addFavorito(favoritos: FavoritosRequestModel): Result<FavoritosRequestModel> {
         return try {
@@ -37,4 +37,6 @@ class AddComidaRepositoryImpl @Inject constructor(
             Result.failure(e)
         }
     }
+
+
 }
