@@ -49,4 +49,8 @@
 
 
     <color name="editText">#616161</color>
+
+
+    <color name="bottom_nav_item_selected">#000000</color>
+    <color name="bottom_nav_item_unselected">#9E9E9E</color>
 </resources>

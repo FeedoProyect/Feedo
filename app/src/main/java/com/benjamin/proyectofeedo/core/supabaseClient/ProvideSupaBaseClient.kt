@@ -1,13 +1,16 @@
 package com.benjamin.proyectofeedo.core.supabaseClient
 
-import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.AddComidaRepositoryImpl
+import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.AddFavComidaRepositoryImpl
+import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.AddRecetasRepositoryImpl
 import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.RepositoryImpl
 import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.UserInformationRepositoryImpl
-import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.AddComidaRepository
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.AddFavComidaRepository
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.AddRecetaRepository
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.Repository
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.UserInformationRepository
 import com.benjamin.proyectofeedo.usuarioLogin.LoginData.AuthRepositoryImpl
 import com.benjamin.proyectofeedo.usuarioLogin.LoginDomain.AuthRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -89,9 +92,7 @@ object ProvideSupaBaseClient {
 
     @Provides
     @Singleton
-    fun provideAddComidaRepository(client: SupabaseClient): AddComidaRepository {
-        return AddComidaRepositoryImpl(client)
+    fun provideAddFavComidaRepository(client: SupabaseClient): AddFavComidaRepository {
+        return AddFavComidaRepositoryImpl(client)
     }
 }
-
-
