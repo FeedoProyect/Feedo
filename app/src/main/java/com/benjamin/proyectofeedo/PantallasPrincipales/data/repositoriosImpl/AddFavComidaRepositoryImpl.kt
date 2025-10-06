@@ -1,21 +1,23 @@
+// com/benjamin/proyectofeedo/PantallasPrincipales/data/repositoriosImpl/AddComidaRepositoryImpl.kt
 package com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl
 
 import android.util.Log
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
-import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.AddComidaRepository
+
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.repositorios.AddFavComidaRepository
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.postgrest
 import javax.inject.Inject
 
-class AddComidaRepositoryImpl @Inject constructor(
+class AddFavComidaRepositoryImpl @Inject constructor(
     private val client: SupabaseClient
-) : AddComidaRepository {
+) : AddFavComidaRepository {
 
     override suspend fun addFavorito(favoritos: FavoritosRequestModel): Result<FavoritosRequestModel> {
         return try {
             Log.d("FavoritosRepo", "🟢 Intentando agregar favorito: usuario=${favoritos.usuarioId}, receta=${favoritos.recetaId}")
 
-            // 1️⃣ Verificar si ya existe ese favorito antes de insertar
+            // 1) Verificar si ya existe
             val existing = client.postgrest["favoritos2"]
                 .select {
                     filter {
@@ -30,21 +32,20 @@ class AddComidaRepositoryImpl @Inject constructor(
                 return Result.success(existing.first())
             }
 
-            // 2️⃣ Intentar insertar el nuevo favorito
+            // 2) Insertar nuevo favorito
             val response = client.postgrest["favoritos2"]
                 .insert(favoritos) {
                     select()
                 }
-                .decodeSingleOrNull<FavoritosRequestModel>() // <- más seguro
+                .decodeSingleOrNull<FavoritosRequestModel>()
 
             if (response != null) {
                 Log.d("FavoritosRepo", "✅ Favorito insertado correctamente: $response")
                 Result.success(response)
             } else {
-                Log.e("FavoritosRepo", "⚠️ Supabase no devolvió respuesta (posible error o duplicado silencioso)")
+                Log.e("FavoritosRepo", "⚠️ Insert vacío o duplicado")
                 Result.failure(Exception("Insert vacío o duplicado"))
             }
-
         } catch (e: Exception) {
             Log.e("FavoritosRepo", "❌ Error al insertar favorito: ${e.message}", e)
             Result.failure(e)
@@ -68,3 +69,4 @@ class AddComidaRepositoryImpl @Inject constructor(
         }
     }
 }
+

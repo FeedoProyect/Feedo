@@ -1,7 +1,6 @@
 package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoPerfil.subFragmentTabLayout.FavoritosFragment.listaFavoritosAdapter
 
 import android.animation.ValueAnimator
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.R
 import com.benjamin.proyectofeedo.databinding.ItemFavoritosPerfilBinding
@@ -17,9 +16,8 @@ class ListaFavoritosViewHolder(private val binding: ItemFavoritosPerfilBinding) 
 
     fun render(
         receta: FavoritosReceta,
-        onDeleteClick: (FavoritosRequestModel) -> Unit,
-        onItemClick: (FavoritosReceta) -> Unit,
-        auth: Auth
+        auth: Auth,
+        onItemSelectedFav: (FavoritosRequestModel, Boolean) -> Unit
     ) {
         binding.tvComidaFavoritos.text = receta.titulo
 
@@ -28,45 +26,37 @@ class ListaFavoritosViewHolder(private val binding: ItemFavoritosPerfilBinding) 
             .error(R.drawable.img_error)
             .into(binding.imgComidaFavoritos)
 
-        updateHeartState(isFav)
+        // en favoritos siempre empieza marcado
+        isFav = true
+        updateHeartState(true)
 
         binding.btnFav.setOnClickListener {
             isFav = !isFav
 
-            val scaleAnimator = ValueAnimator.ofFloat(
-                if (isFav) 0f else 1f,
-                if (isFav) 1f else 0f
-            )
-            scaleAnimator.duration = 250
-            scaleAnimator.addUpdateListener { anim ->
-                val scale = anim.animatedValue as Float
-                binding.btnFav.scaleX = scale
-                binding.btnFav.scaleY = scale
+            // animación del botón
+            val scaleAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
+                duration = 200
+                addUpdateListener { anim ->
+                    val scale = anim.animatedValue as Float
+                    binding.btnFav.scaleX = scale
+                    binding.btnFav.scaleY = scale
+                }
             }
             scaleAnimator.start()
 
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener
+            val favRequest = FavoritosRequestModel(recetaId = receta.id, usuarioId = userId)
 
-            if (isFav) {
-                updateHeartState(true)
-            } else {
-                val deleteFavorito = FavoritosRequestModel(
-                    recetaId = receta.id,
-                    usuarioId = userId
-                )
-                onDeleteClick(deleteFavorito)
-                updateHeartState(false)
-            }
-        }
-
-        binding.root.setOnClickListener {
-            onItemClick(receta)
+            onItemSelectedFav(favRequest, isFav)
+            updateHeartState(isFav)
         }
     }
 
     private fun updateHeartState(isFav: Boolean) {
-        val icon = if (isFav) R.drawable.ic_favs_filled else R.drawable.ic_fav_border
+        val icon = if (isFav) R.drawable.ic_heart_full else R.drawable.ic_fav_border
         binding.btnFav.setImageResource(icon)
     }
 }
+
+
 

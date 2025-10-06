@@ -1,11 +1,13 @@
-package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaModoSaludable
+package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.holders
 
 import android.graphics.drawable.Animatable
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.OvershootInterpolator
 import androidx.recyclerview.widget.RecyclerView
-import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
-import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
 import com.benjamin.proyectofeedo.R
 import com.benjamin.proyectofeedo.databinding.ItemSeccionesMenuBinding
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
 import com.squareup.picasso.Picasso
 import io.github.jan.supabase.auth.Auth
 
@@ -15,65 +17,70 @@ class ListaModoSaludableViewHolder(
 
     fun render(
         comidasModel: ComidasSeccionMenuModel,
-        onItemSelectedFav: (FavoritosRequestModel) -> Unit,
-        auth: Auth
+        auth: Auth,
+        onItemSelectedFav: (FavoritosRequestModel, Boolean) -> Unit
     ) {
-        // Mostrar título e imagen
+        // 🥗 Cargar imagen y título
         binding.tvComidaSeccionesMenu.text = comidasModel.recetas.titulo
         Picasso.get()
             .load(comidasModel.recetas.imagen)
             .error(R.drawable.img_error)
             .into(binding.imgComidaSeccionesMenu)
 
-        // Estado inicial del corazón
+        // ❤️ Estado inicial del ícono
         setFavoriteIcon(comidasModel.recetas.esFavorito)
 
-        // Click en el ícono de favorito
-        binding.iconFav.setOnClickListener {
+        // ❤️ Click del corazón
+        binding.cardFavBackground.setOnClickListener {
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener
+
             val nuevoEstado = !comidasModel.recetas.esFavorito
             comidasModel.recetas.esFavorito = nuevoEstado
 
-            // Ejecutar animación
-            animateHeart(nuevoEstado)
+            // Actualiza visualmente el ícono + animación
+            setFavoriteIcon(nuevoEstado)
+            animateHeartSmooth(nuevoEstado)
 
-            // Notificar el cambio (para Supabase)
+            // Enviar cambio al fragment o ViewModel
             val favorito = FavoritosRequestModel(
                 recetaId = comidasModel.recetas.id,
                 usuarioId = userId
             )
-            onItemSelectedFav(favorito)
+            onItemSelectedFav(favorito, nuevoEstado)
         }
     }
 
-    /** Cambia el ícono del corazón según el estado actual */
+    /** 🔸 Cambia el ícono del corazón según el estado actual */
     private fun setFavoriteIcon(fav: Boolean) {
-        val drawableRes = if (fav) R.drawable.avd_heart_fill else R.drawable.avd_heart_unfill
+        val drawableRes = if (fav) R.drawable.ic_heart_full else R.drawable.ic_heart_empty
         binding.iconFav.setImageResource(drawableRes)
     }
 
-    /** Reproduce la animación del corazón */
-    private fun animateHeart(fav: Boolean) {
-        val drawableRes = if (fav) R.drawable.avd_heart_fill else R.drawable.avd_heart_unfill
-        val drawable = binding.iconFav.context.getDrawable(drawableRes)
-        binding.iconFav.setImageDrawable(drawable)
-        (drawable as? Animatable)?.start()
-
-        // Efecto "pop" al pulsar
+    /** 💖 Animación fluida con rebote */
+    private fun animateHeartSmooth(fav: Boolean) {
         binding.iconFav.animate()
-            .scaleX(1.2f)
-            .scaleY(1.2f)
-            .setDuration(150)
+            .scaleX(0.8f)
+            .scaleY(0.8f)
+            .alpha(0.8f)
+            .setDuration(100)
+            .setInterpolator(AccelerateDecelerateInterpolator())
             .withEndAction {
+                val drawableRes = if (fav) R.drawable.avd_heart_fill else R.drawable.avd_heart_unfill
+                binding.iconFav.setImageResource(drawableRes)
+                (binding.iconFav.drawable as? Animatable)?.start()
+
                 binding.iconFav.animate()
                     .scaleX(1f)
                     .scaleY(1f)
-                    .setDuration(100)
+                    .alpha(1f)
+                    .setDuration(250)
+                    .setInterpolator(OvershootInterpolator())
                     .start()
             }
             .start()
     }
 }
+
 
 
 

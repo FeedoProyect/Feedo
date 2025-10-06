@@ -2,6 +2,7 @@ package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,17 +15,18 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.benjamin.proyectofeedo.databinding.DialogCatalogosMenuBinding
-import com.benjamin.proyectofeedo.databinding.FragmentMenuBinding
 import com.benjamin.proyectofeedo.PantallasPrincipales.UI.GridSpacingItemDecoration
-import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaEspecialMate.ListaEspecialMateAdapter
-import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaModoAhorro.ListaModoAhorroAdapter
 import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaClasicosArgentinos.ListaClasicoArgentinoAdapter
 import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaComidaExpres.ListaExpresAdapter
-import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaModoSaludable.ListaModoSaludableAdapter
 import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaDeCatalogosAdapter.ListaCatalogosAdapter
+import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaEspecialMate.ListaEspecialMateAdapter
+import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaModoAhorro.ListaModoAhorroAdapter
+import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaModoSaludable.ListaModoSaludableAdapter
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.CatalogoInfo
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.CatalogosModel
+import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
+import com.benjamin.proyectofeedo.databinding.DialogCatalogosMenuBinding
+import com.benjamin.proyectofeedo.databinding.FragmentMenuBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.auth
@@ -35,7 +37,6 @@ import javax.inject.Inject
 class MenuFragment : Fragment() {
 
     private val feedoMenuViewModel by viewModels<FeedoMenuViewModel>()
-
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
 
@@ -43,12 +44,19 @@ class MenuFragment : Fragment() {
     lateinit var supabaseClient: SupabaseClient
 
     private lateinit var listaCatalogosAdapter: ListaCatalogosAdapter
-
     private lateinit var listaClasicoArgentinoAdapter: ListaClasicoArgentinoAdapter
     private lateinit var listaEspecialMateAdapter: ListaEspecialMateAdapter
     private lateinit var listaModoSaludableAdapter: ListaModoSaludableAdapter
     private lateinit var listaExpresAdapter: ListaExpresAdapter
     private lateinit var listaModoAhorroAdapter: ListaModoAhorroAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentMenuBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -64,10 +72,12 @@ class MenuFragment : Fragment() {
         initAdapters()
     }
 
+    // ----------------------------------------------------------
+    // 🔹 Inicialización de diálogos y navegación
+    // ----------------------------------------------------------
+
     private fun initClicksDialogs() {
-        binding.piquitoDialogCatalogos.setOnClickListener {
-            dialogCatalogos()
-        }
+        binding.piquitoDialogCatalogos.setOnClickListener { dialogCatalogos() }
         binding.piquitoClasicoArgentino.setOnClickListener { pantallaSecciones(1) }
         binding.piquitoIdealMate.setOnClickListener { pantallaSecciones(2) }
         binding.piquitoModoSaludable.setOnClickListener { pantallaSecciones(3) }
@@ -75,19 +85,19 @@ class MenuFragment : Fragment() {
         binding.piquitoModoAhorro.setOnClickListener { pantallaSecciones(5) }
     }
 
-    private fun pantallaSecciones(seccionId: Int){
+    private fun pantallaSecciones(seccionId: Int) {
         findNavController().navigate(
             MenuFragmentDirections.actionMenuFragmentToSeccionesFragment(seccionId)
         )
     }
 
-    private fun dialogCatalogos(){
+    private fun dialogCatalogos() {
         val dialog = Dialog(requireContext())
         val dialogBinding = DialogCatalogosMenuBinding.inflate(layoutInflater)
         dialog.setContentView(dialogBinding.root)
 
-        val adapterDialog = ListaCatalogosAdapter(onItemSelected = {
-            val type = when (it) {
+        val adapterDialog = ListaCatalogosAdapter { catalogo ->
+            val type = when (catalogo) {
                 CatalogoInfo.Almuerzos -> CatalogosModel.Almuerzos
                 CatalogoInfo.Aperitivos -> CatalogosModel.Aperitivos
                 CatalogoInfo.Cena -> CatalogosModel.Cena
@@ -103,77 +113,75 @@ class MenuFragment : Fragment() {
                 CatalogoInfo.Vegetarianas -> CatalogosModel.Vegetarianas
             }
 
-            dialog.dismiss() // 👈 cierro el diálogo antes de navegar
+            dialog.dismiss()
             findNavController().navigate(
                 MenuFragmentDirections.actionMenuFragmentToCatalogosListComidasFragment(type)
             )
-        })
+        }
 
         adapterDialog.updateList(feedoMenuViewModel.catalogos.value)
 
         dialogBinding.rvDialogCatalogos.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = adapterDialog
-            addItemDecoration(GridSpacingItemDecoration(2, 24, true)) // 24dp de espacio
+            addItemDecoration(GridSpacingItemDecoration(2, 24, true))
         }
 
         dialog.show()
         dialog.window?.setLayout(
-            (resources.displayMetrics.widthPixels * 0.9).toInt(), // 80% ancho pantalla
-            (resources.displayMetrics.heightPixels * 0.7).toInt() // 70% alto pantalla
+            (resources.displayMetrics.widthPixels * 0.9).toInt(),
+            (resources.displayMetrics.heightPixels * 0.7).toInt()
         )
     }
 
+    // ----------------------------------------------------------
+    // 🔹 Configuración de adapters
+    // ----------------------------------------------------------
+
+    private fun handleFavChange(favorito: FavoritosRequestModel, isFavorite: Boolean) {
+        val viewModel = feedoMenuViewModel
+
+        if (isFavorite) {
+            Log.d("Favoritos", "🟢 Agregando favorito desde MenuFragment")
+            viewModel.addComidasFavoritos(favorito)
+            Toast.makeText(requireContext(), "Se añadió a favoritos", Toast.LENGTH_SHORT).show()
+        } else {
+            Log.d("Favoritos", "🔴 Eliminando favorito desde MenuFragment")
+            viewModel.deleteComidasFavoritos(favorito)
+            Toast.makeText(requireContext(), "Se eliminó de favoritos", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun initAdapters() {
-        // 🔥 Paso el onItemClick a cada adapter
         listaClasicoArgentinoAdapter = ListaClasicoArgentinoAdapter(
             auth = supabaseClient.auth,
-            onItemClick = { receta ->
-                navigateToDetalle(receta.recetas.id)
-            }, onItemSelectedFavs = { favoritos ->
-                feedoMenuViewModel.addComidasFavoritos(favoritos)
-                messageFavs()
-            }
-        )
-        listaEspecialMateAdapter = ListaEspecialMateAdapter(
-            auth = supabaseClient.auth,
-            onItemClick = { receta ->
-                navigateToDetalle(receta.recetas.id)
-            }, onItemSelectedFav = { favoritos ->
-                feedoMenuViewModel.addComidasFavoritos(favoritos)
-                messageFavs()
-            }
-        )
-        listaModoSaludableAdapter = ListaModoSaludableAdapter(
-            auth = supabaseClient.auth,
-            onItemClick = { receta ->
-                navigateToDetalle(receta.recetas.id)
-            }, onItemSelectedFavs = { favoritos ->
-                feedoMenuViewModel.addComidasFavoritos(favoritos)
-                messageFavs()
-            }
-        )
-        listaExpresAdapter = ListaExpresAdapter(
-            auth = supabaseClient.auth,
-            listaExpres = emptyList(), // o la lista inicial si ya la tenés cargada
-            onItemClick = { receta ->
-                navigateToDetalle(receta.recetas.id)
-            },
-            onItemSelectedFav = { favorito ->
-                feedoMenuViewModel.addComidasFavoritos(favorito)
-                messageFavs()
-            }
+            onItemClick = { receta -> navigateToDetalle(receta.recetas.id) },
+            onItemSelectedFavs = { fav, isFav -> handleFavChange(fav, isFav) }
         )
 
+        listaEspecialMateAdapter = ListaEspecialMateAdapter(
+            auth = supabaseClient.auth,
+            onItemClick = { receta -> navigateToDetalle(receta.recetas.id) },
+            onItemSelectedFavs = { fav, isFav -> handleFavChange(fav, isFav) }
+        )
+
+        listaModoSaludableAdapter = ListaModoSaludableAdapter(
+            auth = supabaseClient.auth,
+            onItemClick = { receta -> navigateToDetalle(receta.recetas.id) },
+            onItemSelectedFavs = { fav, isFav -> handleFavChange(fav, isFav) }
+        )
+
+        listaExpresAdapter = ListaExpresAdapter(
+            auth = supabaseClient.auth,
+            listaExpres = emptyList(),
+            onItemClick = { receta -> navigateToDetalle(receta.recetas.id) },
+            onItemSelectedFav = { fav, isFav -> handleFavChange(fav, isFav) }
+        )
 
         listaModoAhorroAdapter = ListaModoAhorroAdapter(
             auth = supabaseClient.auth,
-            onItemClick = { receta ->
-                navigateToDetalle(receta.recetas.id)
-            }, onItemSelectedFavs = { favoritos ->
-                feedoMenuViewModel.addComidasFavoritos(favoritos)
-                messageFavs()
-            }
+            onItemClick = { receta -> navigateToDetalle(receta.recetas.id) },
+            onItemSelectedFavs = { fav, isFav -> handleFavChange(fav, isFav) }
         )
 
         binding.rvClasicosArgentinos.adapter = listaClasicoArgentinoAdapter
@@ -183,29 +191,30 @@ class MenuFragment : Fragment() {
         binding.rvModoAhorro.adapter = listaModoAhorroAdapter
     }
 
+    // ----------------------------------------------------------
+    // 🔹 Collectors
+    // ----------------------------------------------------------
+
     private fun initCollectors() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 feedoMenuViewModel.state.collect { stateMap ->
+                    val hasError = stateMap.values.any { it is FeedoMenuState.Error }
+                    val isLoading = stateMap.values.all { it is FeedoMenuState.Loading }
 
-                    launch {
-                        val hasError = stateMap.values.any { it is FeedoMenuState.Error }
-                        val isLoading = stateMap.values.all { it is FeedoMenuState.Loading }
-
-                        when {
-                            hasError -> errorState()
-                            isLoading -> loadingState()
-                            else -> {
-                                successState()
-                                stateMap.forEach { (seccionId, state) ->
-                                    if (state is FeedoMenuState.Success) {
-                                        when (seccionId) {
-                                            1 -> listaClasicoArgentinoAdapter.updateListClasicoArgentino(state.recetas)
-                                            2 -> listaEspecialMateAdapter.updateListEspecialMate(state.recetas)
-                                            3 -> listaModoSaludableAdapter.updateListModoSaludable(state.recetas)
-                                            4 -> listaExpresAdapter.updateListExpres(state.recetas)
-                                            5 -> listaModoAhorroAdapter.updateListModoAhorro(state.recetas)
-                                        }
+                    when {
+                        hasError -> errorState()
+                        isLoading -> loadingState()
+                        else -> {
+                            successState()
+                            stateMap.forEach { (seccionId, state) ->
+                                if (state is FeedoMenuState.Success) {
+                                    when (seccionId) {
+                                        1 -> listaClasicoArgentinoAdapter.updateListClasicoArgentino(state.recetas)
+                                        2 -> listaEspecialMateAdapter.updateListEspecialMate(state.recetas)
+                                        3 -> listaModoSaludableAdapter.updateListModoSaludable(state.recetas)
+                                        4 -> listaExpresAdapter.updateListExpres(state.recetas)
+                                        5 -> listaModoAhorroAdapter.updateListModoAhorro(state.recetas)
                                     }
                                 }
                             }
@@ -215,22 +224,15 @@ class MenuFragment : Fragment() {
             }
         }
 
-        binding.rvClasicosArgentinos.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
-        binding.rvIdealParaElMate.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
-        binding.rvModoSaludable.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
-        binding.rvExpres.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
-        binding.rvModoAhorro.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
+        binding.rvClasicosArgentinos.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvIdealParaElMate.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvModoAhorro.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvExpres.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
+
+    // ----------------------------------------------------------
+    // 🔹 Estados visuales
+    // ----------------------------------------------------------
 
     private fun successState() {
         binding.MenuFeedo.visibility = View.VISIBLE
@@ -247,6 +249,10 @@ class MenuFragment : Fragment() {
         binding.ProgresBarMenu.visibility = View.VISIBLE
     }
 
+    // ----------------------------------------------------------
+    // 🔹 Buscador y catálogos
+    // ----------------------------------------------------------
+
     private fun initBuscador() {
         binding.etSearchFeed.setOnClickListener {
             findNavController().navigate(
@@ -256,9 +262,8 @@ class MenuFragment : Fragment() {
     }
 
     private fun initList() {
-        listaCatalogosAdapter = ListaCatalogosAdapter(onItemSelected = {
-
-            val type = when (it) {
+        listaCatalogosAdapter = ListaCatalogosAdapter { catalogo ->
+            val type = when (catalogo) {
                 CatalogoInfo.Almuerzos -> CatalogosModel.Almuerzos
                 CatalogoInfo.Aperitivos -> CatalogosModel.Aperitivos
                 CatalogoInfo.Cena -> CatalogosModel.Cena
@@ -277,7 +282,7 @@ class MenuFragment : Fragment() {
             findNavController().navigate(
                 MenuFragmentDirections.actionMenuFragmentToCatalogosListComidasFragment(type)
             )
-        })
+        }
 
         binding.rvCatolgo.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -295,23 +300,31 @@ class MenuFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMenuBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
+    // ----------------------------------------------------------
+    // 🔹 Navegación al detalle
+    // ----------------------------------------------------------
 
-    //mensaje de agrego a favoritos
-    private fun messageFavs() {
-        Toast.makeText(requireContext(), "Se a añadido a favoritos", Toast.LENGTH_SHORT).show()
-    }
-
-    // para navegar al detalle
     private fun navigateToDetalle(recetaId: Int) {
         findNavController().navigate(
             MenuFragmentDirections.actionMenuFragmentToDetalleRecetaFragment(recetaId)
         )
     }
+
+    // ----------------------------------------------------------
+    // ✅ NUEVO: refrescar favoritos al volver al menú
+    // ----------------------------------------------------------
+
+    override fun onResume() {
+        super.onResume()
+        recarganFavoritos()
+    }
+
+    private fun recarganFavoritos() {
+        val userId = supabaseClient.auth.currentUserOrNull()?.id ?: return
+        Log.d("Favoritos", "♻️ Recargando favoritos al volver al menú")
+        feedoMenuViewModel.getComidaFavoritos(userId)
+    }
+
+
 }
+

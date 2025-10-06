@@ -1,5 +1,6 @@
 package com.benjamin.proyectofeedo.core.supabaseClient
 
+
 import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.AddFavComidaRepositoryImpl
 import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.AddRecetasRepositoryImpl
 import com.benjamin.proyectofeedo.PantallasPrincipales.data.repositoriosImpl.RepositoryImpl

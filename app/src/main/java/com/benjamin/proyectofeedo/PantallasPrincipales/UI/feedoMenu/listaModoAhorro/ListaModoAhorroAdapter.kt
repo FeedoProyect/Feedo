@@ -10,20 +10,18 @@ import io.github.jan.supabase.auth.Auth
 
 class ListaModoAhorroAdapter(
     private val auth: Auth,
-    private var listModoAhorro: List<ComidasSeccionMenuModel> = emptyList(),
+    private var listaModoAhorro: List<ComidasSeccionMenuModel> = emptyList(),
     private val onItemClick: (ComidasSeccionMenuModel) -> Unit,
-    private val onItemSelectedFavs: (FavoritosRequestModel) -> Unit
+    private val onItemSelectedFavs: (FavoritosRequestModel, Boolean) -> Unit
 ) : RecyclerView.Adapter<ListaModoAhorroViewHolder>() {
 
+    /** 🔁 Actualiza la lista completa */
     fun updateListModoAhorro(list: List<ComidasSeccionMenuModel>) {
-        listModoAhorro = list
+        listaModoAhorro = list
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ListaModoAhorroViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaModoAhorroViewHolder {
         val binding = ItemSeccionesMenuBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -33,16 +31,22 @@ class ListaModoAhorroAdapter(
     }
 
     override fun onBindViewHolder(holder: ListaModoAhorroViewHolder, position: Int) {
-        val item = listModoAhorro[position]
+        val item = listaModoAhorro[position]
 
-        holder.render(item, onItemSelectedFavs, auth)
+        // 🔹 Renderiza el ítem con animación + callback que devuelve estado
+        holder.render(item, auth) { favorito, isFav ->
+            onItemSelectedFavs(favorito, isFav)
+            listaModoAhorro[position].recetas.esFavorito = isFav
+            notifyItemChanged(position)
+        }
 
-        // 👇 el click se maneja acá
+        // 🔹 Click en el ítem completo (abre detalle)
         holder.itemView.setOnClickListener {
             onItemClick(item)
         }
     }
 
-    override fun getItemCount() = listModoAhorro.size
+    override fun getItemCount() = listaModoAhorro.size
 }
+
 

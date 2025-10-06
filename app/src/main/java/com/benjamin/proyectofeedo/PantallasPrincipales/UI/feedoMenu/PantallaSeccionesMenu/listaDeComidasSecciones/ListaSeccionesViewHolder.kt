@@ -1,7 +1,9 @@
 package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.PantallaSeccionesMenu.listaDeComidasSecciones
 
+import android.animation.ObjectAnimator
 import android.graphics.drawable.Animatable
 import android.util.Log
+import android.view.animation.OvershootInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
@@ -17,11 +19,10 @@ class ListaSeccionesViewHolder(
     fun render(
         comidasModel: ComidasSeccionMenuModel,
         auth: Auth,
-        onItemSelectedFav: (FavoritosRequestModel) -> Unit
+        onItemSelectedFav: (FavoritosRequestModel, Boolean) -> Unit
     ) {
-        val TAG = "ListaSeccionesVH"
-
         binding.tvComidaSeccionesMenu.text = comidasModel.recetas.titulo
+
         Picasso.get()
             .load(comidasModel.recetas.imagen)
             .error(R.drawable.img_error)
@@ -29,47 +30,46 @@ class ListaSeccionesViewHolder(
 
         // Estado inicial del corazón
         setFavoriteIcon(comidasModel.recetas.esFavorito)
-        Log.d(TAG, "Render inicial → ${comidasModel.recetas.titulo}, esFavorito=${comidasModel.recetas.esFavorito}")
 
         // Click del corazón
         binding.cardFavBackground.setOnClickListener {
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener
-
             val nuevoEstado = !comidasModel.recetas.esFavorito
-            Log.d(TAG, "Click → anterior=${comidasModel.recetas.esFavorito}, nuevo=$nuevoEstado")
 
             comidasModel.recetas.esFavorito = nuevoEstado
-
-            // Actualizamos icono
             setFavoriteIcon(nuevoEstado)
-            Log.d(TAG, "setFavoriteIcon llamado con nuevoEstado=$nuevoEstado")
-
-            // Animación
-            animateHeart(nuevoEstado)
-            Log.d(TAG, "animateHeart llamado con fav=$nuevoEstado")
+            animateHeartSmooth()
 
             val favorito = FavoritosRequestModel(
                 recetaId = comidasModel.recetas.id,
                 usuarioId = userId
             )
-            onItemSelectedFav(favorito)
+
+            onItemSelectedFav(favorito, nuevoEstado)
         }
     }
 
     private fun setFavoriteIcon(fav: Boolean) {
-        val drawableRes = if (fav) R.drawable.avd_heart_fill else R.drawable.avd_heart_unfill
-        Log.d("ListaSeccionesVH", "setFavoriteIcon → drawable=$drawableRes")
+        val drawableRes = if (fav) R.drawable.ic_heart_full else R.drawable.ic_heart_empty
         binding.iconFav.setImageResource(drawableRes)
+        Log.d("FeedoFav", "Pintando ícono favorito=$fav en posición $adapterPosition")
     }
 
-    private fun animateHeart(fav: Boolean) {
+    private fun animateHeartSmooth() {
+        val scaleX = ObjectAnimator.ofFloat(binding.iconFav, "scaleX", 1f, 1.3f, 1f)
+        val scaleY = ObjectAnimator.ofFloat(binding.iconFav, "scaleY", 1f, 1.3f, 1f)
+        scaleX.interpolator = OvershootInterpolator()
+        scaleY.interpolator = OvershootInterpolator()
+        scaleX.duration = 250
+        scaleY.duration = 250
+        scaleX.start()
+        scaleY.start()
+
         val drawable = binding.iconFav.drawable
-        if (drawable is Animatable) {
-            Log.d("ListaSeccionesVH", "animateHeart → start() ejecutado")
-            drawable.start()
-        } else {
-            Log.d("ListaSeccionesVH", "animateHeart → drawable NO es Animatable")
-        }
+        if (drawable is Animatable) drawable.start()
     }
 }
+
+
+
 

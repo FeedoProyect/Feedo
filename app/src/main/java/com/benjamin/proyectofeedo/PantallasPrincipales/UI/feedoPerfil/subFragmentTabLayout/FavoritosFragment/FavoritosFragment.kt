@@ -41,7 +41,7 @@ class FavoritosFragment : Fragment() {
 
     private fun initUI() {
         initList()
-        iniState()
+        initState()
         userSession()
     }
 
@@ -50,17 +50,12 @@ class FavoritosFragment : Fragment() {
             mutableListOf(),
             onDeleteClick = {
                 favoritoViewModel.deleteComidaFavorito(it)
-                adapterFav.removeItem(it.recetaId)
                 messageDeleteFav()
             },
             onItemClick = { receta ->
-
                 val action = PerfilFragmentDirections
                     .actionPerfilFragmentToDetalleRecetaFragment(receta.id)
-
-                requireParentFragment()
-                    .findNavController()
-                    .navigate(action)
+                requireParentFragment().findNavController().navigate(action)
             },
             auth = supabaseClient.auth
         )
@@ -71,7 +66,7 @@ class FavoritosFragment : Fragment() {
         }
     }
 
-    private fun iniState() {
+    private fun initState() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 favoritoViewModel.state.collect {
@@ -90,7 +85,7 @@ class FavoritosFragment : Fragment() {
     }
 
     private fun loadingState() {
-        // Podés agregar un progress si querés
+        // Podés agregar un progress bar si querés
     }
 
     private fun successState(success: FavoritosState.Success) {
@@ -114,7 +109,8 @@ class FavoritosFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFavoritosBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentFavoritosBinding.inflate(inflater, container, false)
         return binding.root
     }
 }
+

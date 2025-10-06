@@ -123,12 +123,13 @@ class CatalogosListComidasFragment : Fragment() {
                 val action = CatalogosListComidasFragmentDirections
                     .actionCatalogosListComidasFragmentToDetalleRecetaFragment(receta.id)
                 findNavController().navigate(action)
-
-            }, onItemSelectedFav = { favoritos ->
+            },
+            onItemSelectedFav = { favoritos, isSelected ->
                 catalogosListComidasViewModel.addComidasFavoritos(favoritos)
                 addFavMessage()
-            },
+            }
         )
+
     }
 
     private fun initUIState() {

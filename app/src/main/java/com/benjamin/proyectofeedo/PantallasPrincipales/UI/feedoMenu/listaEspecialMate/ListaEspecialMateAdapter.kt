@@ -12,18 +12,16 @@ class ListaEspecialMateAdapter(
     private val auth: Auth,
     private var listaEspecialMate: List<ComidasSeccionMenuModel> = emptyList(),
     private val onItemClick: (ComidasSeccionMenuModel) -> Unit,
-    private val onItemSelectedFav: (FavoritosRequestModel) -> Unit
+    private val onItemSelectedFavs: (FavoritosRequestModel, Boolean) -> Unit // ✅ correcto
 ) : RecyclerView.Adapter<ListaEspecialMateViewHolder>() {
 
+    /** 🔁 Actualiza la lista */
     fun updateListEspecialMate(list: List<ComidasSeccionMenuModel>) {
         listaEspecialMate = list
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ListaEspecialMateViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaEspecialMateViewHolder {
         val binding = ItemSeccionesMenuBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -34,10 +32,18 @@ class ListaEspecialMateAdapter(
 
     override fun onBindViewHolder(holder: ListaEspecialMateViewHolder, position: Int) {
         val item = listaEspecialMate[position]
-        holder.render(item, onItemSelectedFav, auth)
 
+        // ✅ Callback que devuelve el favorito y su estado (true/false)
+        holder.render(item, auth) { favorito, isFav ->
+            // Actualizamos la lista local con el nuevo estado
+            listaEspecialMate[position].recetas.esFavorito = isFav
+            notifyItemChanged(position)
 
-        // 👇 click manejado acá
+            // Notificamos al fragment el cambio (para actualizar Supabase)
+            onItemSelectedFavs(favorito, isFav)
+        }
+
+        // 👇 Click sobre el ítem completo
         holder.itemView.setOnClickListener {
             onItemClick(item)
         }

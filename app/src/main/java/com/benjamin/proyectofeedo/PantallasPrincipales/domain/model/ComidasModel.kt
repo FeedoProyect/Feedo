@@ -7,7 +7,8 @@ data class ComidasModel(
     val id: Int,
     val titulo: String,
     val imagen: String,
-    val receta_catalogo: List<RecetaCatalogo>? = null
+    val receta_catalogo: List<RecetaCatalogo>? = null,
+    var esFavorito: Boolean = false
 )
 
 @Serializable

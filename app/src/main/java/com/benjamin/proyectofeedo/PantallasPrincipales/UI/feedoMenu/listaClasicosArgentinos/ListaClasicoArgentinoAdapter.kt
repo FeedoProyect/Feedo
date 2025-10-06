@@ -3,7 +3,7 @@ package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaClasic
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.PantallaClasicoArgentino.listaDeComidasClasicoArgentino.ListaClasicoArgentinoViewHolder
+import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.holders.ListaClasicoArgentinoViewHolder
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
 import com.benjamin.proyectofeedo.databinding.ItemSeccionesMenuBinding
@@ -13,7 +13,7 @@ class ListaClasicoArgentinoAdapter(
     private val auth: Auth,
     private var listClasicoArgentino: List<ComidasSeccionMenuModel> = emptyList(),
     private val onItemClick: (ComidasSeccionMenuModel) -> Unit,
-    private val onItemSelectedFavs: (FavoritosRequestModel) -> Unit
+    private val onItemSelectedFavs: (FavoritosRequestModel, Boolean) -> Unit // 👈 importante: se recibe el estado
 ) : RecyclerView.Adapter<ListaClasicoArgentinoViewHolder>() {
 
     fun updateListClasicoArgentino(list: List<ComidasSeccionMenuModel>) {
@@ -35,14 +35,23 @@ class ListaClasicoArgentinoAdapter(
 
     override fun onBindViewHolder(holder: ListaClasicoArgentinoViewHolder, position: Int) {
         val item = listClasicoArgentino[position]
-        holder.render(item, auth, onItemSelectedFavs)
 
-        // Click general del ítem (por ejemplo, para abrir detalle)
+        // 🔹 Renderiza el item con su estado actual de favorito
+        holder.render(item, auth) { favorito, isFav ->
+            onItemSelectedFavs(favorito, isFav)
+
+            // 🔹 Actualiza solo el ítem tocado para mantener la UI consistente
+            listClasicoArgentino[position].recetas.esFavorito = isFav
+            notifyItemChanged(position)
+        }
+
+        // 🔹 Click general del ítem (para abrir detalle)
         holder.itemView.setOnClickListener {
             onItemClick(item)
         }
     }
 
-
     override fun getItemCount() = listClasicoArgentino.size
 }
+
+

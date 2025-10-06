@@ -1,6 +1,7 @@
 package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.PantallaSeccionesMenu
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,19 +41,28 @@ class SeccionesFragment : Fragment() {
 
     private val args: SeccionesFragmentArgs by navArgs()
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSeccionesBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.d("FeedoDebug", "🟢 SeccionesFragment creado (onViewCreated)")
         initUI()
     }
 
     private fun initUI() {
-        initTittle()
+        Log.d("FeedoDebug", "⚙️ initUI() iniciado")
+        initTitle()
         initCollectors()
         initAdapter()
     }
 
-    private fun initTittle() {
+    private fun initTitle() {
         val seccionId = args.seccionId
         val titulo = when (seccionId) {
             1 -> "Clásico Argentino"
@@ -62,20 +72,32 @@ class SeccionesFragment : Fragment() {
             5 -> "Modo Ahorro"
             else -> "Sección"
         }
-
+        Log.d("FeedoDebug", "📌 Título de sección: $titulo (id=$seccionId)")
         binding.TituloSeccion.text = titulo
     }
 
     private fun initCollectors() {
         val seccionId = args.seccionId
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 feedoMenuViewModel.state.collect { stateMap ->
-                    when(val state = stateMap[seccionId]){
-                        is FeedoMenuState.Error -> errorState(state.message)
-                        FeedoMenuState.Loading -> loadingState()
-                        is FeedoMenuState.Success -> succesState(state.recetas)
-                        null -> feedoMenuViewModel.getRecetasPorSeccion(seccionId)
+                    when (val state = stateMap[seccionId]) {
+                        is FeedoMenuState.Error -> {
+                            Log.e("FeedoDebug", "❌ ErrorState: ${state.message}")
+                            errorState(state.message)
+                        }
+                        FeedoMenuState.Loading -> {
+                            Log.d("FeedoDebug", "⏳ LoadingState (sección $seccionId)")
+                            loadingState()
+                        }
+                        is FeedoMenuState.Success -> {
+                            Log.d("FeedoDebug", "✅ SuccessState con ${state.recetas.size} recetas")
+                            successState(state.recetas)
+                        }
+                        null -> {
+                            Log.w("FeedoDebug", "⚠️ No hay estado previo, llamando a getRecetasPorSeccion($seccionId)")
+                            feedoMenuViewModel.getRecetasPorSeccion(seccionId)
+                        }
                     }
                 }
             }
@@ -83,54 +105,72 @@ class SeccionesFragment : Fragment() {
     }
 
     private fun initAdapter() {
+        Log.d("FeedoDebug", "🎨 Inicializando adapter")
         listaSeccionesAdapter = ListaSeccionesAdapter(
             auth = supabaseClient.auth,
-            onItemClick = { receta -> navigateToDetalle(receta.recetas.id) },
-            onItemSelectedFav = { favoritos ->
-                feedoMenuViewModel.addComidasFavoritos(favoritos)
-                mensajeFavoritos()
+            onItemClick = { receta ->
+                Log.d("FeedoDebug", "👉 Click en receta id=${receta.recetas.id}")
+                navigateToDetalle(receta.recetas.id)
+            },
+            onItemSelectedFav = { favoritos, nuevoEstado ->
+                Log.d(
+                    "FeedoDebug",
+                    "❤️ Toggle favorito: recetaId=${favoritos.recetaId}, usuarioId=${favoritos.usuarioId}, nuevoEstado=$nuevoEstado"
+                )
+
+                if (nuevoEstado) {
+                    Log.d("FeedoDebug", "🟢 Agregando a favoritos en ViewModel")
+                    feedoMenuViewModel.addComidasFavoritos(favoritos)
+                    showToast("Agregado a favoritos")
+                } else {
+                    Log.d("FeedoDebug", "🔴 Eliminando de favoritos en ViewModel")
+                    feedoMenuViewModel.deleteComidasFavoritos(favoritos)
+                    showToast("Eliminado de favoritos")
+                }
             }
         )
 
         binding.rvComidasSecciones.apply {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = listaSeccionesAdapter
         }
     }
 
-    private fun errorState(msg: String){
-        Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+    private fun errorState(msg: String) {
+        binding.ProgressbarSecciones.isVisible = false
+        binding.pantallaSecciones.isVisible = false
+        showToast(msg)
     }
 
-    private fun loadingState(){
+    private fun loadingState() {
         binding.ProgressbarSecciones.isVisible = true
         binding.pantallaSecciones.isVisible = false
     }
 
-    private fun succesState(recetas: List<ComidasSeccionMenuModel>) {
+    private fun successState(recetas: List<ComidasSeccionMenuModel>) {
+        Log.d("FeedoDebug", "📦 Actualizando adapter con ${recetas.size} recetas")
         binding.ProgressbarSecciones.isVisible = false
         binding.pantallaSecciones.isVisible = true
-        binding.imgSinResultados.isVisible = false
-        binding.tvNoSeencontroComida.isVisible = false
+
+        binding.imgSinResultados.isVisible = recetas.isEmpty()
+        binding.tvNoSeencontroComida.isVisible = recetas.isEmpty()
 
         listaSeccionesAdapter.updateList(recetas)
     }
 
-    private fun mensajeFavoritos(){
-        Toast.makeText(requireContext(), "Añadido a favoritos", Toast.LENGTH_SHORT).show()
+    private fun showToast(mensaje: String) {
+        Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT).show()
     }
 
     private fun navigateToDetalle(recetaId: Int) {
+        Log.d("FeedoDebug", "➡️ Navegando al detalle de receta $recetaId")
         findNavController().navigate(
             SeccionesFragmentDirections.actionSeccionesFragmentToDetalleRecetaFragment(recetaId)
         )
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSeccionesBinding.inflate(layoutInflater, container, false)
-        return binding.root
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

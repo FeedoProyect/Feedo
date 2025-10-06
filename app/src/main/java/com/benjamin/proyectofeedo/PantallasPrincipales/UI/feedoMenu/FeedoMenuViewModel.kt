@@ -11,6 +11,8 @@ import com.benjamin.proyectofeedo.PantallasPrincipales.domain.useCase.AddFavorit
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.useCase.GetComidaSeccionMenuUseCase
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.useCase.GetFavoritosUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -21,7 +23,8 @@ class FeedoMenuViewModel @Inject constructor(
     catalogoProvider: CatalogoProvider,
     private val getComidaSeccionMenuUseCase: GetComidaSeccionMenuUseCase,
     private val addFavoritosUseCase: AddFavoritosUseCase,
-    private val getFavoritosUseCase: GetFavoritosUseCase
+    private val getFavoritosUseCase: GetFavoritosUseCase,
+    private val supabaseClient: SupabaseClient
 ) : ViewModel() {
 
     private var _catalogos = MutableStateFlow<List<CatalogoInfo>>(emptyList())
@@ -33,17 +36,10 @@ class FeedoMenuViewModel @Inject constructor(
     private val _favoritos = MutableStateFlow<List<FavoritosReceta>>(emptyList())
     val favoritos: StateFlow<List<FavoritosReceta>> = _favoritos
 
-
     init {
         _catalogos.value = catalogoProvider.getCatalogos()
-
-        // Obtener las secciones del menú
-        listOf(1, 2, 3, 4, 5).forEach { seccionId ->
-            getRecetasPorSeccion(seccionId)
-        }
-
-        // 🔹 Obtener los favoritos al iniciar
-        getFavoritos("1") // <-- acá pasá el id real del usuario
+        listOf(1, 2, 3, 4, 5).forEach { getRecetasPorSeccion(it) }
+        getFavoritos("1")
     }
 
     fun getRecetasPorSeccion(seccionId: Int) {
@@ -65,7 +61,6 @@ class FeedoMenuViewModel @Inject constructor(
         }
     }
 
-    // ✅ Nuevo: obtener favoritos del usuario
     fun getFavoritos(userId: String) {
         viewModelScope.launch {
             try {
@@ -83,12 +78,52 @@ class FeedoMenuViewModel @Inject constructor(
             val result = addFavoritosUseCase.add(favoritos)
 
             if (result.isSuccess) {
-                Log.d("Favoritos", "Agregado OK")
-                getFavoritos(favoritos.usuarioId) // refrescar lista
+                Log.d("Favoritos", "✅ Agregado correctamente")
+                getFavoritos(favoritos.usuarioId)
             } else {
-                Log.e("Favoritos", "Error: ${result.exceptionOrNull()?.message}")
+                Log.e("Favoritos", "❌ Error al agregar: ${result.exceptionOrNull()?.message}")
             }
         }
     }
+
+    fun deleteComidasFavoritos(favorito: FavoritosRequestModel) {
+        viewModelScope.launch {
+            try {
+                supabaseClient
+                    .from("favoritos2")
+                    .delete {
+                        filter {
+                            eq("id_usuario", favorito.usuarioId)
+                            eq("receta_id", favorito.recetaId)
+                        }
+                    }
+
+                Log.d("FeedoVM", "🗑️ Favorito eliminado correctamente")
+                getFavoritos(favorito.usuarioId)
+            } catch (e: Exception) {
+                Log.e("FeedoVM", "❌ Error al eliminar favorito (FeedoMenuViewModel)", e)
+            }
+        }
+    }
+    fun getComidaFavoritos(userId: String) {
+        viewModelScope.launch {
+            try {
+                // ✅ Llamamos directamente al use case (usa operator fun invoke)
+                val favoritos = getFavoritosUseCase(userId)
+
+                Log.d("Favoritos", "✅ Favoritos recargados (${favoritos.size}) desde MenuViewModel")
+
+                // Si necesitás actualizar LiveData o StateFlow, hacelo acá
+                // _state.value = _state.value.copy(favoritos = favoritos)
+
+            } catch (e: Exception) {
+                Log.e("Favoritos", "❌ Error al recargar favoritos: ${e.message}")
+            }
+        }
+    }
+
+
 }
+
+
 
