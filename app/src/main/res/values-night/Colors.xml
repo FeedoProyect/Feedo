@@ -13,6 +13,8 @@
     <color name="fondo_buscador_color">#686767</color>
     <color name="color_background_cardview">#383636</color>
 
+    <color name="color_text_stepsDescription">#EDEBEB</color>
+
     <color name="color_boton_welcome">#4B4949</color>
     <color name="dark_gray">#DDDADA</color>
     <color name="fondodetalle">#1E1B1F</color>

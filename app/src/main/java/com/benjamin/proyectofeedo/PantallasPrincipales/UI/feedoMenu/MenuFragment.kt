@@ -144,11 +144,9 @@ class MenuFragment : Fragment() {
         if (isFavorite) {
             Log.d("Favoritos", "🟢 Agregando favorito desde MenuFragment")
             viewModel.addComidasFavoritos(favorito)
-            Toast.makeText(requireContext(), "Se añadió a favoritos", Toast.LENGTH_SHORT).show()
         } else {
             Log.d("Favoritos", "🔴 Eliminando favorito desde MenuFragment")
             viewModel.deleteComidasFavoritos(favorito)
-            Toast.makeText(requireContext(), "Se eliminó de favoritos", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -224,8 +222,10 @@ class MenuFragment : Fragment() {
             }
         }
 
+        // ✅ Configurar TODOS los LayoutManagers
         binding.rvClasicosArgentinos.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvIdealParaElMate.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvModoSaludable.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)  // ⭐ ESTO FALTABA
         binding.rvModoAhorro.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvExpres.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
@@ -324,7 +324,4 @@ class MenuFragment : Fragment() {
         Log.d("Favoritos", "♻️ Recargando favoritos al volver al menú")
         feedoMenuViewModel.getComidaFavoritos(userId)
     }
-
-
 }
-

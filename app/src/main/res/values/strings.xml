@@ -99,7 +99,14 @@
     <string name="setting_cerrarSesion">Cerrar Sesión</string>
     <string name="settig_modoOscuroDescription">Activa el modo oscuro para un cambio visual</string>
 
-    <string name="pronto">Toca para volver</string>
+    <string name="sobre_nosotros">Feedo es una aplicación moóvil diseñada para hacer de la cocina una experiencia simple, práctica y accesible para todos. Ofrecemos un amplio recetario digital con preparaciones organizadas por categorías, ingredientes detallados y pasos claros para lograr resultados deliciosos.</string>
+
+    <string name="sobre_nosotros2">Creemos en la colaboración: cada usuario puede compartir sus propias recetas y formar parte de una comunidad que inspira y motiva a cocinar.</string>
+    <string name="seguinos_redes">Seguinos en: </string>
+    <string name="instagramProyecto">proyecto.feedo</string>
+    <string name="contactanos">Contactanos en:</string>
+    <string name="correo_electronico">feedo5155@gmail.com</string>
+
 
     <!-- Pantalla de agregar receta -->
     <string name="textview_agregarAgregarReceta">Pon una foto de tu plato para que los demás lo vean</string>

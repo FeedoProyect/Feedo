@@ -112,7 +112,6 @@ class CatalogosListComidasFragment : Fragment() {
                 findNavController().navigate(action)
             }, onItemSelectedFav =  { favoritos ->
                 catalogosListComidasViewModel.addComidasFavoritos(favoritos)
-                addFavMessage()
             }
         )
 
@@ -126,7 +125,6 @@ class CatalogosListComidasFragment : Fragment() {
             },
             onItemSelectedFav = { favoritos, isSelected ->
                 catalogosListComidasViewModel.addComidasFavoritos(favoritos)
-                addFavMessage()
             }
         )
 
@@ -180,10 +178,6 @@ class CatalogosListComidasFragment : Fragment() {
 
     private fun tituloDeCatalogo(catalogosModel: CatalogosModel) {
         binding.TituloCatalogo.text = catalogosModel.titulo
-    }
-
-    private fun addFavMessage(){
-        Toast.makeText(requireContext(), "Se a añadido a favoritos", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateView(
