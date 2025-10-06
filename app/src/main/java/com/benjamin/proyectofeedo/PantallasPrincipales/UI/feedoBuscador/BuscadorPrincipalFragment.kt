@@ -17,8 +17,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoBuscador.BuscadorPrincipalAdapter.BuscadorPrincipalAdapter
-import com.benjamin.proyectofeedo.databinding.FragmentBuscadorPrincipalBinding
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasModel
+import com.benjamin.proyectofeedo.databinding.FragmentBuscadorPrincipalBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.auth
@@ -40,25 +40,26 @@ class BuscadorPrincipalFragment : Fragment() {
 
     private val buscadorPrincipalViewModel by viewModels<BuscadorPrincipalViewModel>()
 
-    lateinit var adapterBuscador: BuscadorPrincipalAdapter
+    private lateinit var adapterBuscador: BuscadorPrincipalAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentBuscadorPrincipalBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initUI()
     }
 
-
     private fun initUI() {
         initList()
-        initStatee()
+        initState()
         buttonBack()
         initEditText()
-    }
-
-    private fun actualizarResultados(lista: List<ComidasModel>) {
-        val response = "Encontramos ${lista.size} resultados en relacion a tu busqueda"
-        binding.tvResultadosBusqueda.text = response
     }
 
     private fun initList() {
@@ -68,9 +69,15 @@ class BuscadorPrincipalFragment : Fragment() {
                 val action = BuscadorPrincipalFragmentDirections
                     .actionBuscadorPrincipalFragmentToDetalleRecetaFragment(comida.id)
                 findNavController().navigate(action)
-            }, onItemSelectedFavs = { favoritos ->
-                buscadorPrincipalViewModel.addComidasFavoritos(favoritos)
-                messageFav()
+            },
+            onItemSelectedFav = { favoritos, isFav ->
+                if (isFav) {
+                    buscadorPrincipalViewModel.addComidasFavoritos(favoritos)
+                    messageFav()
+                } else {
+                    buscadorPrincipalViewModel.removeComidasFavoritos(favoritos)
+                    messageUnfav()
+                }
             }
         )
 
@@ -80,22 +87,22 @@ class BuscadorPrincipalFragment : Fragment() {
         }
     }
 
-    private fun initStatee() {
+    private fun initState() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                buscadorPrincipalViewModel.state.collect {
-                    when (it) {
+                buscadorPrincipalViewModel.state.collect { state ->
+                    when (state) {
                         is BuscadorPrincipalState.Error -> errorState()
                         BuscadorPrincipalState.Loading -> loadingState()
-                        is BuscadorPrincipalState.Success -> succesState(it)
-                        BuscadorPrincipalState.Empty -> emptySate()
+                        is BuscadorPrincipalState.Success -> successState(state)
+                        BuscadorPrincipalState.Empty -> emptyState()
                     }
                 }
             }
         }
     }
 
-    private fun emptySate(){
+    private fun emptyState() {
         binding.rvListaComidasBuscador.isVisible = false
         binding.imgSinResultadosBuscador.isVisible = true
         binding.tvNoSeencontroComida.isVisible = true
@@ -103,30 +110,25 @@ class BuscadorPrincipalFragment : Fragment() {
         actualizarResultados(emptyList())
     }
 
-    private fun errorState() {
-
-    }
-
-    private fun loadingState() {
-
-    }
-
-    private fun succesState(success: BuscadorPrincipalState.Success) {
+    private fun successState(success: BuscadorPrincipalState.Success) {
         binding.rvListaComidasBuscador.isVisible = true
         binding.imgSinResultadosBuscador.isVisible = false
         binding.tvNoSeencontroComida.isVisible = false
-
-
-
         adapterBuscador.updateList(success.comidasBuscador)
         actualizarResultados(success.comidasBuscador)
     }
 
-    private fun initEditText() {
+    private fun actualizarResultados(lista: List<ComidasModel>) {
+        val response = "Encontramos ${lista.size} resultados en relación a tu búsqueda"
+        binding.tvResultadosBusqueda.text = response
+    }
 
+    private fun errorState() {}
+    private fun loadingState() {}
+
+    private fun initEditText() {
         binding.etPantallaBuscador.requestFocus()
 
-        // Abrir teclado
         val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(binding.etPantallaBuscador, InputMethodManager.SHOW_IMPLICIT)
 
@@ -142,15 +144,13 @@ class BuscadorPrincipalFragment : Fragment() {
                 .debounce(300)
                 .distinctUntilChanged()
                 .collect { query ->
-                    if(query.isNotEmpty()){
+                    if (query.isNotEmpty()) {
                         buscadorPrincipalViewModel.getComidasBuscador(query)
-                    } else{
-                        // Actualizamos el estado a Empty para que se muestre la UI correspondiente
+                    } else {
                         buscadorPrincipalViewModel.clearSearch()
                     }
                 }
         }
-
     }
 
     private fun buttonBack() {
@@ -159,15 +159,16 @@ class BuscadorPrincipalFragment : Fragment() {
         }
     }
 
-    private fun messageFav(){
-        Toast.makeText(requireContext(), "Se a añadido a favoritos", Toast.LENGTH_SHORT).show()
+    private fun messageFav() {
+        Toast.makeText(requireContext(), "Se ha añadido a favoritos", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentBuscadorPrincipalBinding.inflate(layoutInflater, container, false)
-        return binding.root
+    private fun messageUnfav() {
+        Toast.makeText(requireContext(), "Se ha quitado de favoritos", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
