@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
 import com.benjamin.proyectofeedo.databinding.ItemComidaSeccionesBinding
+import com.benjamin.proyectofeedo.databinding.ItemSeccionesMenuBinding
 import io.github.jan.supabase.auth.Auth
 
 class ListaSeccionesAdapter(
@@ -25,9 +26,15 @@ class ListaSeccionesAdapter(
         parent: ViewGroup,
         viewType: Int
     ): ListaSeccionesViewHolder {
-        val binding = ItemComidaSeccionesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemSeccionesMenuBinding.inflate(
+        LayoutInflater.from(parent.context),
+        parent,
+        false
+    )
         return ListaSeccionesViewHolder(binding)
+
     }
+
 
     override fun onBindViewHolder(
         holder: ListaSeccionesViewHolder,

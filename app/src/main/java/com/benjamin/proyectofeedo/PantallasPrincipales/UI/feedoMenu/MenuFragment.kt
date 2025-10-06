@@ -155,13 +155,17 @@ class MenuFragment : Fragment() {
         )
         listaExpresAdapter = ListaExpresAdapter(
             auth = supabaseClient.auth,
+            listaExpres = emptyList(), // o la lista inicial si ya la tenés cargada
             onItemClick = { receta ->
                 navigateToDetalle(receta.recetas.id)
-            }, onItemSelectedFavs = { favoritos ->
-                feedoMenuViewModel.addComidasFavoritos(favoritos)
+            },
+            onItemSelectedFav = { favorito ->
+                feedoMenuViewModel.addComidasFavoritos(favorito)
                 messageFavs()
             }
         )
+
+
         listaModoAhorroAdapter = ListaModoAhorroAdapter(
             auth = supabaseClient.auth,
             onItemClick = { receta ->

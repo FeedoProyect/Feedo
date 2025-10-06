@@ -4,38 +4,25 @@
     android:layout_height="170dp"
     android:layout_margin="15dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="8dp">
+    app:cardElevation="8dp"
+    android:clickable="false"
+    android:focusable="false">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/imgAddComidaSeccionFav"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="16dp"
-        android:layout_gravity="end|top"
-        android:backgroundTint="@color/ToolbarDeFeedo">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_favs"
-            app:tint="@color/tittle_color" />
-
-    </androidx.cardview.widget.CardView>
-
+    <!-- Imagen principal -->
     <ImageView
         android:id="@+id/imgComidaSeccionesMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
+    <!-- Gradiente oscuro -->
     <View
         android:id="@+id/gradientOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/gradient_overlay" />
 
+    <!-- Título -->
     <TextView
         android:id="@+id/tvComidaSeccionesMenu"
         android:layout_width="wrap_content"
@@ -44,6 +31,32 @@
         android:textStyle="bold"
         android:textSize="16sp"
         android:layout_gravity="bottom|start"
-        android:padding="12dp"/>
+        android:padding="12dp" />
+
+    <!-- CardView del corazón -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardFavBackground"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:layout_gravity="end|top"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+        android:backgroundTint="@color/ToolbarDeFeedo"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless">
+
+        <!-- Ícono del corazón -->
+        <ImageView
+            android:id="@+id/iconFav"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/avd_heart_unfill" />
+    </androidx.cardview.widget.CardView>
 
 </androidx.cardview.widget.CardView>
+
+

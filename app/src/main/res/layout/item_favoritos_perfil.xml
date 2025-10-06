@@ -7,8 +7,9 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="8dp">
 
+    <!-- ❤️ Card del corazón de favoritos -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/imgDeleteFavComida"
+        android:id="@+id/cardFav"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_margin="8dp"
@@ -17,26 +18,31 @@
         android:backgroundTint="@color/ToolbarDeFeedo">
 
         <ImageView
+            android:id="@+id/btnFav"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_favs"
-            app:tint="@color/tittle_color"
-            android:scaleType="centerCrop"/>
+            android:src="@drawable/avd_heart_unfill"
+            android:scaleType="centerInside"
 
+            android:clickable="true"
+            android:focusable="true" />
     </androidx.cardview.widget.CardView>
 
+    <!-- Imagen de la comida -->
     <ImageView
         android:id="@+id/imgComidaFavoritos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
+    <!-- Gradiente encima -->
     <View
         android:id="@+id/gradientOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/gradient_overlay" />
 
+    <!-- Título -->
     <TextView
         android:id="@+id/tvComidaFavoritos"
         android:layout_width="wrap_content"
@@ -45,6 +51,6 @@
         android:textStyle="bold"
         android:textSize="16sp"
         android:layout_gravity="bottom|start"
-        android:padding="12dp"/>
+        android:padding="12dp" />
 
 </androidx.cardview.widget.CardView>

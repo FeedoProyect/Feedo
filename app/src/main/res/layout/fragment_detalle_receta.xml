@@ -1,8 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <ImageView
         android:id="@+id/imgReceta"
@@ -13,7 +13,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardDetalleReceta"
@@ -35,7 +34,6 @@
             android:layout_height="match_parent"
             android:padding="16dp">
 
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnCerrar"
                 android:layout_width="36dp"
@@ -51,29 +49,34 @@
                     android:layout_height="match_parent"
                     app:tint="@color/detalleBtn"
                     android:padding="6dp"
-                    android:src="@drawable/ic_close"
-                    android:contentDescription="@string/app_name"/>
+                    android:src="@drawable/ic_close" />
             </androidx.cardview.widget.CardView>
+
+            <!-- HEART / FAVORITE BUTTON -->
 
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnFavDetalle"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_marginEnd="4dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="8dp"
                 app:cardCornerRadius="12dp"
-
-                app:cardElevation="4dp"
-                app:layout_constraintTop_toTopOf="parent"
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="true"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/ToolbarDeFeedo"
+                app:layout_constraintTop_toTopOf="@id/btnCerrar"
+                app:layout_constraintBottom_toBottomOf="@id/btnCerrar"
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <ImageView
                     android:id="@+id/imgFavDetalle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:tint="@color/detalleBtn"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_favs" />
+                    android:src="@drawable/avd_heart_fill"
+
+                     />
             </androidx.cardview.widget.CardView>
 
 
@@ -89,7 +92,6 @@
                 app:layout_constraintTop_toBottomOf="@id/btnCerrar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayoutDetalle"
@@ -110,7 +112,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPage2Detalle"
                 android:layout_width="0dp"
@@ -122,7 +123,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 
     <ProgressBar
         android:id="@+id/progressBarDetalle"
@@ -136,3 +136,4 @@
         android:indeterminateTint="@color/tittle_color"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

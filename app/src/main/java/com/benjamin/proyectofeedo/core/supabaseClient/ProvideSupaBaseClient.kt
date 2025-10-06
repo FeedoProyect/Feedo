@@ -30,7 +30,7 @@ object ProvideSupaBaseClient {
     private const val SUPABASE_ANON_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZkdGZ2bGZtZHVyd3NkY3ZpcmN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyODk3MzEsImV4cCI6MjA2ODg2NTczMX0.tHJ0zc7ZVsC_sxXGISisq7y_wxT-PWYH4UHSjS6iuos"
 
-    // 🔹 Cliente principal de Supabase
+
     @Provides
     @Singleton
     fun provideSupabaseClient(): SupabaseClient {
@@ -44,7 +44,7 @@ object ProvideSupaBaseClient {
                 scheme = "app"
                 host = "supabase.com"
             }
-            install(Storage) // ✅ instalamos módulo de Storage
+            install(Storage)
         }
     }
 
@@ -78,7 +78,6 @@ object ProvideSupaBaseClient {
         return RepositoryImpl(client)
     }
 
-    // 🔹 Ahora este repo recibe el Storage además del Client
     @Provides
     @Singleton
     fun provideUserInformationRepository(

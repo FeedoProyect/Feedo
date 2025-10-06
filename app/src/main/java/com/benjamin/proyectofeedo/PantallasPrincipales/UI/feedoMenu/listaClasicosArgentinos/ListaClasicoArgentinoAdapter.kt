@@ -3,6 +3,7 @@ package com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.listaClasic
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.benjamin.proyectofeedo.PantallasPrincipales.UI.feedoMenu.PantallaClasicoArgentino.listaDeComidasClasicoArgentino.ListaClasicoArgentinoViewHolder
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.ComidasSeccionMenuModel
 import com.benjamin.proyectofeedo.PantallasPrincipales.domain.model.FavoritosRequestModel
 import com.benjamin.proyectofeedo.databinding.ItemSeccionesMenuBinding
@@ -34,13 +35,14 @@ class ListaClasicoArgentinoAdapter(
 
     override fun onBindViewHolder(holder: ListaClasicoArgentinoViewHolder, position: Int) {
         val item = listClasicoArgentino[position]
-        holder.render(item, onItemSelectedFavs, auth)
+        holder.render(item, auth, onItemSelectedFavs)
 
-        // 👇 Click lo manejamos aquí
+        // Click general del ítem (por ejemplo, para abrir detalle)
         holder.itemView.setOnClickListener {
             onItemClick(item)
         }
     }
+
 
     override fun getItemCount() = listClasicoArgentino.size
 }

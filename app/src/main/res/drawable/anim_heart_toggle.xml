@@ -1,0 +1,30 @@
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Estado seleccionado (corazón lleno) -->
+    <item
+        android:id="@+id/state_filled"
+        android:drawable="@drawable/ic_heart_full"
+        android:state_checked="true" />
+
+    <!-- Estado no seleccionado (corazón vacío) -->
+    <item
+        android:id="@+id/state_outline"
+        android:drawable="@drawable/ic_heart_empty"
+        android:state_checked="false" />
+
+    <!-- Transición de vacío → lleno -->
+    <transition
+        android:fromId="@id/state_outline"
+        android:toId="@id/state_filled"
+        android:animation="@animator/anim_heart_fill" />
+
+    <!-- Transición de lleno → vacío -->
+    <transition
+        android:fromId="@id/state_filled"
+        android:toId="@id/state_outline"
+        android:animation="@animator/heart_unfill_anim" />
+
+</animated-selector>
+
+
+

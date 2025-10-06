@@ -119,7 +119,7 @@ class EditarPerfilFragment : Fragment() {
 
                 binding.progressBarFoto.visibility = View.GONE
                 binding.imgProfile.visibility = View.VISIBLE
-                binding.imgProfile.setImageResource(R.drawable.imagen_sin_perfil)
+                binding.imgProfile.setImageResource(R.drawable.agregarperfil)
             }
         }
 

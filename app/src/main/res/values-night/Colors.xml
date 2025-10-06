@@ -19,6 +19,12 @@
     <color name="detalleBtn">#FFAC00</color>
     <color name="editText">#2F2E2E</color>
     <color name="itemPersoPerfil">#242323</color>
+    <!-- Colores para el corazón (modo oscuro) -->
+    <!-- Colores para el ícono de favoritos (modo oscuro) -->
+    <color name="fav_heart_bg">#000000</color> <!-- Fondo negro -->
+    <color name="fav_heart_stroke">@color/tittle_color</color> <!-- Borde naranja Feedo -->
+    <color name="fav_heart_fill">@color/tittle_color</color> <!-- Se llena con naranja Feedo -->
+
 
     <color name="color_fondo_item_steps">#7C7B7B</color>
 </resources>

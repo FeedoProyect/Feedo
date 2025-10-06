@@ -36,6 +36,7 @@ class ListaEspecialMateAdapter(
         val item = listaEspecialMate[position]
         holder.render(item, onItemSelectedFav, auth)
 
+
         // 👇 click manejado acá
         holder.itemView.setOnClickListener {
             onItemClick(item)

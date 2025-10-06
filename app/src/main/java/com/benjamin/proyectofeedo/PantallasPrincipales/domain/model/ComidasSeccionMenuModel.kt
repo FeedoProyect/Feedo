@@ -13,5 +13,6 @@ data class ComidasSeccionMenuModel(
 data class RecetaSeccion(
     val id: Int,
     val titulo: String,
-    val imagen: String
+    val imagen: String,
+    var esFavorito: Boolean = false   // 👈 nuevo campo
 )

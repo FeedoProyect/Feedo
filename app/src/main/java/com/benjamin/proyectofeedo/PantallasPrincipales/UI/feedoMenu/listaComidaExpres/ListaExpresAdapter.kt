@@ -12,31 +12,36 @@ class ListaExpresAdapter(
     private val auth: Auth,
     private var listaExpres: List<ComidasSeccionMenuModel> = emptyList(),
     private val onItemClick: (ComidasSeccionMenuModel) -> Unit,
-    private val onItemSelectedFavs: (FavoritosRequestModel) -> Unit
+    private val onItemSelectedFav: (FavoritosRequestModel) -> Unit
 ) : RecyclerView.Adapter<ListaExpresViewHolder>() {
 
+    /** Actualiza la lista de comidas expres */
     fun updateListExpres(list: List<ComidasSeccionMenuModel>) {
         listaExpres = list
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ListaExpresViewHolder {
-        val binding = ItemSeccionesMenuBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaExpresViewHolder {
+        val binding = ItemSeccionesMenuBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return ListaExpresViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ListaExpresViewHolder, position: Int) {
         val item = listaExpres[position]
-        holder.render(item, onItemSelectedFavs, auth)
 
-        // 👇 Click manejado acá
+        // Renderiza el ítem y pasa el Auth + callback de favoritos
+        holder.render(item, onItemSelectedFav, auth)
+
+        // Maneja el click en el ítem (por ejemplo, para abrir detalle)
         holder.itemView.setOnClickListener {
             onItemClick(item)
         }
     }
 
-    override fun getItemCount() = listaExpres.size
+    override fun getItemCount(): Int = listaExpres.size
 }
+
