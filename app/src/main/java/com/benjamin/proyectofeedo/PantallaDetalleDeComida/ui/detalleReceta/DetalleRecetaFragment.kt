@@ -1,7 +1,6 @@
 package com.benjamin.proyectofeedo.PantallaDetalleDeComida.ui.detalleReceta
 
 import android.animation.ObjectAnimator
-import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-
+import androidx.viewpager2.widget.ViewPager2
 import com.benjamin.proyectofeedo.R
 import com.benjamin.proyectofeedo.databinding.FragmentDetalleRecetaBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -36,6 +35,8 @@ class DetalleRecetaFragment : Fragment() {
     private val viewModel: DetalleRecetaViewModel by viewModels()
     private val args: DetalleRecetaFragmentArgs by navArgs()
     private var mediator: TabLayoutMediator? = null
+    private var mediatorSecundario: TabLayoutMediator? = null
+    private var infoPagerAdapter: InfoPagerAdapter? = null
 
     @Inject
     lateinit var supabase: SupabaseClient
@@ -110,10 +111,26 @@ class DetalleRecetaFragment : Fragment() {
 
         binding.btnCerrar.setOnClickListener { findNavController().popBackStack() }
 
+        // Configurar ViewPager2 principal
         binding.viewPage2Detalle.adapter = DetallePagerAdapter(this, arrayListOf(), arrayListOf())
-        mediator = TabLayoutMediator(binding.tabLayoutDetalle, binding.viewPage2Detalle) { tab, pos ->
-            tab.text = if (pos == 0) "Ingredientes" else "Preparación"
-        }.also { it.attach() }
+        mediator =
+            TabLayoutMediator(binding.tabLayoutDetalle, binding.viewPage2Detalle) { tab, pos ->
+                tab.text = if (pos == 0) "Ingredientes" else "Preparación"
+            }.also { it.attach() }
+
+        // Configurar ViewPager2 secundario
+        infoPagerAdapter = InfoPagerAdapter(this, "", 0)
+        binding.viewPagerSecundarioReceta.adapter = infoPagerAdapter
+        binding.viewPagerSecundarioReceta.isUserInputEnabled = false
+        infoPagerAdapter?.attachImageView(binding.imgIconoSecundario, binding.viewPage2Detalle)
+
+        // Sincronizar ViewPager2 principal con secundario
+        binding.viewPage2Detalle.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                binding.viewPagerSecundarioReceta.currentItem = position
+            }
+        })
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -160,19 +177,24 @@ class DetalleRecetaFragment : Fragment() {
         )
 
         mediator?.detach()
-        mediator = TabLayoutMediator(binding.tabLayoutDetalle, binding.viewPage2Detalle) { tab, pos ->
-            tab.text = if (pos == 0) "Ingredientes" else "Instrucciones"
-        }.also { it.attach() }
+        mediator =
+            TabLayoutMediator(binding.tabLayoutDetalle, binding.viewPage2Detalle) { tab, pos ->
+                tab.text = if (pos == 0) "Ingredientes" else "Instrucciones"
+            }.also { it.attach() }
+
+        // Actualizar el ViewPager2 secundario con los datos de la receta
+        val tiempoFormato = "${receta.tiempoPreparacion} mins"
+        val totalPasos = receta.pasos?.size ?: 0
+        infoPagerAdapter?.updateData(tiempoFormato, totalPasos)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         mediator?.detach()
+        mediatorSecundario?.detach()
         _binding = null
     }
 }
-
-
 
 
 

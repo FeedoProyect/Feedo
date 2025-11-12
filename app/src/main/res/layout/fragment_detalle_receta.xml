@@ -18,7 +18,7 @@
         android:id="@+id/cardDetalleReceta"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="225dp"
         app:cardBackgroundColor="@color/color_background_cardview"
         app:cardCornerRadius="30dp"
         app:cardPreventCornerOverlap="false"
@@ -76,7 +76,7 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/avd_heart_fill"
 
-                     />
+                    />
             </androidx.cardview.widget.CardView>
 
 
@@ -85,19 +85,48 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="Título de la Receta"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_de_items"
                 app:layout_constraintTop_toBottomOf="@id/btnCerrar"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toStartOf="@id/containerImagenViewPager" />
+
+            <!-- CONTAINER PARA IMAGEN + VIEWPAGER -->
+            <LinearLayout
+                android:id="@+id/containerImagenViewPager"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="4dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:spacing="8dp"
+                app:layout_constraintTop_toBottomOf="@id/btnCerrar"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/imgIconoSecundario"
+                    android:layout_width="30dp"
+                    android:src="@drawable/ic_reloj"
+                    android:layout_height="30dp"
+                    android:scaleType="centerInside"
+                    android:contentDescription="Icono secundario" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPagerSecundarioReceta"
+                    android:layout_width="70dp"
+                    android:layout_height="50dp" />
+            </LinearLayout>
+
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayoutDetalle"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="30dp"
                 app:tabIndicatorGravity="stretch"
                 app:tabIndicatorAnimationMode="elastic"
                 app:tabTextColor="@color/color_text_tabs_perfil"
@@ -136,4 +165,3 @@
         android:indeterminateTint="@color/tittle_color"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
