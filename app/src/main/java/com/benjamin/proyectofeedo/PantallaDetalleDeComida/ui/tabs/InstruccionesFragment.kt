@@ -37,7 +37,7 @@ class InstruccionesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val data = arguments?.getStringArrayList(KEY_PASOS) ?: arrayListOf()
 
-        // Convertimos los strings a objetos Paso
+
         val pasos = data.mapIndexed { index, texto ->
             Pasos("Paso ${index + 1}", texto)
         }
