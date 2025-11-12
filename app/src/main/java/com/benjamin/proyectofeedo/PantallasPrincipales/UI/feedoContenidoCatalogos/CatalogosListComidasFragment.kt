@@ -103,7 +103,7 @@ class CatalogosListComidasFragment : Fragment() {
     }
 
     private fun initList() {
-        // ✅ Adapter para la lista destacada con onItemClick
+        //  Adapter para la lista destacada con onItemClick
         adapterComidaDestacadaCatalogo = ComidaDestacadaCatalogoAdapter(
             auth = supabaseClient.auth,
             onItemClick = { comidaDestacada ->

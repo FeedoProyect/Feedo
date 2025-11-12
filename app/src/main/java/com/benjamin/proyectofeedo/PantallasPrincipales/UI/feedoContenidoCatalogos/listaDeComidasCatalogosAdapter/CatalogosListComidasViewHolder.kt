@@ -22,22 +22,22 @@ class CatalogosListComidasViewHolder(
         onItemSelected: (ComidasModel) -> Unit,
         onItemSelectedFav: (FavoritosRequestModel, Boolean) -> Unit
     ) {
-        // 🥘 Carga de datos (imagen + título)
+
         binding.tvComidaSeccionesMenu.text = comidasModel.titulo
         Picasso.get()
             .load(comidasModel.imagen)
             .error(R.drawable.img_error)
             .into(binding.imgComidaSeccionesMenu)
 
-        // ❤️ Estado inicial del corazón
+
         setFavoriteIcon(comidasModel.esFavorito)
 
-        // 👆 Click en la card → abrir detalles
+
         binding.root.setOnClickListener {
             onItemSelected(comidasModel)
         }
 
-        // 💖 Click en el corazón → toggle favorito
+
         binding.cardFavBackground.setOnClickListener {
             val userId = auth.currentUserOrNull()?.id ?: return@setOnClickListener
 
@@ -55,13 +55,13 @@ class CatalogosListComidasViewHolder(
         }
     }
 
-    /** ❤️ Cambia el ícono según el estado actual */
+
     private fun setFavoriteIcon(fav: Boolean) {
         val drawableRes = if (fav) R.drawable.ic_heart_full else R.drawable.ic_heart_empty
         binding.iconFav.setImageResource(drawableRes)
     }
 
-    /** 💞 Animación con rebote y drawable animado */
+
     private fun animateHeartSmooth(fav: Boolean) {
         binding.iconFav.animate()
             .scaleX(0.8f)
