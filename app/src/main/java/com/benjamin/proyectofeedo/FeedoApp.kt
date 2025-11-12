@@ -11,7 +11,6 @@ import javax.inject.Inject
 
 @HiltAndroidApp
 class FeedoApp : Application() {
-
     @Inject
     lateinit var themeRepository: ThemeRepository
 

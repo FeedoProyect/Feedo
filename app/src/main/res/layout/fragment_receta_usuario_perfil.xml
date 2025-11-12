@@ -7,8 +7,8 @@
     tools:context=".PantallasPrincipales.UI.feedoPerfil.subFragmentTabLayout.RecetaUsuarioFragment.RecetaUsuarioPerfilFragment">
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="170dp"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="30dp"
@@ -22,13 +22,13 @@
         android:layout_marginHorizontal="30dp"
         android:textColor="@color/tittle_color"
         android:text="Parece que no tienes ninguna comida agregada..."
-        android:textSize="25sp"/>
+        android:textSize="18sp"/>
 
     <Button
         android:layout_width="220dp"
         android:layout_height="70dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="Crear receta!"
         android:textSize="20sp"
         android:textColor="@color/white"
